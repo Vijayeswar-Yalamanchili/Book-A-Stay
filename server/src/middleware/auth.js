@@ -47,6 +47,7 @@ const getUserEmail = async(req,res,next) => {
         let payload = await decodeLoginToken(token)
         // console.log(payload);
         req.user = payload
+        // console.log(req.user.isAdmin)        // o/p : false
         next()        
     }else{
         res.status(500).send({
@@ -55,10 +56,31 @@ const getUserEmail = async(req,res,next) => {
     }
 }
 
+//role based
+const adminGuard = async(req,res,next) => {
+    let token  = req?.headers?.authorization?.split(' ')[1]
+    // let token = req?.headers?.authorization
+    if(token){
+        let payload = await decodeLoginToken(token)
+        console.log(payload.isAdmin)
+        if(payload.isAdmin === true){
+            next()
+        }else{
+            res.status(401).send({
+                message :"Request noted & Only Admins are allowed to perform"
+            })
+        }        
+    }else{
+        res.status(500).send({
+            message :"Unauthorised access"
+        })
+    }    
+}
 
 export default {
     createLoginToken,
     decodeLoginToken,
     authenticate,
-    getUserEmail
+    getUserEmail,
+    adminGuard
 }

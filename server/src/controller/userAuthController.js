@@ -45,6 +45,7 @@ const login = async(req,res) => {
                     message : "Login Successful",
                     loginToken,
                     id:user._id,
+                    isAdmin : user.isAdmin
                 })
             }else {
                 res.status(400).send({
@@ -59,45 +60,6 @@ const login = async(req,res) => {
     } catch (error) {
         res.status(500).send({
             message : "Internal server error in user login"
-        })
-    }
-}
-
-const getAllUsers = async(req,res) => {
-    try {
-        const allUsers = await UserAuthModel.find()
-        res.status(200).send({
-            allUsers
-        })
-    } catch (error) {
-        res.status(500).send({
-            message : "Internal server error in getting all users"
-        })
-    }
-}
-
-const getUserById = async(req,res) => {
-    try {
-        const userById = await UserAuthModel.findById({_id : req.params.id})
-        res.status(200).send({
-            userById
-        })
-    } catch (error) {
-        res.status(500).send({
-            message : "Internal server error in getting all users"
-        })
-    }
-}
-
-const updateUserById = async(req,res) => {
-    try {
-        const updateUser = await UserAuthModel.findByIdAndUpdate({_id:req.params.id},{$set : req.body},{new : true})
-        res.status(200).send({
-            updateUser
-        })
-    } catch (error) {
-        res.status(500).send({
-            message : "Internal server error in updating user"
         })
     }
 }
@@ -122,8 +84,5 @@ const logout = async(req,res) => {
 export default {
     register,
     login,
-    getAllUsers,
-    getUserById,
-    updateUserById,
     logout
 }

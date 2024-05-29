@@ -1,6 +1,6 @@
 import express from 'express'
 import hotelsRoutes from './hotelRoutes.js'
-import usersAuthRoutes from './usersAuthRoutes.js'
+import usersRoutes from './usersRoutes.js'
 import roomsRoutes from './roomsRoutes.js'
 
 const router = express.Router()
@@ -10,7 +10,7 @@ router.get('/', (req,res)=>{
 })
 
 router.use('/hotels',hotelsRoutes)
-router.use('/usersAuth',usersAuthRoutes)
+router.use('/users',usersRoutes)
 router.use('/rooms',roomsRoutes)
 
 export default router
