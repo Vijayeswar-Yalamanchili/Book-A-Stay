@@ -10,5 +10,4 @@ router.post('/createroom/:hotelId', auth.authenticate, auth.adminGuard, roomCont
 router.put('/updateroom/:roomId', auth.authenticate, auth.adminGuard, roomController.updateRoom)
 router.delete('/deleteroom/:roomId/:hotelId', auth.authenticate, auth.adminGuard, roomController.deleteRoom)
 
-
 export default router

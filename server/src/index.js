@@ -4,9 +4,10 @@ import cors from 'cors'
 import indexRoutes from '../src/routes/indexRoutes.js'
 
 dotenv.config()
-const app = express()
 const PORT = process.env.PORT
 
+//middlewares
+const app = express()
 app.use(cors())
 app.use(express.json())
 app.use(indexRoutes)

@@ -4,7 +4,6 @@ import RoomsModel from "../models/roomsModel.js"
 const createRoom = async(req,res) => {
     try {
         const hotelId = req.params.hotelId
-        // const roomExists = await RoomsModel.findOne()
         const addRoom = await RoomsModel.create({...req.body,hotelId : req.params.hotelId})
         if(addRoom){
             const addRoomInHotel = await HotelsModel.findByIdAndUpdate(hotelId,{ $push : {rooms : addRoom._id} })

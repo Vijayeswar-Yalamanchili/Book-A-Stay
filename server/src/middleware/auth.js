@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken'
 
-
 //jwt
 
 const createLoginToken = async(payload) => {
@@ -14,14 +13,13 @@ const decodeLoginToken = async(token) => {
     return await jwt.decode(token)
 }
 
+// ---------------------------------------------------------------------------------------------------------------
 
-//middlewares
+// Middlewares
 
 //session expiry
 const authenticate = async(req,res,next) => {
-    // let token = req?.headers?.authorization
     let token  = req?.headers?.authorization?.split(' ')[1]
-    // console.log(token)
     if(token){
         let payload = await decodeLoginToken(token)
         let currentTime = +new Date()
@@ -41,13 +39,10 @@ const authenticate = async(req,res,next) => {
 
 //mailId based
 const getUserEmail = async(req,res,next) => {
-    // let token = req?.headers?.authorization
     let token  = req?.headers?.authorization?.split(' ')[1]
     if(token){
         let payload = await decodeLoginToken(token)
-        // console.log(payload);
         req.user = payload
-        // console.log(req.user.isAdmin)        // o/p : false
         next()        
     }else{
         res.status(500).send({
@@ -59,10 +54,8 @@ const getUserEmail = async(req,res,next) => {
 //role based
 const adminGuard = async(req,res,next) => {
     let token  = req?.headers?.authorization?.split(' ')[1]
-    // let token = req?.headers?.authorization
     if(token){
         let payload = await decodeLoginToken(token)
-        console.log(payload.isAdmin)
         if(payload.isAdmin === true){
             next()
         }else{
