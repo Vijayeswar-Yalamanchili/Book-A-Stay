@@ -1,3 +1,4 @@
+import auth from "../middleware/auth.js"
 import hashPwd from "../middleware/hashPwd.js"
 import UserAuthModel from "../models/userAuthModel.js"
 
@@ -30,9 +31,20 @@ const login = async(req,res) => {
         const user = await UserAuthModel.findOne({email : email})
         if(user){
             if(await hashPwd.hashCompare(password,user.password)){
+                const loginToken = await auth.createLoginToken({
+                    id : user._id,
+                    name : `${user.firstName} ${user.lastName}`,
+                    firstName: user.firstName,
+                    lastName : user.lastName,
+                    email:user.email,
+                    isLoggedIn : user.isLoggedIn,
+                    isAdmin : user.isAdmin
+                })
                 await UserAuthModel.findOneAndUpdate({email : email},{$set : {isLoggedIn : true}})
                 res.status(200).send({
-                    message : "Login Successful"
+                    message : "Login Successful",
+                    loginToken,
+                    id:user._id,
                 })
             }else {
                 res.status(400).send({

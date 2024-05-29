@@ -1,5 +1,6 @@
 import express from 'express'
 import hotelController from '../controller/hotelController.js'
+import auth from '../middleware/auth.js'
 
 const router = express.Router()
 
@@ -7,10 +8,10 @@ const router = express.Router()
 //     res.send(`<h3>Welcome to hotel route</h3>`)
 // })
 
-router.get('/', hotelController.getAllHotels)
-router.get('/:id', hotelController.getHotelById)
-router.post('/addHotel', hotelController.addHotel)
-router.put('/updatehotel/:id', hotelController.updateHotel)
-router.delete('/deletehotel/:id', hotelController.deleteHotel)
+router.get('/', auth.authenticate, hotelController.getAllHotels)
+router.get('/:id', auth.authenticate, hotelController.getHotelById)
+router.post('/addHotel', auth.authenticate, hotelController.addHotel)
+router.put('/updatehotel/:id', auth.authenticate, hotelController.updateHotel)
+router.delete('/deletehotel/:id', auth.authenticate, hotelController.deleteHotel)
 
 export default router
