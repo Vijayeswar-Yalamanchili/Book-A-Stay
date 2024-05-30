@@ -5,9 +5,9 @@ import { toast } from 'react-toastify'
 import { Link, useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 import './authentication.css'
-import AppNavbar from '../../components/components/navbar/AppNavbar'
-import AxiosService from '../../../utils/AxiosService'
-import ApiRoutes from '../../../utils/ApiRoutes'
+import AppNavbar from '../../components/navbar/AppNavbar'
+import AxiosService from '../../utils/AxiosService'
+import ApiRoutes from '../../utils/ApiRoutes'
 
 function Login() {
 

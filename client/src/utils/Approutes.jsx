@@ -1,8 +1,8 @@
-import Home from '../components/pages/home/Home'
-import Login from '../components/authentications/Login'
-import Register from '../components/authentications/Register'
-import Hotels from '../components/pages/hotelsList/Hotels'
-import HotelPage from '../components/pages/hotelPage/HotelPage'
+import Home from '../pages/home/Home'
+import Login from '../pages/authentications/Login'
+import Register from '../pages/authentications/Register'
+import Hotels from '../pages/hotelsList/Hotels'
+import HotelPage from '../pages/hotelPage/HotelPage'
 
 const Approutes = [
     {

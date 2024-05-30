@@ -3,7 +3,7 @@ import { Button, Container, Nav, Navbar, Image } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 import { jwtDecode } from "jwt-decode"
 import { toast } from 'react-toastify'
-import logo from '../../../assets/book-a-stay.png'
+import logo from '../../assets/book-a-stay.png'
 import AxiosService from '../../utils/AxiosService'
 import ApiRoutes from '../../utils/ApiRoutes'
 import './AppNavbar.css'
