@@ -52,7 +52,7 @@ function SearchHotel() {
                 <div className='optionItem py-1 d-flex justify-content-between align-items-center'>
                   <span>Adult</span>
                   <div >
-                    <Button variant='none' className='optionCounterBtn' onClick={() => handleOption("adult", "d")}>-</Button>
+                    <Button variant='none' className='optionCounterBtn' disabled={options.adult<=1} onClick={() => handleOption("adult", "d")}>-</Button>
                     <span className='optionValue mx-2'>{options.adult}</span>
                     <Button variant='none' className='optionCounterBtn' onClick={() => handleOption("adult", "i")}>+</Button>
                   </div>
@@ -60,7 +60,7 @@ function SearchHotel() {
                 <div className='optionItem py-1 d-flex justify-content-between align-items-center'>
                   <span>Children</span>
                   <div >
-                    <Button variant='none' className='optionCounterBtn' onClick={() => handleOption("children", "d")}>-</Button>
+                    <Button variant='none' className='optionCounterBtn' disabled={options.children<=0} onClick={() => handleOption("children", "d")}>-</Button>
                     <span className='optionValue mx-2'>{options.children}</span>
                     <Button variant='none' className='optionCounterBtn' onClick={() => handleOption("children", "i")}>+</Button>
                   </div>
@@ -68,7 +68,7 @@ function SearchHotel() {
                 <div className='optionItem py-1 d-flex justify-content-between align-items-center'>
                   <span>room</span>
                   <div >
-                    <Button variant='none' className='optionCounterBtn' onClick={() => handleOption("room", "d")}>-</Button>
+                    <Button variant='none' className='optionCounterBtn' disabled={options.room <=1} onClick={() => handleOption("room", "d")}>-</Button>
                     <span className='optionValue mx-2 '>{options.room}</span>
                     <Button variant='none' className='optionCounterBtn' onClick={() => handleOption("room", "i")}>+</Button>
                   </div>
