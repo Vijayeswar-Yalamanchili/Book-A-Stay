@@ -1,0 +1,33 @@
+.loginForm,.signupForm{
+    background-color: #0d6efd;
+    color: white;
+}
+
+.loginForm{
+    width: 25rem !important;
+}
+
+.signupForm{
+    width: 30rem !important;
+}
+
+.authErrorText{
+    color: rgba(175, 4, 4, 0.896);
+}
+
+.frgtPwdText, .loginText{
+    color: white;
+    text-decoration: none;
+}
+
+.loginText, .frgtPwdText:hover{
+    color: #fd7e14;
+}
+
+.loginText:hover {
+    color: white;
+}
+
+.formBtns {
+    background-color: #fd7e14 !important;
+}
