@@ -1,0 +1,142 @@
+.search{
+    flex-direction: column;
+    width: 17rem;
+    height: max-content;
+    border: 1px solid #0d6efd;
+    border-radius: 20px;
+    padding: 0.5rem 0.5rem;
+}
+
+.searchBar, .searchDate, .persons {
+    width: 100%;
+    padding : 10px 0;
+}
+
+.bedIcon, .calenderIcon, .personIcon{
+    color: lightgray;
+}
+
+.cityNameText{
+    border: none;
+    outline: none;
+}
+
+.searchDateText, .personsText{
+    color: rgb(103, 94, 94);
+    cursor: pointer;
+}
+
+.searchDate{        
+    border-top: 1px solid #0d6efd;
+    border-bottom: 1px solid #0d6efd;
+}
+
+.dateblock{    
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    z-index: 2;
+    position:absolute;
+    top: 13.5rem;
+}
+
+.persons{
+    border-bottom: 1px solid #0d6efd;
+}
+
+.personsOptions{
+    position: absolute;
+    z-index: 2;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 10px;
+    padding: 0.5rem;
+}
+
+.optionItem{        
+    width: 100%;
+}
+
+.optionCounterBtn{
+    border:  1px solid #0d6efd !important;
+}
+
+.searchBtn{
+    width: 100%;
+    margin-top: 1rem;
+    background-color: #fd7e14 !important;
+    border: none !important;
+    border-radius: 10px !important;
+}
+
+@media screen and (max-width: 575px) {
+    .dateblock{
+        width: 250px;
+    }
+    .rdrMonth{
+        width: 100%;
+    }
+    .personsOptions{
+        top: 16rem;
+        width: 15rem;
+    }    
+}
+
+@media screen and (max-width: 767px) and (min-width: 576px){
+    .search{
+        width: 20rem;
+    }
+    .personsOptions{
+        top: 16rem;
+        width: 18rem;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .header{
+        position: relative;
+    }
+    .search{
+        flex-direction: row;
+        height: 3rem;
+        min-width: 45.5rem;
+        border: 1px solid #0d6efd;
+        border-radius: 20px;
+        padding: 1.75rem 0 !important;
+    }
+    .cityNameText, .searchDateText, .personsText{
+        width: 100%;
+    }  
+    .searchBar{
+        width: 12rem;
+    }
+    .cityNameText{
+        border: none;
+        outline: none;
+    }
+    .searchDate, .persons {
+        width: 15rem;
+    }    
+    .searchDate{
+        border-top: none;
+        border-bottom: none;
+        border-left: 1px solid #0d6efd;
+        border-right: 1px solid #0d6efd;
+    }
+    .dateblock{
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        z-index: 2;
+        position:absolute;
+        top:4rem;
+    }
+    .persons{
+        border-bottom: none;
+    }
+    .personsOptions{
+        top: 4rem;
+        width: 15rem;
+    }
+    .searchBtn{
+        margin-top: 0;
+        margin-right: 10px;
+        width: auto;
+    }
+}
