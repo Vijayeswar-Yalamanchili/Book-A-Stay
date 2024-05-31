@@ -45,3 +45,9 @@
         width: 650px !important;
     }
 }
+
+@media screen and (min-width: 992px){
+    .cityRows{
+        width: 100% !important;
+    }
+}

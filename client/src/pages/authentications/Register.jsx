@@ -8,6 +8,7 @@ import './authentication.css'
 import AppNavbar from '../../components/navbar/AppNavbar'
 import AxiosService from '../../utils/AxiosService'
 import ApiRoutes from '../../utils/ApiRoutes'
+import Footer from '../../components/footer/Footer'
 
 function Register() {
 
@@ -49,7 +50,7 @@ function Register() {
   return <>
     <AppNavbar/>
 
-    <Container>
+    <Container className='mb-5'>
       <Col md xs={12}>
         <Form onSubmit={formik.handleSubmit} className='signupForm mx-auto mt-5 p-5 rounded-4'>
           <Row className="mb-3">
@@ -95,6 +96,8 @@ function Register() {
         </Form>
       </Col>
     </Container>
+
+    <Footer/>
   </>
 }
 

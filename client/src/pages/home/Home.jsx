@@ -13,7 +13,7 @@ function Home() {
   return <>
     <AppNavbar/>
     <SearchHotel/>
-    <Container className='homeWrapper my-4 mx-auto'>
+    <Container className='homeWrapper mt-5 mb-3 mx-auto'>
       <FeaturedByCity/>
       <FeaturedByTypes/>
       <FeaturedByLiked/>
