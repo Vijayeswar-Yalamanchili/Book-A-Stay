@@ -7,75 +7,71 @@ import Novotel from '../../assets/Novotel.jpeg'
 import ITCKohenur from '../../assets/ITCKohenur.jpeg'
 
 function FeaturedByLiked() {
+
+  let hotelsLikedList = [
+    {
+      image : courtyard,
+      hotelName : "CourtYard",
+      location : "Bengaluru",
+      desc : "Starting from {'\u20B9'}12,980/- onwards",
+      rating : 9.3,
+      experience : "Excellent"
+    },
+    {
+      image : ITCChola,
+      hotelName : "ITC Grand Chola",
+      location : "Chennai",
+      desc : "Starting from {'\u20B9'}12,914/- onwards",
+      rating : 9.2,
+      experience : "Excellent"
+    },
+    {
+      image : ThePark,
+      hotelName : "The Park",
+      location : "Chennai",
+      desc : "Starting from {'\u20B9'}6,185/- onwards",
+      rating : 8.8,
+      experience : "Excellent"
+    },
+    {
+      image : Novotel,
+      hotelName : "Novotel",
+      location : "Vizag alias Visakhapatnam",
+      desc : "Starting from {'\u20B9'}9,438/- onwards",
+      rating : 9,
+      experience : "Excellent"
+    },
+    {
+      image : ITCKohenur,
+      hotelName : "ITC Kohenur",
+      location : "Hyderabad",
+      desc : "Starting from {'\u20B9'}13,806/- onwards",
+      rating : 9.5,
+      experience : "Excellent"
+    },
+  ]
+
   return <>
     <div className='my-5'>
         <h5>Most Liked Stays</h5>
         <div className='d-flex justify-content-start ' style={{gap : "8px"}}>
           <Row xs={1} className='mx-auto cityRows'>
-            <Card className='px-0' style={{ width: '15rem'}}>
-              <Card.Img variant="top" src={courtyard} className='cardImageType'/>
-              <Card.Body>
-                <h5>CourtYard</h5>
-                <p>Bengaluru</p>
-                <h6>Starting from {'\u20B9'}12,980/- onwards</h6>
-                <div className="rating">
-                  <Button variant='none' className='me-1' style={{backgroundColor : "#003580", color : "white"}}>9.3</Button>
-                  <span>Excellent</span>
-                </div>
-              </Card.Body>
-            </Card>
-  
-            <Card className='px-0' style={{ width: '15rem'}}>
-              <Card.Img variant="top" src={ITCChola} className='cardImageType'/>
-              <Card.Body>
-                <h5>ITC Grand Chola</h5>
-                <p>Chennai</p>
-                <h6>Starting from {'\u20B9'}12,914/- onwards</h6>
-                <div className="rating">
-                  <Button variant='none' className='me-1' style={{backgroundColor : "#003580", color : "white"}}>9.2</Button>
-                  <span>Excellent</span>
-                </div>
-              </Card.Body>
-            </Card>
-  
-            <Card className='px-0' style={{ width: '15rem'}}>
-              <Card.Img variant="top" src={ThePark} className='cardImageType'/>
-              <Card.Body>
-                <h5>The park</h5>
-                <p>Chennai</p>
-                <h6>Starting from {'\u20B9'}6,185/- onwards</h6>
-                <div className="rating">
-                  <Button variant='none' className='me-1' style={{backgroundColor : "#003580", color : "white"}}>8.8</Button>
-                  <span>Excellent</span>
-                </div>
-              </Card.Body>
-            </Card>
-  
-            <Card className='px-0' style={{ width: '15rem'}}>
-              <Card.Img variant="top" src={Novotel} className='cardImageType'/>
-              <Card.Body>
-                <h5>Novotel</h5>
-                <p>Vizag alias Visakhapatnam</p>
-                <h6>Starting from {'\u20B9'}9,438/- onwards</h6>
-                <div className="rating">
-                  <Button variant='none' className='me-1' style={{backgroundColor : "#003580", color : "white"}}>9</Button>
-                  <span>Excellent</span>
-                </div>
-              </Card.Body>
-            </Card>
-  
-            <Card className='px-0' style={{ width: '15rem'}}>
-              <Card.Img variant="top" src={ITCKohenur} className='cardImageType'/>
-              <Card.Body>
-                <h5>ITC Kohenur</h5>
-                <p>Hyderabad</p>
-                <h6>Starting from {'\u20B9'}13,806/- onwards</h6>
-                <div className="rating">
-                  <Button variant='none' className='me-1' style={{backgroundColor : "#003580", color : "white"}}>9.5</Button>
-                  <span>Excellent</span>
-                </div>
-              </Card.Body>
-            </Card>
+            {
+              hotelsLikedList.map((e,i) => {
+                return <Card className='px-0' style={{ width: '15rem'}} key={i}>
+                  <Card.Img variant="top" src={e.image} className='cardImageType'/>
+                  <Card.Body>
+                    <h5>{e.hotelName}</h5>
+                    <p>{e.location}</p>
+                    <h6>{e.desc}</h6>
+                    <div className="rating">
+                      <Button variant='none' className='me-1' style={{backgroundColor : "#003580", color : "white"}}>{e.rating}</Button>
+                      <span>{e.experience}</span>
+                    </div>
+                  </Card.Body>
+                </Card>
+              })
+            }
           </Row>
         </div>
     </div>

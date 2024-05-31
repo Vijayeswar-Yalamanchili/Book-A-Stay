@@ -9,7 +9,7 @@ function Footer() {
     <div className="footerBlock d-flex justify-content-between align-items-center">
       <div className="contactMail flex-column d-flex justify-content-between align-items-start">
         <div style={{fontSize : "1.5em"}} className='mb-3'>Save money, Stay Comfort</div>
-        <div style={{fontSize : "1em"}}>Subscribe to know more!</div>
+        <div style={{fontSize : "1em"}}>List your Hotels? - Needed Offers? - Subscribe to know more!</div>
         <div className="inputField mt-2 d-flex justify-content-between align-items-center">
           <input type ="email" placeholder='Enter your Email' className='mailInput p-2'/>
           <Button className='sendMailBtn'>Subscribe</Button>

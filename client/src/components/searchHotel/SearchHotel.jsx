@@ -1,14 +1,17 @@
 import React,{ useState } from 'react'
-import { Button } from 'react-bootstrap'
+import { Button, Toast } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBed, faCalendar, faPerson }  from '@fortawesome/free-solid-svg-icons'
 import { DateRange } from 'react-date-range';
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns'
 import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 
 function SearchHotel() {
 
+  const navigate = useNavigate()  
   const [openDate, setOpenDate] = useState(false)
   const [openOptions, setOpenOptions] = useState(false)
   const [options, setOptions] = useState({ adult : 1, children : 0, room : 1 })
@@ -27,6 +30,14 @@ function SearchHotel() {
         [name]: operation === "i" ? options[name] + 1 : options[name] - 1,
       }
     })
+  }
+
+  const handleSearch = async() => {
+    try {
+      navigate('/hotels')
+    } catch (error) {
+      toast.error(error)
+    }
   }
 
   return <>
@@ -76,7 +87,7 @@ function SearchHotel() {
             }
         </div>
 
-        <Button className='searchBtn'>Search</Button>  
+        <Button className='searchBtn' onClick={handleSearch}>Search</Button>  
       </div>
     </div>
   </>
