@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, Row } from 'react-bootstrap'
-import './FeaturedByTypes.css'
+import './Featuredbytypes.css'
 import hotelsImg from '../../assets/hotels.jpeg'
 import villasImg from '../../assets/villas.jpeg'
 import resortsImg from '../../assets/resorts.jpeg'
