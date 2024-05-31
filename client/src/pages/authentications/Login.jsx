@@ -1,8 +1,8 @@
 import React from 'react'
 import { Col, Button, Form, Container } from 'react-bootstrap'
+import { Link, useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik'
 import { toast } from 'react-toastify'
-import { Link, useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 import './authentication.css'
 import AppNavbar from '../../components/navbar/AppNavbar'
@@ -41,26 +41,26 @@ function Login() {
     <Container>
       <Col md xs={12}>
         <Form onSubmit={formik.handleSubmit} className='loginForm mx-auto mt-5 p-5 rounded-4'>
-            <Form.Group className="mb-4">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" id='email' name='email' onChange={formik.handleChange} value={formik.values.email} onBlur={formik.handleBlur}/>
-                {formik.touched.email && formik.errors.email ? (<div className='authErrorText'>{formik.errors.email}</div>) : null}
-            </Form.Group>
-            <Form.Group className="mb-4">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Enter Password" id='password' name='password' onChange={formik.handleChange} value={formik.values.password} onBlur={formik.handleBlur}/>
-                {formik.touched.password && formik.errors.password ? (<div className='authErrorText'>{formik.errors.password}</div>) : null}
-            </Form.Group>
-            <div className='mb-4'>
-                <Link to={'/forgotpassword'} className='frgtPwdText'>Forgot Password ?</Link>
-            </div>
-            <div className="d-grid mb-4">
-                <Button className='formBtns' type='submit'>Login</Button>
-            </div>
-            <hr style={{color:"white"}}/>
-            <div className="d-grid mb-4">
-                <Button className='formBtns' onClick={()=>navigate('/register')}>Sign Up</Button>
-            </div>
+          <Form.Group className="mb-4">
+            <Form.Label>Email</Form.Label>
+            <Form.Control type="email" placeholder="Enter email" id='email' name='email' onChange={formik.handleChange} value={formik.values.email} onBlur={formik.handleBlur}/>
+            {formik.touched.email && formik.errors.email ? (<div className='authErrorText'>{formik.errors.email}</div>) : null}
+          </Form.Group>
+          <Form.Group className="mb-4">
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" placeholder="Enter Password" id='password' name='password' onChange={formik.handleChange} value={formik.values.password} onBlur={formik.handleBlur}/>
+            {formik.touched.password && formik.errors.password ? (<div className='authErrorText'>{formik.errors.password}</div>) : null}
+          </Form.Group>
+          <div className='mb-4'>
+            <Link to={'/forgotpassword'} className='frgtPwdText'>Forgot Password ?</Link>
+          </div>
+          <div className="d-grid mb-4">
+            <Button className='formBtns' type='submit'>Login</Button>
+          </div>
+          <hr style={{color:"white"}}/>
+          <div className="d-grid mb-4">
+            <Button className='formBtns' onClick={()=>navigate('/register')}>Sign Up</Button>
+          </div>
         </Form>
       </Col>
     </Container>

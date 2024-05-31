@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 import logo from '../../assets/book-a-stay.png'
 import AxiosService from '../../utils/AxiosService'
 import ApiRoutes from '../../utils/ApiRoutes'
-import './AppNavbar.css'
+import './appNavbar.css'
 
 function AppNavbar() {
 

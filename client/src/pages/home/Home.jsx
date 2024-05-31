@@ -1,18 +1,24 @@
 import React from 'react'
-import { Button, Container, Image } from 'react-bootstrap'
-import { Link, useNavigate } from 'react-router-dom'
+import { Container } from 'react-bootstrap'
+import './home.css'
 import AppNavbar from '../../components/navbar/AppNavbar'
-import './Home.css'
 import SearchHotel from '../../components/searchHotel/SearchHotel'
+import FeaturedByCity from '../../components/featuredByCities/FeaturedByCity'
+import FeaturedByTypes from '../../components/featuredByTypes/FeaturedByTypes'
+import FeaturedByLiked from '../../components/featuredByLiked/FeaturedByLiked'
+import Footer from '../../components/footer/Footer'
 
 function Home() {
-
-  const navigate = useNavigate()
 
   return <>
     <AppNavbar/>
     <SearchHotel/>
-    home
+    <Container className='homeWrapper my-4 mx-auto'>
+      <FeaturedByCity/>
+      <FeaturedByTypes/>
+      <FeaturedByLiked/>
+    </Container>
+    <Footer/>    
   </>
 }
 
