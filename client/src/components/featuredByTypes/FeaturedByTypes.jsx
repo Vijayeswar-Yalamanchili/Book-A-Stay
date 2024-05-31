@@ -5,6 +5,7 @@ import hotelsImg from '../../assets/hotels.jpeg'
 import villasImg from '../../assets/villas.jpeg'
 import resortsImg from '../../assets/resorts.jpeg'
 import cottagesImg from '../../assets/cottages.jpeg'
+import cabinsImg from '../../assets/cabins.jpeg'
 
 function FeaturedByTypes() {
   return <>
@@ -45,7 +46,7 @@ function FeaturedByTypes() {
         </Card>
 
         <Card style={{ width: '15rem'}}>
-          <Card.Img variant="top" src={resortsImg} className='cardImageType'/>
+          <Card.Img variant="top" src={cabinsImg} className='cardImageType'/>
           <Card.Body>
             <h5>Cabins</h5>
             <p className='mb-0'>10 Cabins</p>
