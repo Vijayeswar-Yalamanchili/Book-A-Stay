@@ -5,7 +5,6 @@ import ITCChola from '../../assets/ITCChola.jpeg'
 import ThePark from '../../assets/ThePark.jpeg'
 import Novotel from '../../assets/Novotel.jpeg'
 import ITCKohenur from '../../assets/ITCKohenur.jpeg'
-import './Featuredbyliked.css'
 
 function FeaturedByLiked() {
   return <>
@@ -13,7 +12,7 @@ function FeaturedByLiked() {
         <h5>Most Liked Stays</h5>
         <div className='d-flex justify-content-start ' style={{gap : "8px"}}>
           <Row xs={1} className='mx-auto cityRows'>
-            <Card style={{ width: '15rem'}}>
+            <Card className='px-0' style={{ width: '15rem'}}>
               <Card.Img variant="top" src={courtyard} className='cardImageType'/>
               <Card.Body>
                 <h5>CourtYard</h5>
@@ -26,7 +25,7 @@ function FeaturedByLiked() {
               </Card.Body>
             </Card>
   
-            <Card style={{ width: '15rem'}}>
+            <Card className='px-0' style={{ width: '15rem'}}>
               <Card.Img variant="top" src={ITCChola} className='cardImageType'/>
               <Card.Body>
                 <h5>ITC Grand Chola</h5>
@@ -39,7 +38,7 @@ function FeaturedByLiked() {
               </Card.Body>
             </Card>
   
-            <Card style={{ width: '15rem'}}>
+            <Card className='px-0' style={{ width: '15rem'}}>
               <Card.Img variant="top" src={ThePark} className='cardImageType'/>
               <Card.Body>
                 <h5>The park</h5>
@@ -52,7 +51,7 @@ function FeaturedByLiked() {
               </Card.Body>
             </Card>
   
-            <Card style={{ width: '15rem'}}>
+            <Card className='px-0' style={{ width: '15rem'}}>
               <Card.Img variant="top" src={Novotel} className='cardImageType'/>
               <Card.Body>
                 <h5>Novotel</h5>
@@ -65,7 +64,7 @@ function FeaturedByLiked() {
               </Card.Body>
             </Card>
   
-            <Card style={{ width: '15rem'}}>
+            <Card className='px-0' style={{ width: '15rem'}}>
               <Card.Img variant="top" src={ITCKohenur} className='cardImageType'/>
               <Card.Body>
                 <h5>ITC Kohenur</h5>

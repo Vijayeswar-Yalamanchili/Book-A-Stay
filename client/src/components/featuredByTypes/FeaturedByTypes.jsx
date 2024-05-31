@@ -1,6 +1,5 @@
 import React from 'react'
 import { Card, Row } from 'react-bootstrap'
-import './Featuredbytypes.css'
 import hotelsImg from '../../assets/hotels.jpeg'
 import villasImg from '../../assets/villas.jpeg'
 import resortsImg from '../../assets/resorts.jpeg'
@@ -13,7 +12,7 @@ function FeaturedByTypes() {
     <h5>Browse by Stay Type</h5>
     <div className='d-flex justify-content-start' style={{gap : "8px"}}>
       <Row xs={1} className='mx-auto cityRows'>
-        <Card style={{ width: '15rem'}}>
+        <Card className='px-0' style={{ width: '15rem'}}>
           <Card.Img variant="top" src={hotelsImg} className='cardImageType'/>
           <Card.Body>
             <h5>Hotels</h5>
@@ -21,7 +20,7 @@ function FeaturedByTypes() {
           </Card.Body>
         </Card>
 
-        <Card style={{ width: '15rem'}}>
+        <Card className='px-0' style={{ width: '15rem'}}>
           <Card.Img variant="top" src={villasImg} className='cardImageType'/>
           <Card.Body>
             <h5>Villas</h5>
@@ -29,7 +28,7 @@ function FeaturedByTypes() {
           </Card.Body>
         </Card>
 
-        <Card style={{ width: '15rem'}}>
+        <Card className='px-0' style={{ width: '15rem'}}>
           <Card.Img variant="top" src={cottagesImg} className='cardImageType'/>
           <Card.Body>
             <h5>Cottages</h5>
@@ -37,7 +36,7 @@ function FeaturedByTypes() {
           </Card.Body>
         </Card>
 
-        <Card style={{ width: '15rem'}}>
+        <Card className='px-0' style={{ width: '15rem'}}>
           <Card.Img variant="top" src={resortsImg} className='cardImageType'/>
           <Card.Body>
             <h5>Resorts</h5>
@@ -45,7 +44,7 @@ function FeaturedByTypes() {
           </Card.Body>
         </Card>
 
-        <Card style={{ width: '15rem'}}>
+        <Card className='px-0' style={{ width: '15rem'}}>
           <Card.Img variant="top" src={cabinsImg} className='cardImageType'/>
           <Card.Body>
             <h5>Cabins</h5>
