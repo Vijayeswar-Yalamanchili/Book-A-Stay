@@ -5,7 +5,7 @@ import ITCChola from '../../assets/ITCChola.jpeg'
 import ThePark from '../../assets/ThePark.jpeg'
 import Novotel from '../../assets/Novotel.jpeg'
 import ITCKohenur from '../../assets/ITCKohenur.jpeg'
-import './featuredByLiked.css'
+import './FeaturedByLiked.css'
 
 function FeaturedByLiked() {
   return <>

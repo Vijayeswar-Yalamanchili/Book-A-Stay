@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, Row } from 'react-bootstrap'
-import './featuredByCity.css'
+import './FeaturedByCity.css'
 import bangaloreCity from '../../assets/bangaloreCity.jpeg'
 import chennaiCity from '../../assets/chennaiCity.jpeg'
 import hyderabadCity from '../../assets/hyderabadCity.jpeg'

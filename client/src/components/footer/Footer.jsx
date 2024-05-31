@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button,Image } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import './footer.css'
+import './Footer.css'
 import logo from '../../assets/book-a-stay.png'
 
 function Footer() {
