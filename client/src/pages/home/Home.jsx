@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
-import './home.css'
+import './Home.css'
 import AppNavbar from '../../components/navbar/AppNavbar'
 import SearchHotel from '../../components/searchHotel/SearchHotel'
 import FeaturedByCity from '../../components/featuredByCities/FeaturedByCity'
