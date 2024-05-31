@@ -373,8 +373,36 @@
 /* HotelsPageSearchBar */
 
 .searchFilterBlock{
-    width: 30%;
+    width: 30% !important;
     background-color: red;
+    border-radius: 10px;
+}
+
+@media screen and (min-width: 768px){
+    .searchFilterBlock{
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        height: 22rem;
+        background-color: #fd7e14;
+    }
+    .destinationInput, .searchDateArea{
+        width: 100%;
+        height: 2rem;
+        border: none;
+        outline: none;
+        border-radius: 10px;
+    }
+    .searchDateArea{
+        background-color: white;
+    }
+    .pplData{
+        width: 20%;
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        
+    }
 }
 
 /* ------------------------------------------------------------------- */
@@ -383,7 +411,80 @@
 
 .hotelsListBlock{
     width: 100%;
-    background-color: green;
+    height: max-content;
+}
+
+@media screen and (max-width: 767px){
+   
+}
+
+@media screen and (min-width: 768px){
+    .hotelListCard{
+        gap: 10px !important;
+    }
+    .hotelCard{
+        height: 15rem !important;
+    }
+    .roomImage{
+        width : 12rem !important;
+    }
+    .cardLeftBlock{
+        width: 70% !important;
+    }
+    .cardLeftBlock{
+        height: 100%;
+    }
+    .cardLeftBottomBlock{
+        gap: 5px;
+        height: max-content;
+    }
+    .label{
+        width: max-content;
+        margin: 2px 0;
+        font-size: small;
+        background-color: #fd7e14;
+        color: white;
+        padding: 2px 6px;
+        border: none;
+        border-radius: 5px;
+    }
+    .cardRightBlock{
+        width: auto;
+        height: 100%;
+    }
+    .cardRightTopBlock{
+        width: 100%;
+        flex-direction: column;
+        align-items : end;
+        gap: 2px;
+    }
+    .ratingBtn{
+        padding: 2px 5px;
+        background-color: #003580;
+        color: white;
+        border-radius: 5px;
+    }
+    .availabilityBtn{
+        width: max-content;
+        font-size: 0.75em !important;
+    }
+}
+
+@media screen and (min-width: 992px){
+    .roomImage{
+        width: 20rem;
+    }
+    .cardLeftBottomBlock{
+        display: flex;
+        flex-direction: row;
+    }
+    .availabilityBtn{
+        font-size: medium !important;
+    }
+}
+
+@media screen and (min-width: 1024){
+
 }
 
 /* ------------------------------------------------------------------- */

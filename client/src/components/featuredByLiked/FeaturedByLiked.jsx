@@ -13,7 +13,7 @@ function FeaturedByLiked() {
       image : courtyard,
       hotelName : "CourtYard",
       location : "Bengaluru",
-      desc : "Starting from {'\u20B9'}12,980/- onwards",
+      desc : "Starting from \u20B912,980/- onwards",
       rating : 9.3,
       experience : "Excellent"
     },
@@ -21,7 +21,7 @@ function FeaturedByLiked() {
       image : ITCChola,
       hotelName : "ITC Grand Chola",
       location : "Chennai",
-      desc : "Starting from {'\u20B9'}12,914/- onwards",
+      desc : "Starting from \u20B912,914/- onwards",
       rating : 9.2,
       experience : "Excellent"
     },
@@ -29,7 +29,7 @@ function FeaturedByLiked() {
       image : ThePark,
       hotelName : "The Park",
       location : "Chennai",
-      desc : "Starting from {'\u20B9'}6,185/- onwards",
+      desc : "Starting from \u20B96,185/- onwards",
       rating : 8.8,
       experience : "Excellent"
     },
@@ -37,7 +37,7 @@ function FeaturedByLiked() {
       image : Novotel,
       hotelName : "Novotel",
       location : "Vizag alias Visakhapatnam",
-      desc : "Starting from {'\u20B9'}9,438/- onwards",
+      desc : "Starting from \u20B99,438/- onwards",
       rating : 9,
       experience : "Excellent"
     },
@@ -45,7 +45,7 @@ function FeaturedByLiked() {
       image : ITCKohenur,
       hotelName : "ITC Kohenur",
       location : "Hyderabad",
-      desc : "Starting from {'\u20B9'}13,806/- onwards",
+      desc : "Starting from \u20B913,806/- onwards",
       rating : 9.5,
       experience : "Excellent"
     },
