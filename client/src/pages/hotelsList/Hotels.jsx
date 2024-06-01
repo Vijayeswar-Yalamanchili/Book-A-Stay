@@ -1,9 +1,9 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
-import AppNavbar from '../../components/navbar/AppNavbar'
-import HotelsPageSearchBar from '../../components/hotelsPageSearchbar/HotelsPageSearchBar'
-import HotelsPageList from '../../components/hotelsPageList/HotelsPageList'
-import Footer from '../../components/footer/Footer'
+import AppNavbar from '../../components/AppNavbar'
+import HotelsPageSearchBar from '../../components/HotelsPageSearchBar'
+import HotelsPageList from '../../components/HotelsPageList'
+import Footer from '../../components/Footer'
 
 function Hotels() {
   return <>

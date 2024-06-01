@@ -4,10 +4,10 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik'
 import { toast } from 'react-toastify'
 import * as Yup from 'yup'
-import AppNavbar from '../../components/navbar/AppNavbar'
+import AppNavbar from '../../components/AppNavbar'
 import AxiosService from '../../utils/AxiosService'
 import ApiRoutes from '../../utils/ApiRoutes'
-import Footer from '../../components/footer/Footer'
+import Footer from '../../components/Footer'
 
 function Login() {
 

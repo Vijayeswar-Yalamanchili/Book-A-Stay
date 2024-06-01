@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Container, Nav, Navbar, Image } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
-import logo from '../../assets/book-a-stay.png'
+import logo from '../assets/book-a-stay.png'
 
 function AppNavbar() {
   

@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Card, Row } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationPin }  from '@fortawesome/free-solid-svg-icons'
-import hotelRoomImg from '../../assets/hotelroom.jpeg'
+import hotelRoomImg from '../assets/hotelroom.jpeg'
 
 function HotelDetailPage() {
 
@@ -47,8 +47,8 @@ function HotelDetailPage() {
             <div className="roomImagesList my-4">
                 <Row xs={1} className='mx-auto cityRows'>
                 {
-                    imagesList.map((e) => {
-                        return <Card style={{width : "20rem"}} className='p-0'>
+                    imagesList.map((e,i) => {
+                        return <Card key={i} style={{width : "20rem"}} className='p-0'>
                             <Card.Img src={e.image} className='roomViewImg'/>
                         </Card>
                     })

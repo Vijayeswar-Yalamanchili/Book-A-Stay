@@ -1,10 +1,10 @@
 import React from 'react'
 import { Card, Button, Row } from 'react-bootstrap'
-import courtyard from '../../assets/courtyard.jpeg'
-import ITCChola from '../../assets/ITCChola.jpeg'
-import ThePark from '../../assets/ThePark.jpeg'
-import Novotel from '../../assets/Novotel.jpeg'
-import ITCKohenur from '../../assets/ITCKohenur.jpeg'
+import courtyard from '../assets/courtyard.jpeg'
+import ITCChola from '../assets/ITCChola.jpeg'
+import ThePark from '../assets/ThePark.jpeg'
+import Novotel from '../assets/Novotel.jpeg'
+import ITCKohenur from '../assets/ITCKohenur.jpeg'
 
 function FeaturedByLiked() {
 

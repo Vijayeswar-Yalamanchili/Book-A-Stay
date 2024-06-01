@@ -1,11 +1,11 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
-import AppNavbar from '../../components/navbar/AppNavbar'
-import SearchHotel from '../../components/searchHotel/SearchHotel'
-import FeaturedByCity from '../../components/featuredByCities/FeaturedByCity'
-import FeaturedByTypes from '../../components/featuredByTypes/FeaturedByTypes'
-import FeaturedByLiked from '../../components/featuredByLiked/FeaturedByLiked'
-import Footer from '../../components/footer/Footer'
+import AppNavbar from '../../components/AppNavbar'
+import SearchHotel from '../../components/SearchHotel'
+import FeaturedByCity from '../../components/FeaturedByCity'
+import FeaturedByTypes from '../../components/FeaturedByTypes'
+import FeaturedByLiked from '../../components/FeaturedByLiked'
+import Footer from '../../components/Footer'
 
 function Home() {
 

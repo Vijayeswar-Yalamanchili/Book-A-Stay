@@ -1,10 +1,10 @@
 import React from 'react'
 import { Card, Row } from 'react-bootstrap'
-import hotelsImg from '../../assets/hotels.jpeg'
-import villasImg from '../../assets/villas.jpeg'
-import resortsImg from '../../assets/resorts.jpeg'
-import cottagesImg from '../../assets/cottages.jpeg'
-import cabinsImg from '../../assets/cabins.jpeg'
+import hotelsImg from '../assets/hotels.jpeg'
+import villasImg from '../assets/villas.jpeg'
+import resortsImg from '../assets/resorts.jpeg'
+import cottagesImg from '../assets/cottages.jpeg'
+import cabinsImg from '../assets/cabins.jpeg'
 
 function FeaturedByTypes() {
 

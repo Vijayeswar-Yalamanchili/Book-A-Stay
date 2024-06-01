@@ -41,6 +41,12 @@
     background-color: #fd7e14 !important;
 }
 
+@media screen and (max-width : 576px){
+    .loginForm{
+        width: 18rem !important;
+    }
+}
+
 /* ------------------------------------------------------------------- */
 
 /* APP NAVBAR */
@@ -333,7 +339,12 @@
 
 .sendMailBtn {
     background-color: #fd7e14 !important;
-    border: none;
+    border: none !important;
+}
+
+.sendMailBtn:hover {
+    background-color: white !important;
+    color: #0d6efd !important;
 }
 
 .logoImg{
@@ -544,3 +555,146 @@
 }
 
 /* ------------------------------------------------------------------- */
+/* ------------------------------------------------------------------- */
+/* ------------------------------------------------------------------- */
+/* ------------------------------------------------------------------- */
+/* ------------------------------------------------------------------- */
+/* ------------------------------------------------------------------- */
+
+/* ADMIN */
+
+/* ADMIN NAVBAR */
+.adminNavBtns{
+    width: 9.25rem;
+}
+
+.adminAppData{
+    width: 8.25rem;
+    color: white;
+    text-decoration: none;
+}
+
+.adminAppName{
+    font-size: medium;
+}
+
+.adminAuthBtns {
+    background-color: white !important;
+    color: #0d6efd !important;
+    border: 1px solid white !important;
+    width: 4.5rem;
+    font-size: smaller !important;
+}
+
+.adminAuthBtns:hover {
+    color: white !important;
+    background-color: #0d6efd !important;
+}
+
+@media screen and (min-width: 426px){
+    .adminAppData{
+        width: 9rem;
+    }
+    .adminNavBtns{
+        width: 10rem;
+    }
+    
+    .adminAppName{
+        font-size: large;
+    }
+    .adminAuthBtns{
+        width: auto;
+        font-size: medium !important;
+    }
+}
+
+/* ------------------------------------------------------------------- */
+
+/* ADMIN FOOTER */
+
+.adminFooter{
+    background-color: #fd7e14;
+    height: max-content;
+}
+
+.adminFooterBlock{
+    padding: 2rem 4rem;
+    gap: 2rem;
+    flex-direction: column;
+}
+   
+.adminMailInput{
+    height: 2.25rem;
+    border: none;
+    width: 18rem;
+    border-radius: 5px;
+}
+
+.adminSendMailBtn {
+    background-color: white !important;
+    color: #0d6efd !important;
+    border: none !important;
+}
+
+.adminSendMailBtn:hover {
+    background-color: #0d6efd !important;
+    color: white !important;
+}
+
+.adminLogoImg{
+    width: 5rem;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 767px){
+    .adminInputField{
+        width: 18rem !important;
+    } 
+    .adminMailInput{
+        width: 12rem;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .adminFooterBlock{
+        flex-direction: row;
+    }
+    .adminInputField{
+        width: 24rem !important;
+    }    
+    .adminLogoImg{
+        width: 6rem;
+    }
+}
+
+/* ------------------------------------------------------------------- */
+
+/* ADMIN LOGIN & REGISTER */
+
+.adminLoginForm, .adminSignupForm{
+    border: 1px solid #fd7e14;
+    width: 25rem;
+}
+
+.adminFormBtns{
+    background-color: #0d6efd !important;
+}
+
+.adminFrgtPwdText,.adminLoginText{
+    text-decoration: none;
+    color: #0d6efd;
+}
+
+.adminLoginText:hover{
+    color: #fd7e14;
+}
+
+#adminEmail,#adminPassword, #adminFirstName,#adminLastName,#adminMobile,#adminConfirmPassword{
+    border: 1px solid #0d6efd !important;
+}
+
+@media screen and (max-width : 576px){
+    .adminLoginForm{
+        width: 18rem !important;
+    }
+}

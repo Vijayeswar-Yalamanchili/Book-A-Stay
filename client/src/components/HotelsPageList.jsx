@@ -3,7 +3,7 @@ import { Card,Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar }  from '@fortawesome/free-solid-svg-icons'
-import hotelRoom from '../../assets/hotelroom.jpeg'
+import hotelRoom from '../assets/hotelroom.jpeg'
 
 function HotelsPageList() {
 

@@ -1,9 +1,9 @@
 import React from 'react'
 import { Card, Row } from 'react-bootstrap'
-import bangaloreCity from '../../assets/bangaloreCity.jpeg'
-import chennaiCity from '../../assets/chennaiCity.jpeg'
-import hyderabadCity from '../../assets/hyderabadCity.jpeg'
-import vizagCity from '../../assets/vizagCity.jpeg'
+import bangaloreCity from '../assets/bangaloreCity.jpeg'
+import chennaiCity from '../assets/chennaiCity.jpeg'
+import hyderabadCity from '../assets/hyderabadCity.jpeg'
+import vizagCity from '../assets/vizagCity.jpeg'
 
 function FeaturedByCity() {
     
