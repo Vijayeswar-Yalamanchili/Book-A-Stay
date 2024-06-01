@@ -6,11 +6,11 @@ import Footer from '../../components/footer/Footer'
 
 function HotelPage() {
   return <>
+    <AppNavbar/>
     <Container>
-      <AppNavbar/>
-      <HotelDetailPage/>
-      <Footer/>
-    </Container>    
+      <HotelDetailPage/>      
+    </Container>
+    <Footer/>
   </>
 }
 

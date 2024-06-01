@@ -492,7 +492,6 @@
 
 .desc{
     width: 100%;
-    height: 15rem;
 }
 .leftDescData{
     height:100%;
@@ -500,8 +499,36 @@
     background-color: #fd7e14;
     border-radius: 10px;
 }
+.roomImagesList{
+    height: max-content;
+}
 
-@media screen and (min-width : 768px){
+@media screen and (max-width : 991px) and (min-width : 768px){
+    .desc{
+        height: 18rem !important;
+    }
+    .rightDesc{
+        width: 65% !important;
+    }
+    .leftDesc{
+        width: 35% !important;
+        height: 100%;
+    }
+}
+
+@media screen and (max-width : 767px) {
+    .desc{
+        flex-direction: column;
+    }
+    .leftDesc{
+        padding: 0 2rem;
+    }
+}
+
+@media screen and (min-width : 992px){
+    .desc{
+        height: 15rem;
+    }
     .rightDesc{
         width: 75%;
         height: 100%;
