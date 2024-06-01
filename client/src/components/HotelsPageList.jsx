@@ -9,58 +9,23 @@ import {UserAuthContext} from '../contextApi/UserAuthContextComponent'
 import AxiosService from '../utils/AxiosService'
 import ApiRoutes from '../utils/ApiRoutes'
 
-function HotelsPageList() {
+function HotelsPageList({hotelsList, features}) {
 
   const navigate = useNavigate()
   let {userAuth} = useContext(UserAuthContext)
   let getLoginToken = localStorage.getItem('loginToken')
-  // const [hotelsList, setHotelsList] = useState([])
-
-  let hotelsList = [
-    {
-      roomImage: hotelRoom,
-      hotelName : "Olive Hotels",
-      rating : 8.9,
-      experience : "Excellent",
-      price : "\u20B96000",
-      desc : "Room With AC - 1 bathroom - 1 king Size Bed"
-    },
-    {
-      roomImage: hotelRoom,
-      hotelName : "Olive Hotels",
-      rating : 8.9,
-      experience : "Excellent",
-      price : "\u20B96000",
-      desc : "Room With AC - 1 bathroom - 1 king Size Bed"
-    },
-    {
-      roomImage: hotelRoom,
-      hotelName : "Olive Hotels",
-      rating : 8.9,
-      experience : "Excellent",
-      price : "\u20B96000",
-      desc : "Room With AC - 1 bathroom - 1 king Size Bed"
-    },
-    {
-      roomImage: hotelRoom,
-      hotelName : "Olive Hotels",
-      rating : 8.9,
-      experience : "Excellent",
-      price : "\u20B96000",
-      desc : "Room With AC - 1 bathroom - 1 king Size Bed"
-    }
-  ]
 
   const handleAvailability = async() => {
     try {
-      navigate('/hotels/:hotelId')
+      navigate('/:hotelId')
     } catch (error) {
       console.log(error)
     }
   }
 
   return <>
-    <div className='hotelsListBlock'>
+    <div className='hotelsListBlock mt-5 px-5 mx-auto'>
+      <h4>List of Stays availble</h4>
       {
         hotelsList.map((e,i) => {
           return <div className='hotelListCard' key={i}>
@@ -71,9 +36,15 @@ function HotelsPageList() {
                 <div className='cardLeftBlock d-flex flex-column justify-content-between align-items-start'>
                   <div className='cardLeftTopBlock'>
                     <Card.Title>{e.hotelName}</Card.Title>
-                    <Card.Text>{e.desc}</Card.Text>
+                    <Card.Text>{e.description}</Card.Text>
+                    <Card.Text>{e.distance}kms from center city</Card.Text>
                   </div>
                   <div className='cardLeftBottomBlock'>
+                    {/* { 
+                      features.map((e,i) => {
+                        return <div className='label'>{e[i]}</div>
+                      })
+                    } */}
                     <div className='label'>Free Wifi</div>
                     <div className='label'>Breakfast</div>
                     <div className='label'>Cab Service</div>
@@ -86,7 +57,7 @@ function HotelsPageList() {
                     <div className='ratingBtn me-1 d-flex align-items-center'><FontAwesomeIcon icon={faStar} className='me-1'/>{e.rating}</div>
                   </div>
                   <div className='cardRightBottomBlock d-flex flex-column justify-content-between align-items-end'>
-                    <div>{e.price}</div>
+                    <div>{'\u20B9'}{e.lowestPrice}</div>
                     <div style={{fontSize : "0.75em"}}>Inclusive Of all taxes</div>
                     <Button variant="primary" className='availabilityBtn' onClick={handleAvailability}>Check availabilty</Button>
                   </div>                  

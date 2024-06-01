@@ -29,7 +29,7 @@ const ApiRoutes = {
         authenticate :true
     },
     HOTELSLIST : {
-        path : '/hotels/hotelList',
+        path : '/hotels/searchResult',
         authenticate :true
     }
 }

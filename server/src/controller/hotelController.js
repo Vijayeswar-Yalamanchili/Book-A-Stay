@@ -2,7 +2,8 @@ import HotelsModel from "../models/hotelsModel.js"
 
 const addHotel = async(req,res) => {
     try {
-        const addNewHotel = await HotelsModel.create(req.body)
+        const addNewHotel = await HotelsModel.create({...req.body})
+        console.log(addNewHotel)
         res.status(200).send({
             addNewHotel
         })
@@ -15,10 +16,17 @@ const addHotel = async(req,res) => {
 
 const getAllHotels = async(req,res) => {
     try {
-        const getHotels = await HotelsModel.find({city : req.body.cityName})
-        res.status(200).send({
-            getHotels
-        })
+        if(req.body.cityName === "bangalore" || req.body.cityName === "bengaluru"){
+            const searchResult = await HotelsModel.find({city : "bengaluru"})
+            res.status(200).send({
+                searchResult
+            })            
+        }else{
+            const searchResult = await HotelsModel.find({city : req.body.cityName})
+            res.status(200).send({
+                searchResult
+            })
+        }
     } catch (error) {
         res.status(500).send({
             message:`Internal Server Error in Getting Hotels at ${req.body.cityName}`

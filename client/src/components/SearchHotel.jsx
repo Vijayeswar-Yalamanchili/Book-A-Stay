@@ -1,5 +1,5 @@
 import React,{ useState, useContext } from 'react'
-import { Button, Form } from 'react-bootstrap'
+import { Container, Button, Form } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBed, faCalendar, faPerson }  from '@fortawesome/free-solid-svg-icons'
 import { DateRange } from 'react-date-range'
@@ -12,14 +12,21 @@ import { jwtDecode } from 'jwt-decode'
 import AxiosService from '../utils/AxiosService'
 import ApiRoutes from '../utils/ApiRoutes'
 import { UserAuthContext } from '../contextApi/UserAuthContextComponent'
+import FeaturedByCity from './FeaturedByCity'
+import FeaturedByTypes from './FeaturedByTypes'
+import FeaturedByLiked from './FeaturedByLiked'
+import HotelsPageList from './HotelsPageList'
 
 function SearchHotel({isLoggedIn}) {
 
   const navigate = useNavigate()
   let getLoginToken = localStorage.getItem('loginToken')
   let {userAuth} = useContext(UserAuthContext)
+  const [homePage, setHomePage] = useState(true)
+  const [features, setFeatures] = useState([])
   const [cityName, setCityName] = useState('')
   const [openDate, setOpenDate] = useState(false)
+  const [hotelsList, setHotelsList] = useState([])
   const [openOptions, setOpenOptions] = useState(false)
   const [options, setOptions] = useState({ adult : 1, children : 0, room : 1 })
   const [date, setDate] = useState([
@@ -45,9 +52,13 @@ function SearchHotel({isLoggedIn}) {
         e.preventDefault()
         const inputData = { cityName : cityName.toLowerCase(), day : date, persons : options }
         if(inputData.cityName !== ""){
-          let res = await AxiosService.put(`${ApiRoutes.USERSEARCHDATA.path}/${userAuth[0]._id}`,inputData,{headers : { 'Authorization' : `${getLoginToken}`}})
-          console.log(res.data.searchResult)
-          navigate('/hotels')
+          let res = await AxiosService.put(`${ApiRoutes.HOTELSLIST.path}/${userAuth[0]._id}`,inputData,{headers : { 'Authorization' : `${getLoginToken}`}})
+          let result = res.data.searchResult
+          let aminity = result.map((e)=> e)
+          console.log(aminity)
+          setFeatures(aminity)
+          setHomePage(false)
+          setHotelsList(result)          
         } else { 
           toast.error("City name cant be empty")
         }
@@ -110,6 +121,18 @@ function SearchHotel({isLoggedIn}) {
         <Button className='searchBtn' type='submit'>Search</Button>  
       </Form>
     </div>
+
+    {
+      homePage ? 
+      <Container className='homeWrapper mt-5 mb-3 mx-auto'>
+        <FeaturedByCity/>
+        <FeaturedByTypes/>
+        <FeaturedByLiked/>
+      </Container> : 
+      <Container className='hotelsPage'>
+        <HotelsPageList hotelsList={hotelsList} features={features}/>
+      </Container>
+    }
   </>
 }
 

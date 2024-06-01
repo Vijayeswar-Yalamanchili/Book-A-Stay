@@ -42,13 +42,9 @@ function Hotels() {
 
   return <>
     <AppNavbar/>
-
     <Container className='hotelsPage d-flex flex-column justify-content-between'>
       <SearchHotel isLoggedIn={isLoggedIn}/>
-      {/* <HotelsPageSearchBar/> */}
-      <HotelsPageList />
     </Container>
-
     <Footer/>
   </>
 }

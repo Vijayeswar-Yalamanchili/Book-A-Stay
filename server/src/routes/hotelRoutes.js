@@ -4,9 +4,9 @@ import auth from '../middleware/auth.js'
 
 const router = express.Router()
 
-router.get('/', auth.authenticate, hotelController.getAllHotels)
+router.put('/searchResult/:id', auth.authenticate, hotelController.getAllHotels)
 router.get('/:id', auth.authenticate, hotelController.getHotelById)
-router.post('/addHotel', auth.authenticate, auth.adminGuard, hotelController.addHotel)
+router.post('/addHotel/:id', auth.authenticate, hotelController.addHotel)
 router.put('/updatehotel/:id', auth.authenticate, auth.adminGuard, hotelController.updateHotel)
 router.delete('/deletehotel/:id', auth.authenticate, auth.adminGuard, hotelController.deleteHotel)
 
