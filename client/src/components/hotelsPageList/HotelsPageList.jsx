@@ -1,11 +1,13 @@
 import React from 'react'
 import { Card,Button } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar }  from '@fortawesome/free-solid-svg-icons'
 import hotelRoom from '../../assets/hotelroom.jpeg'
 
 function HotelsPageList() {
 
+  const navigate = useNavigate()
   let hotelsList = [
     {
       roomImage: hotelRoom,
@@ -41,6 +43,14 @@ function HotelsPageList() {
     }
   ]
 
+  const handleAvailability = async() => {
+    try {
+      navigate('/hotels/:hotelId')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return <>
     <div className='hotelsListBlock'>
       {
@@ -70,7 +80,7 @@ function HotelsPageList() {
                   <div className='cardRightBottomBlock d-flex flex-column justify-content-between align-items-end'>
                     <div>{e.price}</div>
                     <div style={{fontSize : "0.75em"}}>Inclusive Of all taxes</div>
-                    <Button variant="primary" className='availabilityBtn'>Check availabilty</Button>
+                    <Button variant="primary" className='availabilityBtn' onClick={handleAvailability}>Check availabilty</Button>
                   </div>                  
                 </div>
 

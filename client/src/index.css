@@ -488,3 +488,32 @@
 }
 
 /* ------------------------------------------------------------------- */
+/* HotelDetailPage */
+
+.desc{
+    width: 100%;
+    height: 15rem;
+}
+.leftDescData{
+    height:100%;
+    color: white;
+    background-color: #fd7e14;
+    border-radius: 10px;
+}
+
+@media screen and (min-width : 768px){
+    .rightDesc{
+        width: 75%;
+        height: 100%;
+    }
+    .leftDesc{
+        width: 25%;
+        height: 100%;        
+    }
+    .leftDescData{
+        color: white;
+        border-radius: 10px;
+    }
+}
+
+/* ------------------------------------------------------------------- */
