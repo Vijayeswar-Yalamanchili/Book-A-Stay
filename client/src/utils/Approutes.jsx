@@ -8,11 +8,12 @@ import AdminRegister from '../pages/admin/AdminRegister'
 import AdminDashboard from '../pages/admin/AdminDashboard'
 import AdminAddHotel from '../pages/admin/AdminAddHotel'
 import AdminEditHotel from '../pages/admin/AdminEditHotel'
+import UserAuthContextComponent from '../contextApi/UserAuthContextComponent'
 
 const Approutes = [
     {
         path : '/',
-        element : <Home/>,
+        element : <UserAuthContextComponent><Home/></UserAuthContextComponent>,
         exact : true
     },
     {
@@ -27,12 +28,12 @@ const Approutes = [
     },
     {
         path : '/hotels',
-        element : <Hotels/>,
+        element : <UserAuthContextComponent><Hotels/></UserAuthContextComponent>,
         exact : true
     },
     {
         path : '/hotels/:hotelId',
-        element : <HotelPage/>,
+        element : <UserAuthContextComponent><HotelPage/></UserAuthContextComponent>,
         exact : true
     },
     // Admin

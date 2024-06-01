@@ -1,4 +1,19 @@
 import UserAuthModel from "../models/userAuthModel.js"
+import HotelsModel from '../models/hotelsModel.js'
+
+const userSearchData = async(req,res) => {
+    try {
+        const searchResult = await HotelsModel.find({city : req.body.cityName})
+        console.log(searchResult)
+        res.status(200).send({
+            searchResult
+        })
+    } catch (error) {
+        res.status(500).send({
+            message : "Internal server error in getting all users"
+        })
+    }
+}
 
 const getAllUsers = async(req,res) => {
     try {
@@ -53,6 +68,7 @@ const deleteUser = async(req,res) => {
 }
 
 export default {
+    userSearchData,
     getAllUsers,
     getUserById,
     updateUserById,

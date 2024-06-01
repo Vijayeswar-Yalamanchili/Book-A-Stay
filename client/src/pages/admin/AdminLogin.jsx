@@ -54,9 +54,9 @@ function AdminLogin() {
           <div className="d-grid mb-4">
             <Button className='adminFormBtns' type='submit'>Login</Button>
           </div>
-          <hr style={{color:"white"}}/>
+          <hr style={{color:"black"}}/>
           <div className="d-grid mb-4">
-            <Button className='adminFormBtns' onClick={()=>navigate('/register')}>Sign Up</Button>
+            <Button className='adminFormBtns' onClick={()=>navigate('/admin/register')}>Sign Up</Button>
           </div>
         </Form>
       </Col>

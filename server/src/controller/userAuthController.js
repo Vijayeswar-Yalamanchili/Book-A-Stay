@@ -70,8 +70,7 @@ const logout = async(req,res) => {
         if(user){
             let logout =  await UserAuthModel.findOneAndUpdate({_id : req.params.id},{ "$set": { isLoggedIn: false }},{new : true})
             res.status(200).send({
-                message : "Logged Out Successfully",
-                logout
+                message : "Logged Out Successfully"
             })
         }
     } catch (error) {

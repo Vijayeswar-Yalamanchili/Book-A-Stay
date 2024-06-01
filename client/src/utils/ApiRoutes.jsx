@@ -12,6 +12,26 @@ const ApiRoutes = {
         path : '/users/register',
         authenticate : false
     },
+    LOGOUT : {
+        path : '/users/logout',
+        authenticate : true
+    },
+    GETALLUSERS : {
+        path : '/users/getallusers',
+        authenticate :true
+    },
+    GETUSERBYID : {
+        path : '/users/getuserbyid',
+        authenticate :true
+    },
+    USERSEARCHDATA : {
+        path : '/users/usersearchdata',
+        authenticate :true
+    },
+    HOTELSLIST : {
+        path : '/hotels/hotelList',
+        authenticate :true
+    }
 }
 
 export default ApiRoutes

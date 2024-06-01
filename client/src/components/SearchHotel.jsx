@@ -1,5 +1,5 @@
-import React,{ useState } from 'react'
-import { Button, Toast } from 'react-bootstrap'
+import React,{ useState, useContext } from 'react'
+import { Button, Form } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBed, faCalendar, faPerson }  from '@fortawesome/free-solid-svg-icons'
 import { DateRange } from 'react-date-range'
@@ -8,10 +8,17 @@ import { useNavigate } from 'react-router-dom'
 import { format } from 'date-fns'
 import 'react-date-range/dist/styles.css' // main css file
 import 'react-date-range/dist/theme/default.css' // theme css file
+import { jwtDecode } from 'jwt-decode'
+import AxiosService from '../utils/AxiosService'
+import ApiRoutes from '../utils/ApiRoutes'
+import { UserAuthContext } from '../contextApi/UserAuthContextComponent'
 
-function SearchHotel() {
+function SearchHotel({isLoggedIn}) {
 
-  const navigate = useNavigate()  
+  const navigate = useNavigate()
+  let getLoginToken = localStorage.getItem('loginToken')
+  let {userAuth} = useContext(UserAuthContext)
+  const [cityName, setCityName] = useState('')
   const [openDate, setOpenDate] = useState(false)
   const [openOptions, setOpenOptions] = useState(false)
   const [options, setOptions] = useState({ adult : 1, children : 0, room : 1 })
@@ -32,24 +39,37 @@ function SearchHotel() {
     })
   }
 
-  const handleSearch = async() => {
+  const handleSubmit = async(e) => {
     try {
-      navigate('/hotels')
+      if(isLoggedIn){
+        e.preventDefault()
+        const inputData = { cityName : cityName.toLowerCase(), day : date, persons : options }
+        if(inputData.cityName !== ""){
+          let res = await AxiosService.put(`${ApiRoutes.USERSEARCHDATA.path}/${userAuth[0]._id}`,inputData,{headers : { 'Authorization' : `${getLoginToken}`}})
+          console.log(res.data.searchResult)
+          navigate('/hotels')
+        } else { 
+          toast.error("City name cant be empty")
+        }
+      }else{
+        navigate('/login')
+      }
     } catch (error) {
-      toast.error(error)
+      console.log(error.message)
+      toast.error(error.response.data.message || error.message)
     }
   }
 
   return <>
     <div className="header">
-      <div className="search mx-auto mt-5 d-flex justify-content-between align-items-center">  
+      <Form onSubmit={handleSubmit} className="search mx-auto mt-5 d-flex justify-content-between align-items-center">  
         <div className="searchBar d-flex justify-content-start px-2 align-items-center">
             <FontAwesomeIcon icon={faBed} className='bedIcon me-2'/>
-            <input type="text" placeholder='Enter the City' className='cityNameText'/>
+            <input type="text" name='city' defaultValue={cityName} placeholder='Enter the City' className='cityNameText' onChange={(e)=>setCityName(e.target.value)}/>
         </div>
         <div className="searchDate d-flex justify-content-start px-2 align-items-center">
             <FontAwesomeIcon icon={faCalendar} className='calenderIcon me-2'/>
-            <span className='searchDateText' onClick={()=> setOpenDate(!openDate)}>{`${format(date[0].startDate, "dd/MM/yyyy")} to ${format(date[0].endDate, "dd/MM/yyyy")}`}</span>
+            <span className='searchDateText'  onClick={()=> setOpenDate(!openDate)}>{`${format(date[0].startDate, "dd/MM/yyyy")} to ${format(date[0].endDate, "dd/MM/yyyy")}`}</span>
             {
               openDate && <DateRange className='dateblock' ranges={date} onChange={item => setDate([item.selection])} editableDateInputs={true} moveRangeOnFirstSelection={false}/>
             }
@@ -87,8 +107,8 @@ function SearchHotel() {
             }
         </div>
 
-        <Button className='searchBtn' onClick={handleSearch}>Search</Button>  
-      </div>
+        <Button className='searchBtn' type='submit'>Search</Button>  
+      </Form>
     </div>
   </>
 }

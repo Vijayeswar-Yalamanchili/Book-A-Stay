@@ -1,13 +1,21 @@
-import React from 'react'
+import React, { useState,useEffect,useContext } from 'react'
 import { Card,Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar }  from '@fortawesome/free-solid-svg-icons'
+import { toast } from 'react-toastify'
 import hotelRoom from '../assets/hotelroom.jpeg'
+import {UserAuthContext} from '../contextApi/UserAuthContextComponent'
+import AxiosService from '../utils/AxiosService'
+import ApiRoutes from '../utils/ApiRoutes'
 
 function HotelsPageList() {
 
   const navigate = useNavigate()
+  let {userAuth} = useContext(UserAuthContext)
+  let getLoginToken = localStorage.getItem('loginToken')
+  // const [hotelsList, setHotelsList] = useState([])
+
   let hotelsList = [
     {
       roomImage: hotelRoom,

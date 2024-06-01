@@ -15,13 +15,13 @@ const addHotel = async(req,res) => {
 
 const getAllHotels = async(req,res) => {
     try {
-        const getHotels = await HotelsModel.find()
+        const getHotels = await HotelsModel.find({city : req.body.cityName})
         res.status(200).send({
             getHotels
         })
     } catch (error) {
         res.status(500).send({
-            message:"Internal Server Error in Getting all Hotels"
+            message:`Internal Server Error in Getting Hotels at ${req.body.cityName}`
         })
     }
 }
