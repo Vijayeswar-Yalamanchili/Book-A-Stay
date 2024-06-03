@@ -19,7 +19,7 @@ function AppNavbar() {
       const decodedToken = jwtDecode(getLoginToken)
       const id = decodedToken.id
       let res = await AxiosService.put(`${ApiRoutes.LOGOUT.path}/${id}`,{ headers : { 'Authorization' : ` ${getLoginToken}`}})
-      
+      console.log(res)
       if(res.status === 200){
         logout()
       }

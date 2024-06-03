@@ -8,22 +8,25 @@ import { useNavigate } from 'react-router-dom'
 import { format } from 'date-fns'
 import 'react-date-range/dist/styles.css' // main css file
 import 'react-date-range/dist/theme/default.css' // theme css file
-import { jwtDecode } from 'jwt-decode'
 import AxiosService from '../utils/AxiosService'
 import ApiRoutes from '../utils/ApiRoutes'
-import { UserAuthContext } from '../contextApi/UserAuthContextComponent'
 import FeaturedByCity from './FeaturedByCity'
 import FeaturedByTypes from './FeaturedByTypes'
 import FeaturedByLiked from './FeaturedByLiked'
 import HotelsPageList from './HotelsPageList'
+import { UserAuthContext } from '../contextApi/UserAuthContextComponent'
+import { UserStatusContext } from '../contextApi/UserLogInStatusContextComponent'
 
-function SearchHotel({isLoggedIn}) {
+
+function SearchHotel() {
 
   const navigate = useNavigate()
   let getLoginToken = localStorage.getItem('loginToken')
-  let {userAuth} = useContext(UserAuthContext)
+  
+  let { userAuth } = useContext(UserAuthContext)
+  let { isLoggedIn } = useContext(UserStatusContext)
+
   const [homePage, setHomePage] = useState(true)
-  const [features, setFeatures] = useState([])
   const [cityName, setCityName] = useState('')
   const [openDate, setOpenDate] = useState(false)
   const [hotelsList, setHotelsList] = useState([])
@@ -54,9 +57,6 @@ function SearchHotel({isLoggedIn}) {
         if(inputData.cityName !== ""){
           let res = await AxiosService.put(`${ApiRoutes.HOTELSLIST.path}/${userAuth[0]._id}`,inputData,{headers : { 'Authorization' : `${getLoginToken}`}})
           let result = res.data.searchResult
-          let aminity = result.map((e)=> e)
-          console.log(aminity)
-          setFeatures(aminity)
           setHomePage(false)
           setHotelsList(result)          
         } else { 
@@ -130,7 +130,7 @@ function SearchHotel({isLoggedIn}) {
         <FeaturedByLiked/>
       </Container> : 
       <Container className='hotelsPage'>
-        <HotelsPageList hotelsList={hotelsList} features={features}/>
+        <HotelsPageList hotelsList={hotelsList}/>
       </Container>
     }
   </>

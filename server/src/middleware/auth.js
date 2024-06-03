@@ -26,8 +26,8 @@ const authenticate = async(req,res,next) => {
         if(Math.floor(currentTime/1000)<payload.exp){
             next()
         }else{
-            res.status(402).send({
-                message :"Session expired"
+            res.status(200).send({
+                message :"Session expired and Logged out"
             })
         }
     }else{

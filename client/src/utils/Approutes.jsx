@@ -9,11 +9,12 @@ import AdminDashboard from '../pages/admin/AdminDashboard'
 import AdminAddHotel from '../pages/admin/AdminAddHotel'
 import AdminEditHotel from '../pages/admin/AdminEditHotel'
 import UserAuthContextComponent from '../contextApi/UserAuthContextComponent'
+import UserLogInStatusContextComponent from '../contextApi/UserLogInStatusContextComponent'
 
 const Approutes = [
     {
         path : '/',
-        element : <UserAuthContextComponent><Home/></UserAuthContextComponent>,
+        element : <UserAuthContextComponent><UserLogInStatusContextComponent><Home/></UserLogInStatusContextComponent></UserAuthContextComponent>,
         exact : true
     },
     {
@@ -28,12 +29,12 @@ const Approutes = [
     },
     {
         path : '/hotels',
-        element : <UserAuthContextComponent><Hotels/></UserAuthContextComponent>,
+        element : <UserAuthContextComponent><UserLogInStatusContextComponent><Hotels/></UserLogInStatusContextComponent></UserAuthContextComponent>,
         exact : true
     },
     {
         path : '/:hotelId',
-        element : <UserAuthContextComponent><HotelPage/></UserAuthContextComponent>,
+        element : <UserAuthContextComponent><UserLogInStatusContextComponent><HotelPage/></UserLogInStatusContextComponent></UserAuthContextComponent>,
         exact : true
     },
     // Admin

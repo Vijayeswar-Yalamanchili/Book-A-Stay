@@ -424,9 +424,45 @@
     width: 80%;
     height: max-content;
 }
+.availabilityBtn{
+    width: max-content;
+    font-size: 0.75em !important;
+}
 
 @media screen and (max-width: 767px){
-   
+    .hotelListCard{
+        font-size: smaller !important;
+    }
+    .hotelCard{
+        height: 12rem !important;
+    }
+   .roomImage{
+        width: 8rem !important;
+   }
+   .cardrightside{
+        padding: 0.5rem !important;
+   }
+   .cardLeftBlock, .cardRightBlock {
+        height: 100% !important;
+   }
+   .cardLeftBottomBlock{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: auto;
+    /* justify-content: space-between; */
+    gap: 2px;
+   }
+   .label{
+    font-size: smaller;
+    background-color: #fd7e14;
+    color: white;
+    padding: 1px 3px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 5px;
+   }
+
 }
 
 @media screen and (min-width: 768px){
@@ -475,9 +511,13 @@
         color: white;
         border-radius: 5px;
     }
-    .availabilityBtn{
-        width: max-content;
-        font-size: 0.75em !important;
+}
+
+@media screen and (max-width: 992px){
+    .cardLeftBottomBlock{
+        display: flex;
+        flex: row;
+        flex-wrap: wrap;
     }
 }
 
