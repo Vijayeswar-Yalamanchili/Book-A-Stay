@@ -66,7 +66,6 @@ function SearchHotel() {
         navigate('/login')
       }
     } catch (error) {
-      console.log(error.message)
       toast.error(error.response.data.message || error.message)
     }
   }

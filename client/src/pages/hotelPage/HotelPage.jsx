@@ -5,6 +5,7 @@ import HotelDetailPage from '../../components/HotelDetailPage'
 import Footer from '../../components/Footer'
 
 function HotelPage() {
+
   return <>
     <AppNavbar/>
     <Container>

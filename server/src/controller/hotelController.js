@@ -36,9 +36,9 @@ const getAllHotels = async(req,res) => {
 
 const getHotelById = async(req,res) => {
     try {
-        const getHotel = await HotelsModel.findById({_id:req.params.id})
+        const getHotelData = await HotelsModel.findById({_id:req.params.id})
         res.status(200).send({
-            getHotel
+            getHotelData
         })
     } catch (error) {
         res.status(500).send({

@@ -31,6 +31,10 @@ const ApiRoutes = {
     HOTELSLIST : {
         path : '/hotels/searchResult',
         authenticate :true
+    },
+    HOTELBYID : {
+        path : '/hotels',
+        authenticate : true
     }
 }
 

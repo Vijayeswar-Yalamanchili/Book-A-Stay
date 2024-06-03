@@ -4,20 +4,23 @@ import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar }  from '@fortawesome/free-solid-svg-icons'
 import { UserStatusContext } from '../contextApi/UserLogInStatusContextComponent'
+import { SharedDataContext } from '../contextApi/SharedDataComponent'
 import hotelRoom from '../assets/hotelroom.jpeg'
 
 function HotelsPageList({hotelsList}) {
 
   const navigate = useNavigate()
   let { isLoggedIn } = useContext(UserStatusContext)
+  let { setSharedHotelIdData } = useContext(SharedDataContext)
 
-  const handleAvailability = async() => {
+  const handleAvailability = async(hotelId) => {
     try {
       if(isLoggedIn){
-        navigate('/:hotelId')
+        setSharedHotelIdData(hotelId)
+        navigate(`/hotels/${hotelId}`)
       }
     } catch (error) {
-      console.log(error)
+      toast.error(error)
     }
   }
 
@@ -55,7 +58,7 @@ function HotelsPageList({hotelsList}) {
                     <div className='cardRightBottomBlock d-flex flex-column justify-content-between align-items-end'>
                       <div>{'\u20B9'}{e.lowestPrice}</div>
                       <div style={{fontSize : "0.75em"}}>Inclusive Of all taxes</div>
-                      <Button variant="primary" className='availabilityBtn' onClick={handleAvailability}>Check availabilty</Button>
+                      <Button variant="primary" className='availabilityBtn' onClick={()=> handleAvailability(e._id)}>Check availabilty</Button>
                     </div>                  
                   </div>
 
