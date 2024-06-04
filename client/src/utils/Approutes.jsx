@@ -11,6 +11,7 @@ import AdminEditHotel from '../pages/admin/AdminEditHotel'
 import UserAuthContextComponent from '../contextApi/UserAuthContextComponent'
 import UserLogInStatusContextComponent from '../contextApi/UserLogInStatusContextComponent'
 import SharedDataComponent from '../contextApi/SharedDataComponent'
+import MyProfile from '../pages/myProfile/MyProfile'
 
 const Approutes = [
     {
@@ -28,11 +29,11 @@ const Approutes = [
         element : <Register/>,
         exact : true
     },
-    // {
-    //     path : '/hotels',
-    //     element : <UserAuthContextComponent><UserLogInStatusContextComponent><Hotels/></UserLogInStatusContextComponent></UserAuthContextComponent>,
-    //     exact : true
-    // },
+    {
+        path : '/myProfile',
+        element : <UserAuthContextComponent><UserLogInStatusContextComponent><MyProfile/></UserLogInStatusContextComponent></UserAuthContextComponent>,
+        exact : true
+    },
     {
         path : '/hotels/:hotelId',
         element : <UserAuthContextComponent><UserLogInStatusContextComponent><SharedDataComponent><HotelPage/></SharedDataComponent></UserLogInStatusContextComponent></UserAuthContextComponent>,
