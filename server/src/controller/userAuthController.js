@@ -1,6 +1,7 @@
 import auth from "../middleware/auth.js"
 import hashPwd from "../middleware/hashPwd.js"
 import UserAuthModel from "../models/userAuthModel.js"
+import contactEmailId from '../helper/emailService.js'
 
 const register = async(req,res) => {
     try {
@@ -80,8 +81,23 @@ const logout = async(req,res) => {
     }
 }
 
+const contactEmail = async(req,res) => {
+    try {
+        const {email} = req.body
+        res.status(200).send({
+            message : "Thanks for Contacting us, We will revert you back!!!",
+        })
+        await contactEmailId(email)
+    } catch (error) {
+        res.status(500).send({
+            message : "Internal server error in registering query by email"
+        })
+    }
+}
+
 export default {
     register,
     login,
-    logout
+    logout,
+    contactEmail
 }

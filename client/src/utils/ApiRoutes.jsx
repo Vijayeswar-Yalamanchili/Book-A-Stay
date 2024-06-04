@@ -12,6 +12,10 @@ const ApiRoutes = {
         path : '/users/register',
         authenticate : false
     },
+    CONTACTEMAIL : {
+        path : '/users/contactemail',
+        authenticate : false
+    }, 
     LOGOUT : {
         path : '/users/logout',
         authenticate : true
