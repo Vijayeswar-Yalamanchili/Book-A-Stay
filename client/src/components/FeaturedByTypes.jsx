@@ -1,38 +1,57 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Card, Row } from 'react-bootstrap'
+import { toast } from 'react-toastify'
 import hotelsImg from '../assets/hotels.jpeg'
 import villasImg from '../assets/villas.jpeg'
 import resortsImg from '../assets/resorts.jpeg'
 import cottagesImg from '../assets/cottages.jpeg'
 import cabinsImg from '../assets/cabins.jpeg'
+import AxiosService from '../utils/AxiosService'
+import ApiRoutes from '../utils/ApiRoutes'
 
 function FeaturedByTypes() {
+
+  const [typesCount,setTypesCount] = useState()
+
+  const getTypesCount = async() => {
+    try {
+      let res = await AxiosService.get(`${ApiRoutes.COUNTBYTYPE.path}?types=hotel,villa,resort,cottage,cabin`)
+      let result = res.data.countByTypelist
+      setTypesCount(result)        
+    } catch (error) {
+        toast.error(error.response.data.message || error.message)
+    }
+}
+
+useEffect(()=> {
+  getTypesCount()
+})
 
   let stayTypesList = [
     {
       image : hotelsImg,
       type : "Hotels",
-      count : "10 hotels"
+      count : typesCount ?  `${typesCount[0]} Hotels` : null
     },
     {
       image : villasImg,
       type : "Villas",
-      count : "10 hotels"
+      count : typesCount ?  `${typesCount[1]} Villas` : null
     },
     {
       image : resortsImg,
       type : "Resorts",
-      count : "10 hotels"
+      count : typesCount ?  `${typesCount[2]} Resorts` : null
     },
     {
       image : cottagesImg,
       type : "Cottages",
-      count : "10 hotels"
+      count : typesCount ?  `${typesCount[3]} Cottages` : null
     },
     {
       image : cabinsImg,
       type : "Cabins",
-      count : "10 hotels"
+      count : typesCount ?  `${typesCount[4]} Cabins` : null
     },
   ]
 

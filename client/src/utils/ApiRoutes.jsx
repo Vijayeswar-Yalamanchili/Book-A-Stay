@@ -49,7 +49,7 @@ const ApiRoutes = {
         authenticate : false
     },
     COUNTBYTYPE : {
-        path : '/hotels/countbycity',
+        path : '/hotels/countbytype',
         authenticate : false
     }
 }

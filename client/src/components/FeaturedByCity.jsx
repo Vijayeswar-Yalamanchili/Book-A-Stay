@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Card, Row } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import bangaloreCity from '../assets/bangaloreCity.jpeg'
@@ -7,24 +7,16 @@ import hyderabadCity from '../assets/hyderabadCity.jpeg'
 import vizagCity from '../assets/vizagCity.jpeg'
 import AxiosService from '../utils/AxiosService'
 import ApiRoutes from '../utils/ApiRoutes'
-import { UserAuthContext } from '../contextApi/UserAuthContextComponent'
-import {UserStatusContext} from '../contextApi/UserLogInStatusContextComponent'
 
 function FeaturedByCity() {
 
-    let {userAuth} = useContext(UserAuthContext)
-    let {isLoggedIn} = useContext(UserStatusContext)
-    let getLoginToken = localStorage.getItem('loginToken')
     const [cityPropsCount,setCityPropsCount] = useState()
-
 
     const getCitiesPropsCount = async() => {
         try {
-                let res = await AxiosService.get(`${ApiRoutes.COUNTBYCITY.path}?cities=bengaluru,chennai,hyderabad,vizag`)
-                let result = res.data.countByCitylist
-                setCityPropsCount(result)
-                console.log(result)
-            
+            let res = await AxiosService.get(`${ApiRoutes.COUNTBYCITY.path}?cities=bengaluru,chennai,hyderabad,vizag`)
+            let result = res.data.countByCitylist
+            setCityPropsCount(result)            
         } catch (error) {
             toast.error(error.response.data.message || error.message)
         }
