@@ -16,6 +16,10 @@ const ApiRoutes = {
         path : '/users/contactemail',
         authenticate : false
     }, 
+    PROFILEUPDATE : {
+        path : '/users/userprofileupdate',
+        authenticate : true
+    },
     LOGOUT : {
         path : '/users/logout',
         authenticate : true

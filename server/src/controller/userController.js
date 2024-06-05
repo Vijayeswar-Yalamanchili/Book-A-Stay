@@ -28,9 +28,9 @@ const getUserById = async(req,res) => {
 
 const updateUserById = async(req,res) => {
     try {
-        const updateUser = await UserAuthModel.findByIdAndUpdate({_id:req.params.id},{$set : req.body},{new : true})
+        const updatedUserDetails = await UserAuthModel.findByIdAndUpdate({_id:req.params.id},{$set : req.body},{new : true})
         res.status(200).send({
-            updateUser
+            updatedUserDetails
         })
     } catch (error) {
         res.status(500).send({

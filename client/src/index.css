@@ -110,14 +110,10 @@
 
 /* MY PROFILE */
 
-.block{
-    width: 100%;
-    height: 100%;
-    background-color: red;
-}
-
 .detailsForm{
     border: 1px solid #0d6efd;
+    width: 100%;
+    padding: 3rem;
 }
 
 .detailtext{
@@ -127,6 +123,24 @@
 .updateDetailBtn{
     background-color: #fd7e14 !important;
     border: none !important;
+}
+
+@media screen and (max-width : 576px){
+    .detailsForm {
+        padding: 16px !important;
+    }
+    .detailtextleft, .detailtextright{
+        font-size: smaller !important;
+    }
+    .detailtextleft{
+        width: 5rem !important;
+    }
+}
+
+@media screen and (min-width : 992px){
+    .detailsForm{
+        width: 40% !important;
+    }
 }
 
 /* ------------------------------------------------------------------- */
@@ -591,6 +605,10 @@
     height: max-content;
 }
 
+.roomViewImg{
+    border-radius: 5px;
+}
+
 @media screen and (max-width : 991px) and (min-width : 768px){
     .desc{
         height: 18rem !important;
@@ -609,7 +627,7 @@
         flex-direction: column;
     }
     .leftDesc{
-        padding: 0 2rem;
+        padding: 0 ;
     }
 }
 

@@ -30,7 +30,7 @@ function AppNavbar() {
       if(res.status === 200){
         logout()
       }
-    } catch (error) {
+    } catch (error) {console.log(error.message)
       toast.error(error.response.data.message || error.message)
     }
   }

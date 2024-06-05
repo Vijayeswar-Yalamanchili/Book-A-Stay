@@ -12,7 +12,7 @@ router.put('/logout/:id',auth.authenticate, userAuthController.logout)
 
 router.get('/getallusers/:id', auth.authenticate, userController.getAllUsers)
 router.get('/getuserbyid/:id', auth.authenticate, userController.getUserById)
-router.put('/updateuser/:id', auth.authenticate, userController.updateUserById)
+router.put('/userprofileupdate/:id', auth.authenticate, userController.updateUserById)
 router.delete('/deleteuser/:id', auth.authenticate, userController.deleteUser)
 
 export default router
