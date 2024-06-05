@@ -56,8 +56,12 @@ const hotelsSchema = new mongoose.Schema({
     },
     featured : {
         type : Boolean,
+        required : true
+    } ,
+    experience : {
+        type : String,
         required : false
-    }    
+    },  
 },
 {   timestamps : true  },
 {   collection : 'hotels' })

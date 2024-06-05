@@ -40,6 +40,10 @@ const ApiRoutes = {
         path : '/hotels/searchResult',
         authenticate :true
     },
+    GETALLHOTELS : {
+        path : '/hotels/allhotels',
+        authenticate : false
+    },
     HOTELBYID : {
         path : '/hotels',
         authenticate : true
