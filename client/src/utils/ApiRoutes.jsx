@@ -43,6 +43,14 @@ const ApiRoutes = {
     HOTELBYID : {
         path : '/hotels',
         authenticate : true
+    },
+    COUNTBYCITY : {
+        path : '/hotels/countbycity',
+        authenticate : false
+    },
+    COUNTBYTYPE : {
+        path : '/hotels/countbycity',
+        authenticate : false
     }
 }
 

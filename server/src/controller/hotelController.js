@@ -73,10 +73,44 @@ const deleteHotel = async(req,res) => {
     }
 }
 
+// const countByType = async(req,res) => {
+//     const types = req.qurery.types.split(',')
+//     try {
+//         const countByTypelist = await Promise.all(types.map((type => {
+//             return HotelsModel.countDocuments({type : type})
+//         })))
+//         res.status(200).send({
+//             countByTypelist
+//         })
+//     } catch (error) {
+//         res.status(500).send({
+//             message:"Internal Server Error in Getting Hotel by type"
+//         })
+//     }
+// }
+
+const countByCity = async(req,res) => {
+    const cities = req.query.cities.split(',')
+    try {
+        const countByCitylist = await Promise.all(cities.map((city => {
+            return HotelsModel.countDocuments({city : city})
+        })))
+        res.status(200).send({
+            countByCitylist
+        })
+    } catch (error) {
+        res.status(500).send({
+            message:"Internal Server Error in Getting Hotel by city"
+        })
+    }
+}
+
 export default {
     addHotel,
     getAllHotels,
     getHotelById,
     updateHotel,
-    deleteHotel
+    deleteHotel,
+    countByCity,
+    // countByType
 }

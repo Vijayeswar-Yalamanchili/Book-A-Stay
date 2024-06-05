@@ -49,7 +49,7 @@ function HotelDetailPage() {
 
     const getHotelData = async() => {
         try {
-            let res = await AxiosService.get(`${ApiRoutes.HOTELBYID.path}/${sharedHotelIdData}`,{ headers : { 'Authorization' : `${getLoginToken}`} })
+            let res = await AxiosService.get(`${ApiRoutes.HOTELBYID.path}/find/${sharedHotelIdData}`,{ headers : { 'Authorization' : `${getLoginToken}`} })
             let result = res.data.getHotelData
             setHotelData(result)            
         } catch (error) {

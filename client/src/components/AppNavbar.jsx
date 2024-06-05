@@ -9,11 +9,11 @@ import logo from '../assets/book-a-stay.png'
 import { useLogout } from '../hooks/UseLogout'
 import ApiRoutes from '../utils/ApiRoutes'
 import AxiosService from '../utils/AxiosService'
-import { UserAuthContext } from '../contextApi/UserAuthContextComponent'
+// import { UserAuthContext } from '../contextApi/UserAuthContextComponent'
 
 function AppNavbar() {
   
-  let {userAuth} = useContext(UserAuthContext)
+  // let {userAuth} = useContext(UserAuthContext)
   const navigate = useNavigate()
   let logout = useLogout()
   let getLoginToken = localStorage.getItem('loginToken')
