@@ -3,7 +3,6 @@ import HotelsModel from "../models/hotelsModel.js"
 const addHotel = async(req,res) => {
     try {
         const addNewHotel = await HotelsModel.create({...req.body})
-        console.log(addNewHotel)
         res.status(200).send({
             addNewHotel
         })
@@ -17,7 +16,6 @@ const addHotel = async(req,res) => {
 const getAllHotels = async(req,res) => {
     try {
         const allHotels = await HotelsModel.find(req.query).limit(5)
-        console.log(allHotels)
         res.status(200).send({
             allHotels
         })
