@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Card, Button, Row } from 'react-bootstrap'
+import { toast } from 'react-toastify'
 import courtyard from '../assets/courtyard.jpeg'
 import ITCChola from '../assets/ITCChola.jpeg'
 import ThePark from '../assets/ThePark.jpeg'
@@ -17,7 +18,6 @@ function FeaturedByLiked() {
       let res = await AxiosService.get(`${ApiRoutes.GETALLHOTELS.path}?featured=true`)
       let result = res.data.allHotels
       setFeaturedList(result)
-      console.log(result)
     } catch (error) {
       toast.error(error.response.data.message || error.message)
     }

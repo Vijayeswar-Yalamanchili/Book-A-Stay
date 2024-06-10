@@ -9,7 +9,7 @@ import logo from '../assets/book-a-stay.png'
 import { useLogout } from '../hooks/UseLogout'
 import ApiRoutes from '../utils/ApiRoutes'
 import AxiosService from '../utils/AxiosService'
-// import { UserAuthContext } from '../contextApi/UserAuthContextComponent'
+import { UserAuthContext } from '../contextApi/UserAuthContextComponent'
 
 function AppNavbar() {
   
@@ -18,7 +18,7 @@ function AppNavbar() {
   let logout = useLogout()
   let getLoginToken = localStorage.getItem('loginToken')
   const [myProfile, setMyProfile] = useState(false)
-
+  
   const handleMyProfile = () => setMyProfile(!myProfile)
 
   const handleLogout = async() => {
@@ -26,7 +26,6 @@ function AppNavbar() {
       const decodedToken = jwtDecode(getLoginToken)
       const id = decodedToken.id
       let res = await AxiosService.put(`${ApiRoutes.LOGOUT.path}/${id}`,{ headers : { 'Authorization' : ` ${getLoginToken}`}})
-      console.log(res)
       if(res.status === 200){
         logout()
       }
@@ -68,7 +67,7 @@ function AppNavbar() {
           <div className="myProfileDrpdwn list-group list-group-flush py-2 px-3">
             <div className='listMenuUserName list-group-item list-group-item-action'>
               {/* <Image className="userImage my-2" src={`https://chillhub-social-platform.onrender.com/${user[0].imageDP}`} roundedCircle/> */}
-              <div><b>Welcome, {userAuth[0]?.firstName}</b></div>
+              <div><b>Welcome User !!!</b></div>
             </div>
             <Link to={'/myProfile'} className="listMenu list-group-item list-group-item-action">
               <span className='d-flex align-items-center' style={{gap:"15px"}}>

@@ -4,7 +4,7 @@ import auth from '../middleware/auth.js'
 
 const router = express.Router()
 
-router.get('/allhotels', auth.authenticate, hotelController.getAllHotels)
+router.get('/allhotels', hotelController.getAllHotels)
 router.put('/searchResult/:id', auth.authenticate, hotelController.getAllHotelsByCity)
 router.get('/find/:id', auth.authenticate, hotelController.getHotelById)
 router.post('/addHotel/:id', auth.authenticate, hotelController.addHotel)

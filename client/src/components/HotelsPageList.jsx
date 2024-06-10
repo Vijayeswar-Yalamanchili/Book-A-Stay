@@ -7,15 +7,28 @@ import { UserStatusContext } from '../contextApi/UserLogInStatusContextComponent
 import { SharedDataContext } from '../contextApi/SharedDataComponent'
 import hotelRoom from '../assets/hotelroom.jpeg'
 
-function HotelsPageList({hotelsList}) {
+function HotelsPageList({hotelsList,searchInputs}) {
 
   const navigate = useNavigate()
   let { isLoggedIn } = useContext(UserStatusContext)
   let { setSharedHotelIdData } = useContext(SharedDataContext)
+  // const [daysCount, setDaysCount] = useState()
+
+  const MilliSecondsPerDay = 1000 * 60 * 60 * 24
+  const dayDifference = (date1,date2) => {
+    const timeDifference = Math.abs(date2.getTime() - date1.getTime())
+    const differentDays  = Math.ceil(timeDifference / MilliSecondsPerDay)
+    return differentDays
+  }
+
+  let startDate = searchInputs?.day[0]?.startDate
+  let endDate = searchInputs?.day[0]?.endDate
 
   const handleAvailability = async(hotelId) => {
     try {
       if(isLoggedIn){
+        // console.log(dayDifference(startDate, endDate))
+        // console.log(hotelId,hotelsList)
         setSharedHotelIdData(hotelId)
         navigate(`/hotels/${hotelId}`)
       }

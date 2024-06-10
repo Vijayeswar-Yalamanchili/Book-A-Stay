@@ -28,6 +28,7 @@ function SearchHotel() {
 
   const [homePage, setHomePage] = useState(true)
   const [cityName, setCityName] = useState('')
+  const [searchInputs, setSearchInputs] = useState()
   const [openDate, setOpenDate] = useState(false)
   const [hotelsList, setHotelsList] = useState([])
   const [openOptions, setOpenOptions] = useState(false)
@@ -58,7 +59,9 @@ function SearchHotel() {
           let res = await AxiosService.put(`${ApiRoutes.HOTELSLIST.path}/${userAuth[0]._id}`,inputData,{headers : { 'Authorization' : `${getLoginToken}`}})
           let result = res.data.searchResult
           setHomePage(false)
-          setHotelsList(result)          
+          setHotelsList(result) 
+          setSearchInputs(inputData)  
+          // console.log(result,searchInputs)       
         } else { 
           toast.error("City name cant be empty")
         }
@@ -129,7 +132,7 @@ function SearchHotel() {
         <FeaturedByLiked/>
       </Container> : 
       <Container className='hotelsPage'>
-        <HotelsPageList hotelsList={hotelsList}/>
+        <HotelsPageList hotelsList={hotelsList} searchInputs={searchInputs}/>
       </Container>
     }
   </>

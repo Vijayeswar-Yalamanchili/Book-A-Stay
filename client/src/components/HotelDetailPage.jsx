@@ -72,7 +72,7 @@ function HotelDetailPage() {
                     <span><FontAwesomeIcon icon={faLocationPin} style={{color : "gray"}}/> {hotelData.address}</span>
                     <span style={{color:"green"}}>Book to stay over {'\u20B9'}{hotelData.lowestPrice} at this stay and get free Breakfast</span>
                 </div>
-                <Button variant='primary'> Reserve or Book Now</Button>
+                <Button variant='primary'> Reserve Now</Button>
             </div>
 
             <div className="roomImagesList my-4">
@@ -106,7 +106,7 @@ function HotelDetailPage() {
                         <h5>Perfect for Stay</h5>
                         <p>Located in center of {hotelData.city} city, It has an awesome Experience rating of about {hotelData.rating}</p>
                         <h5>{'\u20B9'}{hotelData.lowestPrice}/day</h5>
-                        <Button style={{width : "100%"}}>Book now</Button>
+                        <Button style={{width : "100%"}}>Reserve now</Button>
                     </div>
                     
                 </div>
