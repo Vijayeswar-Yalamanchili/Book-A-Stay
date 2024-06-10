@@ -1,4 +1,13 @@
 const ApiRoutes = {
+    //admin
+    ADMINLOGIN : {
+        path : '/users/admin',
+        authenticate : false
+    },
+    ADMINREGISTER : {
+        path : '/users/admin/register',
+        authenticate : false
+    },
     // Users
     HOME : {
         path : '/home',

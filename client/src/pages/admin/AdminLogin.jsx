@@ -6,6 +6,8 @@ import { toast } from 'react-toastify'
 import * as Yup from 'yup'
 import AdminNavbar from '../../components/admin/AdminNavbar'
 import AdminFooter from '../../components/admin/AdminFooter'
+import AxiosService from '../../utils/AxiosService'
+import ApiRoutes from '../../utils/ApiRoutes'
 
 function AdminLogin() {
 
@@ -22,10 +24,10 @@ function AdminLogin() {
         }),
         onSubmit : async(values) => {
             try {
-                let res = await AxiosService.post(`${ApiRoutes.LOGIN.path}`,values)
+                let res = await AxiosService.post(`${ApiRoutes.ADMINLOGIN.path}`,values)
                 if(res.status === 200){
                     localStorage.setItem('loginToken',res.data.loginToken)
-                    navigate('/')
+                    navigate('/admin/dashboard')
                 }
             } catch (error) {
                 toast.error(error.response.data.message || error.message)

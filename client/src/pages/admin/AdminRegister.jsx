@@ -6,6 +6,8 @@ import { toast } from 'react-toastify'
 import * as Yup from 'yup'
 import AdminFooter from '../../components/admin/AdminFooter'
 import AdminNavbar from '../../components/admin/AdminNavbar'
+import AxiosService from '../../utils/AxiosService'
+import ApiRoutes from '../../utils/ApiRoutes'
 
 function AdminRegister() {
 
@@ -31,9 +33,9 @@ function AdminRegister() {
     onSubmit : async(values) => {
         try {        
             if(values.password === values.confirmPassword){
-              let res = await AxiosService.post(`${ApiRoutes.REGISTER.path}`,values)
+              let res = await AxiosService.post(`${ApiRoutes.ADMINREGISTER.path}`,values)
               if(res.status === 200){
-                navigate('/login')
+                navigate('/admin')
               }     
             }else{
               toast.error("Passwords doesnt match! Please enter the same passwords")
@@ -88,7 +90,7 @@ function AdminRegister() {
             <Button variant='primary'className='adminFormBtns' type="submit">Register</Button>
           </div>
           <div className='text-center mb-2'>
-            Already existing user? <Link to={'/login'} className='adminLoginText'>Login</Link>
+            Already existing user? <Link to={'/admin'} className='adminLoginText'>Login</Link>
           </div>
         </Form>
       </Col>
