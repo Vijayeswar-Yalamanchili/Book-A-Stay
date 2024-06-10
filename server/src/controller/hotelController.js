@@ -28,6 +28,19 @@ const getAllHotels = async(req,res) => {
     }
 }
 
+const getHotelsList = async(req,res) => {
+    try {
+        const hotelsList = await HotelsModel.find()
+        res.status(200).send({
+            hotelsList
+        })
+    } catch (error) {
+        res.status(500).send({
+            message:"Internal Server Error in Getting all stays"
+        })
+    }
+}
+
 const getAllHotelsByCity = async(req,res) => {
     try {
         if(req.body.cityName === "bangalore" || req.body.cityName === "bengaluru"){
@@ -122,6 +135,7 @@ const countByCity = async(req,res) => {
 export default {
     addHotel,
     getAllHotels,
+    getHotelsList,
     getAllHotelsByCity,
     getHotelById,
     updateHotel,
