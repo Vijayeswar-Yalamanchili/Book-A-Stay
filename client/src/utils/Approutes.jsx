@@ -18,6 +18,7 @@ import AdminVillas from '../pages/admin/AdminVillas'
 import AdminResorts from '../pages/admin/AdminResorts'
 import AdminCottages from '../pages/admin/AdminCottages'
 import AdminCabins from '../pages/admin/AdminCabins'
+import AdminMyProfile from '../pages/admin/AdminMyProfile'
 
 const Approutes = [
     {
@@ -54,6 +55,11 @@ const Approutes = [
     {
         path : '/admin/register',
         element : <AdminRegister/>,
+        exact : true
+    },
+    {
+        path : '/admin/myProfile',
+        element : <AdminLogInStatusContextComponent><AdminMyProfile/></AdminLogInStatusContextComponent>,
         exact : true
     },
     {

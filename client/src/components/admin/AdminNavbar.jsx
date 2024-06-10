@@ -76,7 +76,7 @@ function AdminNavbar() {
               {/* <Image className="userImage my-2" src={`https://chillhub-social-platform.onrender.com/${user[0].imageDP}`} roundedCircle/> */}
               <div><b>Welcome Admin !!!</b></div>
             </div>
-            <Link to={'/myProfile'} className="listMenu list-group-item list-group-item-action">
+            <Link to={'/admin/myProfile'} className="listMenu list-group-item list-group-item-action">
               <span className='d-flex align-items-center' style={{gap:"15px"}}>
                 <FontAwesomeIcon icon={faUser} size='xl' style={{color: "#0d6efd", width:"18px", height:"16px"}}/>My Profile
               </span>
