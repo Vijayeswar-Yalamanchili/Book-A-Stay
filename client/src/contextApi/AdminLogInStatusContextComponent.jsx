@@ -20,7 +20,7 @@ function AdminLogInStatusContextComponent({children}){
       }else{
         const decodedToken = jwtDecode(getLoginToken)
         const id = decodedToken.id
-        const res = await AxiosService.get(`${ApiRoutes.GETADMINUSERBYID.path}/${id}`, {headers : { 'Authorization' : `${getLoginToken}`}})
+        const res = await AxiosService.get(`${ApiRoutes.GETADMINUSERBYID.path}/user/${id}`, {headers : { 'Authorization' : `${getLoginToken}`}})
         let result = res.data.userById
         if(result){
           setIsLoggedIn(result.isLoggedIn)

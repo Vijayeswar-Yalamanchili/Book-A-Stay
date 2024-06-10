@@ -5,7 +5,17 @@ import logo from '../../assets/book-a-stay.png'
 
 function AdminFooter() {
   return <>
-  <div className='adminFooter text-white'>
+
+  <div className='adminFooter text-white' style={{height : ""}}>
+    <div style={{fontSize : "1.5em"}} className='mb-3'>Save money, Stay Comfort</div>
+    <Link to={'/'} className='text-white text-decoration-none'>
+        <div className='d-flex flex-column justify-content-between align-items-center'>
+          <Image src={logo} className='adminLogoImg'/>
+          <div style={{fontSize : "1.5em"}}>book-A-stay</div>      
+        </div>
+      </Link>
+  </div>
+  {/* <div className='adminFooter text-white'>
     <div className="adminFooterBlock d-flex justify-content-between align-items-center">
       <div className="adminContactMail flex-column d-flex justify-content-between align-items-start">
         <div style={{fontSize : "1.5em"}} className='mb-3'>Save money, Stay Comfort</div>
@@ -24,7 +34,7 @@ function AdminFooter() {
     </div>
     <hr style={{color : "white"}}/>
     <div className='text-center pb-2' style={{fontSize : "0.7em"}}>Copyright &copy; 2024 Vijayeswar Yalmanchili</div>
-  </div>
+  </div> */}
   </>
 }
 

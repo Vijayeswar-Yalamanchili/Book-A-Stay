@@ -13,6 +13,11 @@ import UserLogInStatusContextComponent from '../contextApi/UserLogInStatusContex
 import AdminLogInStatusContextComponent from '../contextApi/AdminLogInStatusContextComponent'
 import SharedDataComponent from '../contextApi/SharedDataComponent'
 import MyProfile from '../pages/myProfile/MyProfile'
+import AdminHotels from '../pages/admin/AdminHotels'
+import AdminVillas from '../pages/admin/AdminVillas'
+import AdminResorts from '../pages/admin/AdminResorts'
+import AdminCottages from '../pages/admin/AdminCottages'
+import AdminCabins from '../pages/admin/AdminCabins'
 
 const Approutes = [
     {
@@ -66,6 +71,32 @@ const Approutes = [
         element : <AdminLogInStatusContextComponent><AdminEditHotel/></AdminLogInStatusContextComponent>,
         exact : true
     },
+    {
+        path : '/admin/hotel',
+        element : <AdminLogInStatusContextComponent><AdminHotels/></AdminLogInStatusContextComponent>,
+        exact : true
+    },
+    {
+        path : '/admin/villa',
+        element : <AdminLogInStatusContextComponent><AdminVillas/></AdminLogInStatusContextComponent>,
+        exact : true
+    },
+    {
+        path : '/admin/resort',
+        element : <AdminLogInStatusContextComponent><AdminResorts/></AdminLogInStatusContextComponent>,
+        exact : true
+    },
+    {
+        path : '/admin/cottage',
+        element : <AdminLogInStatusContextComponent><AdminCottages/></AdminLogInStatusContextComponent>,
+        exact : true
+    },
+    {
+        path : '/admin/cabin',
+        element : <AdminLogInStatusContextComponent><AdminCabins/></AdminLogInStatusContextComponent>,
+        exact : true
+    }
+
 ]
 
 export default Approutes

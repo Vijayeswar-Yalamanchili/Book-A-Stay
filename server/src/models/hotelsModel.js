@@ -64,8 +64,8 @@ const hotelsSchema = new mongoose.Schema({
     },  
 },
 {   timestamps : true  },
-{   collection : 'hotels' })
+{   collection : 'stays' })
 
-const HotelsModel = mongoose.model('hotels', hotelsSchema)
+const HotelsModel = mongoose.model('stays', hotelsSchema)
 
 export default HotelsModel

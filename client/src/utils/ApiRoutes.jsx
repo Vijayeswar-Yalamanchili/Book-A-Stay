@@ -16,8 +16,28 @@ const ApiRoutes = {
         path : '/admin/hotelslist',
         authenticate :false
     },
+    GETADMINVILLASLIST : {
+        path : '/admin/villaslist',
+        authenticate :false
+    },
+    GETADMINRESORTSLIST : {
+        path : '/admin/resortslist',
+        authenticate :false
+    },
+    GETADMINCOTTAGESLIST : {
+        path : '/admin/cottageslist',
+        authenticate :false
+    },
+    GETADMINCABINSLIST : {
+        path : '/admin/cabinslist',
+        authenticate :false
+    },
     GETADMINUSERBYID : {
         path : '/admin/getadminuserbyid',
+        authenticate :true
+    },
+    GETTYPESLIST : {
+        path : '/admin/gettypeslist',
         authenticate :true
     },
     // Users

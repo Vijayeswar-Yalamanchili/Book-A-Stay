@@ -709,54 +709,21 @@
 
 .adminFooter{
     background-color: #fd7e14;
-    height: max-content;
-}
-
-.adminFooterBlock{
-    padding: 2rem 4rem;
-    gap: 2rem;
+    height: 15rem;
+    text-align: center;
+    display: flex;
     flex-direction: column;
-}
-   
-.adminMailInput{
-    height: 2.25rem;
-    border: none;
-    width: 18rem;
-    border-radius: 5px;
+    justify-content: center;
 }
 
-.adminSendMailBtn {
-    background-color: white !important;
-    color: #0d6efd !important;
-    border: none !important;
-}
-
-.adminSendMailBtn:hover {
-    background-color: #0d6efd !important;
-    color: white !important;
-}
 
 .adminLogoImg{
     width: 5rem;
     border-radius: 10px;
 }
 
-@media screen and (max-width: 767px){
-    .adminInputField{
-        width: 18rem !important;
-    } 
-    .adminMailInput{
-        width: 12rem;
-    }
-}
-
 @media screen and (min-width: 768px) {
-    .adminFooterBlock{
-        flex-direction: row;
-    }
-    .adminInputField{
-        width: 24rem !important;
-    }    
+   
     .adminLogoImg{
         width: 6rem;
     }
