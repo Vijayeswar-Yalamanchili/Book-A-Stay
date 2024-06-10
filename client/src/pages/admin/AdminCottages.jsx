@@ -16,7 +16,7 @@ function AdminCottages() {
   const [lists, setLists] = useState([])
   let getLoginToken = localStorage.getItem('adminLoginToken')
 
-  const getHotelsList = async() => {
+  const getCottagesList = async() => {
     try {
       const decodedToken = jwtDecode(getLoginToken)
       const id = decodedToken.id
@@ -27,9 +27,17 @@ function AdminCottages() {
     }
   }
 
+  const handleDelete = async(stayId) => {
+    try {
+      let res = await AxiosService.delete(`${ApiRoutes.DELETESTAY.path}/${stayId}`,{ headers : { 'Authorization' : `${getLoginToken}`} })
+    } catch (error) {
+      toast.error(error.response.data.message || error.message)
+    }
+  }
+
   useEffect(() => {
-    getHotelsList()
-  },[])
+    getCottagesList()
+  },[lists])
 
   return <>
     <AdminNavbar/>
@@ -39,13 +47,14 @@ function AdminCottages() {
         <h4>List of Hotels</h4>
       </div>
       <Table striped bordered hover>
-        <thead>
+      <thead>
           <tr>
             <th>S.No</th>
             <th>Name</th>
             <th>Type</th>
             <th>City</th>
             <th>Rating</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -58,6 +67,11 @@ function AdminCottages() {
               <td>{e.type}</td>
               <td>{e.city}</td>
               <td>{e.rating}</td>
+              <td>
+                <Button variant='primary' onClick={()=>navigate(`/admin/editHotel/${e._id}`)}>Edit</Button>
+                &nbsp;
+                <Button variant='danger' onClick={()=>{handleDelete(e._id)}}>Delete</Button>
+              </td>
             </tr> 
             }) : 
             <Card style={{width : "100%",textAlign : 'center'}}>

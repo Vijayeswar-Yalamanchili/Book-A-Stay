@@ -19,7 +19,7 @@ const getTypesList = async(req,res) => {
         const list = await HotelsModel.find()
         const types = list.map((e)=> e.type)
         const typesList = new Set(types)
-        console.log(typesList,types)
+        // console.log(types)
         res.status(200).send({
             types, typesList
         })
@@ -96,6 +96,19 @@ const getCabinsList = async(req,res) => {
     }
 }
 
+const deleteStays = async(req,res) => {
+    try {
+        const deleteStay = await HotelsModel.findByIdAndDelete(req.params.hotelId)
+        res.status(200).send({
+            deleteStay
+        })
+    } catch (error) {
+        res.status(500).send({
+            message : "Internal server error in deleting stay"
+        })
+    }
+}
+
 export default {
     getUserById,
     getTypesList,
@@ -103,5 +116,6 @@ export default {
     getVillasList,
     getResortsList,
     getCottagesList,
-    getCabinsList
+    getCabinsList,
+    deleteStays
 }

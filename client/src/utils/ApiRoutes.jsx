@@ -40,6 +40,10 @@ const ApiRoutes = {
         path : '/admin/gettypeslist',
         authenticate :true
     },
+    DELETESTAY : {
+        path : '/admin/deletestay',
+        authenticate :true
+    },
     // Users
     HOME : {
         path : '/home',

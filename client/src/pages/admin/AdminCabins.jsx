@@ -16,21 +16,28 @@ function AdminCabins() {
   const [lists, setLists] = useState([])
   let getLoginToken = localStorage.getItem('adminLoginToken')
 
-  const getHotelsList = async() => {
+  const getCabinsList = async() => {
     try {
       const decodedToken = jwtDecode(getLoginToken)
       const id = decodedToken.id
       let res = await AxiosService.get(`${ApiRoutes.GETADMINCABINSLIST.path}?type=cabin`,{ headers : { 'Authorization' : `${getLoginToken}`} })
       setLists(res.data.cabinsList)
-      console.log(res)
+    } catch (error) {
+      toast.error(error.response.data.message || error.message)
+    }
+  }
+
+  const handleDelete = async(stayId) => {
+    try {
+      let res = await AxiosService.delete(`${ApiRoutes.DELETESTAY.path}/${stayId}`,{ headers : { 'Authorization' : `${getLoginToken}`} })
     } catch (error) {
       toast.error(error.response.data.message || error.message)
     }
   }
 
   useEffect(() => {
-    getHotelsList()
-  },[])
+    getCabinsList()
+  },[lists])
 
   return <>
     <AdminNavbar/>
@@ -40,13 +47,14 @@ function AdminCabins() {
         <h4>List of Hotels</h4>
       </div>
       <Table striped bordered hover>
-        <thead>
+      <thead>
           <tr>
             <th>S.No</th>
             <th>Name</th>
             <th>Type</th>
             <th>City</th>
             <th>Rating</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -59,6 +67,11 @@ function AdminCabins() {
               <td>{e.type}</td>
               <td>{e.city}</td>
               <td>{e.rating}</td>
+              <td>
+                <Button variant='primary' onClick={()=>navigate(`/admin/editHotel/${e._id}`)}>Edit</Button>
+                &nbsp;
+                <Button variant='danger' onClick={()=>{handleDelete(e._id)}}>Delete</Button>
+              </td>
             </tr> 
             }) : 
             <Card style={{width : "100%",textAlign : 'center'}}>

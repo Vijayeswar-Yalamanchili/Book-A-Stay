@@ -16,4 +16,6 @@ router.get('/resortslist',auth.adminAuthenticate, auth.adminGuard, adminControll
 router.get('/cottageslist',auth.adminAuthenticate, auth.adminGuard, adminController.getCottagesList)
 router.get('/cabinslist',auth.adminAuthenticate, auth.adminGuard, adminController.getCabinsList)
 
+router.delete('/deletestay/:hotelId',auth.adminAuthenticate,adminController.deleteStays)
+
 export default router
