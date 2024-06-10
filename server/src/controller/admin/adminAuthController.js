@@ -32,7 +32,7 @@ const login = async(req,res) => {
         const user = await UserAuthModel.findOne({email : email})
         if(user){
             if(await hashPwd.hashCompare(password,user.password)){
-                const loginToken = await auth.createLoginToken({
+                const adminLoginToken = await auth.createLoginToken({
                     id : user._id,
                     name : `${user.firstName} ${user.lastName}`,
                     firstName: user.firstName,
@@ -44,7 +44,7 @@ const login = async(req,res) => {
                 await UserAuthModel.findOneAndUpdate({email : email},{$set : {isLoggedIn : true}})
                 res.status(200).send({
                     message : "Login Successful",
-                    loginToken,
+                    adminLoginToken,
                     id:user._id,
                     isAdmin : user.isAdmin
                 })

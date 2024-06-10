@@ -61,7 +61,7 @@ function SearchHotel() {
           setHomePage(false)
           setHotelsList(result) 
           setSearchInputs(inputData)  
-          // console.log(result,searchInputs)       
+          console.log(result,searchInputs)
         } else { 
           toast.error("City name cant be empty")
         }

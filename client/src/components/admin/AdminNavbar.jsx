@@ -12,7 +12,7 @@ import AxiosService from '../../utils/AxiosService'
 function AdminNavbar() {
 
   const navigate = useNavigate()
-  let getLoginToken = localStorage.getItem('loginToken')
+  let getLoginToken = localStorage.getItem('adminLoginToken')
   const [myProfile, setMyProfile] = useState(false)
   
   const handleMyProfile = () => setMyProfile(!myProfile)
@@ -21,7 +21,7 @@ function AdminNavbar() {
     try {
       const decodedToken = jwtDecode(getLoginToken)
       const id = decodedToken.id
-      let res = await AxiosService.put(`${ApiRoutes.ADMINLOGOUT.path}/${id}`,{ headers : { 'Authorization' : ` ${getLoginToken}`}})
+      let res = await AxiosService.put(`${ApiRoutes.ADMINLOGOUT.path}/${id}`,{},{ headers : { 'Authorization' : ` ${getLoginToken}`}})
       if(res.status === 200){
         toast.success("Logged Out Successfully")
         localStorage.clear()
@@ -37,7 +37,7 @@ function AdminNavbar() {
       <Container>
         <Navbar.Brand className='me-0'>
           <span className='appinfo'>
-            <Link to={'/'} className='adminAppData d-flex justify-content-between align-items-center'>
+            <Link to={'/admin'} className='adminAppData d-flex justify-content-between align-items-center'>
               <Image src={logo} width={40} height={40} className='appLogo' rounded/>
               <div className='adminAppName'>book-A-stay</div>
             </Link>

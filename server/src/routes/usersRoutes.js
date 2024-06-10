@@ -3,6 +3,7 @@ import auth from '../middleware/auth.js'
 import userAuthController from '../controller/userAuthController.js'
 import userController from '../controller/userController.js'
 import adminAuthController from '../controller/admin/adminAuthController.js'
+import adminController from '../controller/admin/adminController.js'
 
 const router = express.Router()
 //Users
@@ -21,5 +22,6 @@ router.delete('/deleteuser/:id', auth.authenticate, userController.deleteUser)
 router.post('/admin', adminAuthController.login)
 router.post('/admin/register', adminAuthController.register)
 router.put('/admin/logout/:id', auth.authenticate, adminAuthController.logout)
+router.get('/admin/hotelslist/:id', auth.authenticate, adminController.getHotelsList)
 
 export default router
