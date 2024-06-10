@@ -8,6 +8,10 @@ const ApiRoutes = {
         path : '/users/admin/register',
         authenticate : false
     },
+    ADMINLOGOUT : {
+        path : '/users/admin/logout',
+        authenticate : true
+    },
     // Users
     HOME : {
         path : '/home',

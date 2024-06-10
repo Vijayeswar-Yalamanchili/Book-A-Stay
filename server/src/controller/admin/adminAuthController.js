@@ -65,8 +65,25 @@ const login = async(req,res) => {
     }
 }
 
+const logout = async(req,res) => {
+    try {
+        const user = await UserAuthModel.findOne({_id : req.params.id})
+        if(user){
+            let logout =  await UserAuthModel.findOneAndUpdate({_id : req.params.id},{ "$set": { isLoggedIn: false }},{new : true})
+            res.status(200).send({
+                message : "Logged Out Successfully"
+            })
+        }
+    } catch (error) {
+        res.status(500).send({
+            message : "Internal server error in logging out"
+        })
+    }
+}
+
 
 export default {
     register,
-    login
+    login,
+    logout
 }
