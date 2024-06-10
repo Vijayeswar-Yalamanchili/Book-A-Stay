@@ -1,17 +1,19 @@
 import React, { useState,useEffect } from 'react'
-import { Container, Table } from 'react-bootstrap'
+import { Container, Table, Button } from 'react-bootstrap'
 import { toast } from 'react-toastify'
+import { jwtDecode } from 'jwt-decode'
+import { useNavigate } from 'react-router-dom'
 import AdminNavbar from '../../components/admin/AdminNavbar'
 import AdminFooter from '../../components/admin/AdminFooter'
 import AxiosService from '../../utils/AxiosService'
 import ApiRoutes from '../../utils/ApiRoutes'
-import { jwtDecode } from 'jwt-decode'
-
 
 function AdminDashboard() {
 
+  const navigate = useNavigate()
   const [lists, setLists] = useState([])
   let getLoginToken = localStorage.getItem('adminLoginToken')
+
   const getHotelsList = async() => {
     try {
       const decodedToken = jwtDecode(getLoginToken)
@@ -30,8 +32,11 @@ function AdminDashboard() {
   return <>
     <AdminNavbar/>
     
-    <Container className='p-5'>
-      <h4>List of stays</h4>
+    <Container className='py-5'>
+      <div className='mb-3 d-flex justify-content-between align-items-center'>
+        <h4>List of stays</h4>
+        <Button onClick={()=> navigate('/admin/addHotel')}> + Add New Stay</Button>
+      </div>
       <Table striped bordered hover>
         <thead>
           <tr>

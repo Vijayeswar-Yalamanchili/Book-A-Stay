@@ -20,7 +20,6 @@ const decodeLoginToken = async(token) => {
 //session expiry
 const authenticate = async(req,res,next) => {
     let token  = req?.headers?.authorization?.split(' ')[1]
-    console.log(token)
     if(token){
         let payload = await decodeLoginToken(token)
         let currentTime = +new Date()
@@ -55,7 +54,6 @@ const getUserEmail = async(req,res,next) => {
 
 //role based
 const adminGuard = async(req,res,next) => {
-    // console.log(req)
     let token  = req?.headers?.authorization
     if(token){
         let payload = await decodeLoginToken(token)
@@ -75,7 +73,6 @@ const adminGuard = async(req,res,next) => {
 
 const adminAuthenticate = async(req,res,next) => {
     let token  = req?.headers?.authorization
-    console.log(token)
     if(token){
         let payload = await decodeLoginToken(token)
         let currentTime = +new Date()

@@ -8,6 +8,7 @@ const router = express.Router()
 router.post('/', adminAuthController.login)
 router.post('/register', adminAuthController.register)
 router.put('/logout/:id', auth.adminAuthenticate, adminAuthController.logout)
+router.get('/getadminuserbyid/:id', auth.authenticate, adminController.getUserById)
 router.get('/hotelslist/:id',auth.adminAuthenticate, auth.adminGuard, adminController.getHotelsList)
 
 export default router

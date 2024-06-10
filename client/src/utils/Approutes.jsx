@@ -10,6 +10,7 @@ import AdminAddHotel from '../pages/admin/AdminAddHotel'
 import AdminEditHotel from '../pages/admin/AdminEditHotel'
 import UserAuthContextComponent from '../contextApi/UserAuthContextComponent'
 import UserLogInStatusContextComponent from '../contextApi/UserLogInStatusContextComponent'
+import AdminLogInStatusContextComponent from '../contextApi/AdminLogInStatusContextComponent'
 import SharedDataComponent from '../contextApi/SharedDataComponent'
 import MyProfile from '../pages/myProfile/MyProfile'
 
@@ -52,17 +53,17 @@ const Approutes = [
     },
     {
         path : '/admin/dashboard',
-        element : <AdminDashboard/>,
+        element : <AdminLogInStatusContextComponent><AdminDashboard/></AdminLogInStatusContextComponent>,
         exact : true
     },
     {
         path : '/admin/addHotel',
-        element : <AdminAddHotel/>,
+        element : <AdminLogInStatusContextComponent><AdminAddHotel/></AdminLogInStatusContextComponent>,
         exact : true
     },
     {
         path : '/admin/editHotel',
-        element : <AdminEditHotel/>,
+        element : <AdminLogInStatusContextComponent><AdminEditHotel/></AdminLogInStatusContextComponent>,
         exact : true
     },
 ]
