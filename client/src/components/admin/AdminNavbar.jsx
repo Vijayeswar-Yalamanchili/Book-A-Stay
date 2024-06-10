@@ -37,10 +37,17 @@ function AdminNavbar() {
       <Container>
         <Navbar.Brand className='me-0'>
           <span className='appinfo'>
-            <Link to={'/admin'} className='adminAppData d-flex justify-content-between align-items-center'>
-              <Image src={logo} width={40} height={40} className='appLogo' rounded/>
-              <div className='adminAppName'>book-A-stay</div>
-            </Link>
+            {
+              getLoginToken ? 
+                <Link to={'/admin/dashboard'} className='adminAppData d-flex justify-content-between align-items-center'>
+                  <Image src={logo} width={40} height={40} className='appLogo' rounded/>
+                  <div className='adminAppName'>book-A-stay</div>
+                </Link> : 
+                <Link to={'/admin'} className='adminAppData d-flex justify-content-between align-items-center'>
+                  <Image src={logo} width={40} height={40} className='appLogo' rounded/>
+                  <div className='adminAppName'>book-A-stay</div>
+              </Link>
+            }
           </span>
         </Navbar.Brand>
 

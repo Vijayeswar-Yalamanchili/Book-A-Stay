@@ -14,7 +14,7 @@ const ApiRoutes = {
     },
     GETADMINHOTELSLIST : {
         path : '/admin/hotelslist',
-        authenticate :true
+        authenticate :false
     },
     GETADMINUSERBYID : {
         path : '/admin/getadminuserbyid',
