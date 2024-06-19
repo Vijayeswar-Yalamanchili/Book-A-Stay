@@ -686,6 +686,16 @@
     background-color: #0d6efd !important;
 }
 
+@media screen and (max-width: 426px){
+    .navBtnsAFterAdminLogin{
+        width: 7rem;
+    }
+    .usericon{
+        width: 2rem;
+        padding: 0.25rem 0.5rem !important;
+    }
+}
+
 @media screen and (min-width: 426px){
     .adminAppData{
         width: 9rem;

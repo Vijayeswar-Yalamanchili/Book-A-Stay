@@ -48,7 +48,7 @@ function AdminDashboard() {
           <Row xs={1} md={2} className='mx-auto cityRows d-flex justify-content-around align-items-center'>
             {
               lists.map((e,i)=> {
-                return  <Card className='px-0 mb-4' style={{ width: '18rem',minHeight:"10rem"}} key={i} onClick={() =>navigate(`/admin/${e}`)}>
+                return  <Card className='px-0 mb-4' style={{ width: '15rem',minHeight:"10rem"}} key={i} onClick={() =>navigate(`/admin/${e}`)}>
                   <Card.Img variant="top" src={hotelsImg} alt='a'/>
                   <Card.Body>
                     <h5 style={{textTransform : 'capitalize'}}>{e+`s`}</h5>

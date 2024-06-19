@@ -53,9 +53,9 @@ function AdminNavbar() {
 
         {
           getLoginToken ? 
-          <Nav className='navBtnsAFterLogin d-flex justify-content-between align-items-center'>
+          <Nav className='navBtnsAFterLogin navBtnsAFterAdminLogin  d-flex justify-content-between align-items-center'>
             <Button className='adminAuthBtns' onClick={handleLogout}>Logout</Button>
-            <Button className='adminAuthBtns' onClick={()=>handleMyProfile()}>
+            <Button className='adminAuthBtns usericon' onClick={()=>handleMyProfile()}>
               <FontAwesomeIcon icon={faUser} style={{ height : '1.25rem'}}/>
             </Button>
           </Nav> : 

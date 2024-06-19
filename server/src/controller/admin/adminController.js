@@ -96,7 +96,34 @@ const getCabinsList = async(req,res) => {
     }
 }
 
-const deleteStays = async(req,res) => {
+const addStay = async(req,res) => {
+    try {
+        console.log(req.body)
+        // const addNewHotel = await HotelsModel.create({...req.body})
+        // res.status(200).send({
+        //     addNewHotel
+        // })
+    } catch (error) {
+        res.status(500).send({
+            message:"Internal Server Error in Adding Hotel"
+        })
+    }
+}
+
+const updateStay = async(req,res) => {
+    try {
+        const updateHotel = await HotelsModel.findByIdAndUpdate({_id:req.params.id},{$set : req.body},{new : true})
+        res.status(200).send({
+            updateHotel
+        })
+    } catch (error) {
+        res.status(500).send({
+            message:"Internal Server Error in updating Hotel"
+        })
+    }
+}
+
+const deleteStay = async(req,res) => {
     try {
         const deleteStay = await HotelsModel.findByIdAndDelete(req.params.hotelId)
         res.status(200).send({
@@ -117,5 +144,7 @@ export default {
     getResortsList,
     getCottagesList,
     getCabinsList,
-    deleteStays
+    addStay,
+    updateStay,
+    deleteStay
 }
