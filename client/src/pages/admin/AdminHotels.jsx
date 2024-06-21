@@ -20,7 +20,7 @@ function AdminHotels() {
     try {
       const decodedToken = jwtDecode(getLoginToken)
       const id = decodedToken.id
-      let res = await AxiosService.get(`${ApiRoutes.GETADMINHOTELSLIST.path}?type=hotel`,{ headers : { 'Authorization' : `${getLoginToken}`} })
+      let res = await AxiosService.get(`${ApiRoutes.GETADMINHOTELSLIST.path}?type=Hotel`,{ headers : { 'Authorization' : `${getLoginToken}`} })
       setLists(res.data.hotelsList)
     } catch (error) {
       toast.error(error.response.data.message || error.message)
@@ -64,7 +64,7 @@ function AdminHotels() {
             lists.map((e,i) => {
               return <tr key={i}>
               <td>{i+1}</td>
-              <td>{e.hotelName}</td>
+              <td>{e.name}</td>
               <td>{e.type}</td>
               <td>{e.city}</td>
               <td>{e.rating}</td>

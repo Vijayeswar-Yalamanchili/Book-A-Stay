@@ -20,7 +20,7 @@ function AdminCottages() {
     try {
       const decodedToken = jwtDecode(getLoginToken)
       const id = decodedToken.id
-      let res = await AxiosService.get(`${ApiRoutes.GETADMINCOTTAGESLIST.path}?type=cottage`,{ headers : { 'Authorization' : `${getLoginToken}`} })
+      let res = await AxiosService.get(`${ApiRoutes.GETADMINCOTTAGESLIST.path}?type=Cottage`,{ headers : { 'Authorization' : `${getLoginToken}`} })
       setLists(res.data.cottagesList)
     } catch (error) {
       toast.error(error.response.data.message || error.message)
@@ -63,7 +63,7 @@ function AdminCottages() {
             lists.map((e,i) => {
               return <tr key={i}>
               <td>{i+1}</td>
-              <td>{e.hotelName}</td>
+              <td>{e.name}</td>
               <td>{e.type}</td>
               <td>{e.city}</td>
               <td>{e.rating}</td>
