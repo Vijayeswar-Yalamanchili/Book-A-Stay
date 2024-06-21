@@ -54,6 +54,7 @@ const getUserEmail = async(req,res,next) => {
 
 //role based
 const adminGuard = async(req,res,next) => {
+    // let token  = req?.headers?.authorization?.split(' ')[1]
     let token  = req?.headers?.authorization
     if(token){
         let payload = await decodeLoginToken(token)
@@ -72,6 +73,7 @@ const adminGuard = async(req,res,next) => {
 }
 
 const adminAuthenticate = async(req,res,next) => {
+    // let token  = req?.headers?.authorization?.split(' ')[1]
     let token  = req?.headers?.authorization
     if(token){
         let payload = await decodeLoginToken(token)

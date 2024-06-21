@@ -1,11 +1,19 @@
 import mongoose from "./indexModel.js"
 
 const hotelsSchema = new mongoose.Schema({
-    hotelName : {
+    name : {
         type : String,
         required : true
     },
     type : {
+        type : String,
+        required : true
+    },
+    title : {
+        type : String,
+        required : true
+    },
+    address : {
         type : String,
         required : true
     },
@@ -17,51 +25,42 @@ const hotelsSchema = new mongoose.Schema({
         type : String,
         required : true
     },
-    address : {
-        type : String,
-        required : true
-    },
-    roomPhotos : {
-        type : [String]
-    },
-    hotelPhotos : {
-        type : [String]
-    },
-    aminities : {
-        type : [String]
-    },
-    title : {
-        type : String,
-        required : true
-    },
     description : {
         type : String,
         required : true
     },
-    detailedDesc : {
-        type : String,
+    lowestPrice : {
+        type : Number,
         required : true
+    },
+    aminities : {
+        type : [String]
     },
     rating : {
         type : Number,
         min : 0,
         max : 10
     },
-    rooms: {
-        type : [String]
-    },
-    lowestPrice : {
-        type : Number,
-        required : true
-    },
-    featured : {
-        type : Boolean,
-        required : true
-    } ,
     experience : {
         type : String,
         required : false
-    },  
+    }, 
+    featured : {
+        type : String,
+        required : true
+    } , 
+    overview : {
+        type : String,
+        required : true
+    },
+    hotelImage : {
+        type : String,
+        // required : true
+    },
+    roomImages : {
+        type : [String],
+        // required : true
+    },
 },
 {   timestamps : true  },
 {   collection : 'stays' })

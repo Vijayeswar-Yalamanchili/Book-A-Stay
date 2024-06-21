@@ -98,14 +98,17 @@ const getCabinsList = async(req,res) => {
 
 const addStay = async(req,res) => {
     try {
-        console.log(req.body)
-        // const addNewHotel = await HotelsModel.create({...req.body})
-        // res.status(200).send({
-        //     addNewHotel
-        // })
+        const addNewStay = await HotelsModel.create({
+            ...req.body,
+            hotelImage : req.files.hotelImage[0]?.filename,
+            roomImages : req.files.roomImages.map(ele => ele.filename)
+        })
+        res.status(200).send({
+            addNewStay
+        })
     } catch (error) {
         res.status(500).send({
-            message:"Internal Server Error in Adding Hotel"
+            message:"Internal Server Error in Adding stay"
         })
     }
 }
