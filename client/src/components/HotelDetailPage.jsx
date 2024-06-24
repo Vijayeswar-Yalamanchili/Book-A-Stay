@@ -43,10 +43,6 @@ function HotelDetailPage() {
         }
     ]
 
-    // const handleViewImage = (image,i) => {
-    //     console.log(image,i)
-    // }
-
     const getHotelData = async() => {
         try {
             let res = await AxiosService.get(`${ApiRoutes.HOTELBYID.path}/find/${sharedHotelIdData}`,{ headers : { 'Authorization' : `${getLoginToken}`} })
@@ -80,7 +76,7 @@ function HotelDetailPage() {
                     <Masonry gutter='0.5rem'>
                         {
                             imagesList.map((e,i) => {
-                                return <img key={i} src={e.image} alt="Room Image" className='roomViewImg'/>            //onClick={()=> handleViewImage(e.image,i)}
+                                return <img key={i} src={`http://localhost:7000/${e.roomImages}`} alt="Room Image" className='roomViewImg'/>            //onClick={()=> handleViewImage(e.image,i)}
                             })
                         }
                     </Masonry>
