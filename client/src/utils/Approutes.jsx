@@ -68,12 +68,12 @@ const Approutes = [
         exact : true
     },
     {
-        path : '/admin/addHotel',
+        path : '/admin/addStay',
         element : <AdminLogInStatusContextComponent><AdminAddHotel/></AdminLogInStatusContextComponent>,
         exact : true
     },
     {
-        path : '/admin/editHotel/:hotelId',
+        path : '/admin/editStay/:id',
         element : <AdminLogInStatusContextComponent><AdminEditHotel/></AdminLogInStatusContextComponent>,
         exact : true
     },

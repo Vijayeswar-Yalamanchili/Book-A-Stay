@@ -6,7 +6,7 @@ import indexRoutes from '../src/routes/indexRoutes.js'
 dotenv.config()
 const PORT = process.env.PORT
 
-//middlewares
+//middlewares 
 const app = express()
 app.use(cors())
 app.use(express.urlencoded({extended:false}))

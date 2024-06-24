@@ -15,7 +15,7 @@ function FeaturedByTypes() {
 
   const getTypesCount = async() => {
     try {
-      let res = await AxiosService.get(`${ApiRoutes.COUNTBYTYPE.path}?types=hotel,villa,resort,cottage,cabin`)
+      let res = await AxiosService.get(`${ApiRoutes.COUNTBYTYPE.path}?types=Hotel,Villa,Resort,Cottage,Cabin`)
       let result = res.data.countByTypelist
       setTypesCount(result)        
     } catch (error) {

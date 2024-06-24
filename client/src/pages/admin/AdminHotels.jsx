@@ -69,7 +69,7 @@ function AdminHotels() {
               <td>{e.city}</td>
               <td>{e.rating}</td>
               <td>
-                <Button variant='primary' onClick={()=>navigate(`/admin/editHotel/${e._id}`)}>Edit</Button>
+                <Button variant='primary' onClick={()=>navigate(`/admin/editStay/${e._id}`)}>Edit</Button>
                 &nbsp;
                 <Button variant='danger' onClick={()=>{handleDelete(e._id)}}>Delete</Button>
               </td>

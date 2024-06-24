@@ -3,10 +3,10 @@ import multer from 'multer'
 const hotelImageStorage = multer.diskStorage({
   destination: (req, file, cb) => {
     if (file.fieldname === "hotelImage") {
-      // console.log("first")
       cb(null, 'hotelImages')
     }else if (file.fieldname === "roomImages") {
       cb(null, 'roomsImages');
+      
     }
   },
   filename:(req,file,cb)=>{

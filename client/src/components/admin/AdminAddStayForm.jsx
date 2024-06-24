@@ -4,19 +4,14 @@ import { useNavigate } from 'react-router-dom'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { jwtDecode } from "jwt-decode"
-import { useSelector, useDispatch } from 'react-redux'
-import { saveDatas, addCheckbox, removeCheckbox, setImage, addMultipleImage, removeMultipleImage, resetDatas } from '../../redux/admin/addStaySlice'
+import { toast } from 'react-toastify'
 import AxiosService from '../../utils/AxiosService'
 import ApiRoutes from '../../utils/ApiRoutes'
-// import { useFormik } from 'formik'
-// import * as Yup from 'yup'
 
 function AdminAddHotelForm() {
 
     let navigate = useNavigate()
-    const dispatch = useDispatch()
     let getToken = localStorage.getItem('adminLoginToken')
-    // const [hotelImgFile, setHotelImgFile] = useState(null)
     const [formValues, setFormValues] = useState({
         name : '',
         type : '',
@@ -41,10 +36,6 @@ function AdminAddHotelForm() {
     let isFeaturedHotel = ['True','False']
     let hotelAminities = ['Free Wifi','Breakfast','Cab service','Spa','Gym','Parking']
 
-    const handleReset = () => {
-      setFormValues('')
-    };
-
     const handleChange = (e) => {
         const { name, value, type, checked, files } = e.target;
         if (type === 'checkbox') {
@@ -58,17 +49,6 @@ function AdminAddHotelForm() {
             } else if (name === 'roomImages') {
                 setFormValues({ ...formValues, roomImages: Array.from(files) });
             }
-            // setFormValues({ ...formValues, roomImages: Array.from(files) });
-
-            // if (name === 'hotelImage') {
-            //     setFormValues({ ...formValues, hotelImage: e.target.files[0] });
-            // } else if (name === 'roomImages') {
-            //     setFormValues({ ...formValues, roomImages: [...e.target.files] });
-            // }
-            //   setFormValues(prevState => ({
-            //     ...prevState,
-            //     [name]: files
-            //   }));
         } 
         else {
           setFormValues( prevState => ({ ...prevState,[name]: value }) );
@@ -80,20 +60,17 @@ function AdminAddHotelForm() {
         const formDataToSend = new FormData();
         for (const key in formValues) {
             if (key === 'roomImages') {
-                console.log(formValues)
                 formValues.roomImages.forEach(image => {
-                    formDataToSend.append('roomImages', image);
-                    console.log(image)
+                    formDataToSend.append('roomImages', image)
                 });
             } 
-            // else if(key === 'hotelImage') {
-            //     formDataToSend.append('hotelImage',formValues[hotelImage]);
-            // }
+            else if(key === 'hotelImage') {
+                formDataToSend.append('hotelImage',formValues[key]);
+            }
             else {
                 formDataToSend.append(key, formValues[key]);
             }
         }
-        console.log('Form submitted:', formValues)
         try {
             const decodedToken = jwtDecode(getToken)
             const id = decodedToken.id
@@ -104,8 +81,12 @@ function AdminAddHotelForm() {
                 }
             })
             console.log(res.data)
+            if(res.status===200){
+                navigate('/admin/dashboard')
+            }
         } catch (error) {
             console.error(error)
+            toast.error(error.response.data.message || error.message)
         }
     };
 
@@ -154,7 +135,7 @@ function AdminAddHotelForm() {
                 </Form.Group>
 
                 <Form.Group as={Col}>
-                    <Form.Label>Distance from Railway station</Form.Label>
+                    <Form.Label>Nearest Railway station</Form.Label>
                     <Form.Control type='number' name='distance' value={formValues.distance} onChange={handleChange} placeholder='Enter distance in numbers'/>
                 </Form.Group>
             </Row>
@@ -240,7 +221,7 @@ function AdminAddHotelForm() {
             </Row>
 
             <Button variant="primary" type="submit">Save</Button>
-            <Button variant="secondary" type="button" className='ms-2' onClick={handleReset}>Reset</Button>
+            {/* <Button variant="secondary" type="button" className='ms-2' onClick={handleReset}>Reset</Button> */}
         </Form>
     </>
 }

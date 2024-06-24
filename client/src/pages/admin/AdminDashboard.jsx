@@ -40,7 +40,7 @@ function AdminDashboard() {
     <Container className='p-5'>
       <div className="header d-flex justify-content-between align-items-center">
         <h4>List of Stay types</h4>
-        <Button onClick={()=> navigate('/admin/addHotel')}>Add new Stay</Button>
+        <Button onClick={()=> navigate('/admin/addStay')}>Add new Stay</Button>
       </div>
       {
         lists.length > 0 ? 

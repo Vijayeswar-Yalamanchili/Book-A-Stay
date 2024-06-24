@@ -19,7 +19,6 @@ const getTypesList = async(req,res) => {
         const list = await HotelsModel.find()
         const types = list.map((e)=> e.type)
         const typesList = new Set(types)
-        // console.log(types)
         res.status(200).send({
             types, typesList
         })
@@ -96,16 +95,33 @@ const getCabinsList = async(req,res) => {
     }
 }
 
+const getStayById = async(req,res) => {
+    try {
+        const stayById = await HotelsModel.findById({_id : req.params.id})
+        res.status(200).send({
+            stayById
+        })
+    } catch (error) {
+        res.status(500).send({
+            message : "Internal server error in getting stay by stayId"
+        })
+    }
+}
+
 const addStay = async(req,res) => {
     try {
-        const addNewStay = await HotelsModel.create({
-            ...req.body,
-            hotelImage : req.files.hotelImage[0]?.filename,
-            roomImages : req.files.roomImages.map(ele => ele.filename)
-        })
-        res.status(200).send({
-            addNewStay
-        })
+        if(req.body.city !== ''){
+            let city = req.body.city.toLowerCase()
+            const addNewStay = await HotelsModel.create({
+                ...req.body,
+                city : city,
+                hotelImage : req.files.hotelImage[0]?.filename,
+                roomImages : req.files.roomImages.map(ele => ele.filename)
+            })
+            res.status(200).send({
+                addNewStay
+            })
+        }
     } catch (error) {
         res.status(500).send({
             message:"Internal Server Error in Adding stay"
@@ -115,13 +131,16 @@ const addStay = async(req,res) => {
 
 const updateStay = async(req,res) => {
     try {
-        const updateHotel = await HotelsModel.findByIdAndUpdate({_id:req.params.id},{$set : req.body},{new : true})
-        res.status(200).send({
-            updateHotel
-        })
+        if(req.body.city !== ''){
+            let city = req.body.city.toLowerCase()
+            const updatedStay = await HotelsModel.findByIdAndUpdate({_id:req.params.id},{$set : {...req.body,city : city,hotelImage : req.files.hotelImage[0]?.filename,roomImages : req.files.roomImages.map(ele => ele.filename) }})
+            res.status(200).send({
+                updatedStay
+            })
+        }
     } catch (error) {
         res.status(500).send({
-            message:"Internal Server Error in updating Hotel"
+            message:"Internal Server Error in updating stay"
         })
     }
 }
@@ -147,6 +166,7 @@ export default {
     getResortsList,
     getCottagesList,
     getCabinsList,
+    getStayById,
     addStay,
     updateStay,
     deleteStay

@@ -40,6 +40,10 @@ const ApiRoutes = {
         path : '/admin/gettypeslist',
         authenticate :true
     },
+    GETSTAYBYID : {
+        path : '/admin/getstaybyid',
+        authenticate :true
+    },
     ADDSTAY : {
         path : '/admin/addstay',
         authenticate :true
