@@ -42,7 +42,7 @@ function HotelDetailPage() {
                         <Link to={'/'}><Button variant='none' className='px-0'><FontAwesomeIcon icon={faArrowLeftLong}/></Button></Link>
                         <h3>{hotelData.name}</h3>
                     </div>
-                    <span><FontAwesomeIcon icon={faLocationPin} style={{color : "gray"}}/> {hotelData.address}</span>
+                    <span className='my-1'><FontAwesomeIcon icon={faLocationPin} style={{color : "gray"}}/> {hotelData.address}</span>
                     <span style={{color:"green"}}>Book to stay over {'\u20B9'}{hotelData.lowestPrice} at this stay and get free Breakfast</span>
                 </div>
                 <Button variant='primary'> Reserve Now</Button>
@@ -53,10 +53,10 @@ function HotelDetailPage() {
                     <Masonry gutter='0.5rem'>
                         {
                             roomImgs.length > 0 ?
-                            roomImgs.map((e,i) => {
-                                console.log(e)
-                                return <Image key={i} src={`http://localhost:7000/${e}`} alt="Room Image" className='roomViewImg'/>            //onClick={()=> handleViewImage(e.image,i)}
-                            }) : null
+                                roomImgs.map((e,i) => {
+                                    console.log(e)
+                                    return <Image key={i} src={`http://localhost:7000/${e}`} alt="Room Image" className='roomViewImg'/>            //onClick={()=> handleViewImage(e.image,i)}
+                                }) : null
                         }
                     </Masonry>
                 </ResponsiveMasonry>
