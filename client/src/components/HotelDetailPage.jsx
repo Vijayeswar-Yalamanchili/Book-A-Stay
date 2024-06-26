@@ -43,7 +43,7 @@ function HotelDetailPage() {
                         <h3>{hotelData.name}</h3>
                     </div>
                     <span className='my-1'><FontAwesomeIcon icon={faLocationPin} style={{color : "gray"}}/> {hotelData.address}</span>
-                    <span style={{color:"green"}}>Book to stay over {'\u20B9'}{hotelData.lowestPrice} at this stay and get free Breakfast</span>
+                    <span style={{color:"green"}}>Pay now {'\u20B9'}500 to Reserve your here (Refundable)</span>
                 </div>
                 <Button variant='primary'> Pay {'\u20B9'}500 to Reserve stay</Button>
             </div>
