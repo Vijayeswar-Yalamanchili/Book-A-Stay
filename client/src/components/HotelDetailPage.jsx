@@ -67,7 +67,7 @@ function HotelDetailPage() {
                     <h3>Stay In {hotelData.name}</h3>
                     <p className='d-flex flex-column'>
                         {hotelData.overview}
-                        <div className='d-flex flex-row mt-2' style={{gap : "5px"}}> Aminities we have : 
+                        <div className='d-flex flex-row mt-2' style={{gap : "5px"}}> <i>Aminities we have :</i> 
                             {
                                 aminities.map((ele,i)=> {
                                     return <div className='label' key={i}>{ele}</div>
