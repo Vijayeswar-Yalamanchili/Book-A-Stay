@@ -42,7 +42,7 @@ function HotelDetailPage() {
                         <Link to={'/'}><Button variant='none' className='px-0'><FontAwesomeIcon icon={faArrowLeftLong}/></Button></Link>
                         <h3>{hotelData.name}</h3>
                     </div>
-                    <span className='my-1'><FontAwesomeIcon icon={faLocationPin} style={{color : "gray"}}/> {hotelData.address}</span>
+                    <span className='my-2'><FontAwesomeIcon icon={faLocationPin} style={{color : "gray"}}/> {hotelData.address}</span>
                     <span style={{color:"green"}}>Now Pay {'\u20B9'}500 to Reserve your stay here (Refundable)</span>
                 </div>
                 <Button variant='primary'> Pay  to Reserve</Button>
@@ -80,7 +80,7 @@ function HotelDetailPage() {
                     <div className='leftDescData px-4 py-3 d-flex flex-column justify-content-between align-items-start'>
                         <h5>Perfect for Stay</h5>
                         <p>Located in center of {hotelData.city} city, It has an awesome Experience rating of about {hotelData.rating}</p>
-                        <h5>{'\u20B9'}{hotelData.lowestPrice}/day</h5>
+                        <h5>{'\u20B9'}{hotelData.lowestPrice}/day <span style={{fontSize : '0.85rem'}}>(min.)</span></h5>
                         <Button style={{width : "100%"}}>Pay  to Reserve</Button>
                     </div>
                     
