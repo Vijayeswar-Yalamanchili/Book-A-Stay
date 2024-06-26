@@ -39,7 +39,7 @@ function FeaturedByLiked() {
                   <Card.Body>
                     <h5>{e.name}</h5>
                     <p style={{textTransform : 'capitalize'}}>{e.city}</p>
-                    <h6>Starting from {e.lowestPrice}/- onwards</h6>
+                    <h6 style={{height : "2.5rem"}}>Starting from {e.lowestPrice}/- onwards</h6>
                     <div className="rating">
                       <Button variant='none' className='me-1' style={{backgroundColor : "#003580", color : "white"}}>{e.rating}</Button>
                       <span>{e.experience}</span>
