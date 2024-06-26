@@ -8,14 +8,35 @@ import AdminFooter from '../../components/admin/AdminFooter'
 import AxiosService from '../../utils/AxiosService'
 import ApiRoutes from '../../utils/ApiRoutes'
 import hotelsImg from '../../assets/hotels.jpeg'
+import villasImg from '../../assets/villas.jpeg'
+import resortsImg from '../../assets/resorts.jpeg'
+import cottagesImg from '../../assets/cottages.jpeg'
+import cabinsImg from '../../assets/cabins.jpeg'
 import AdminHotels from './AdminHotels'
 
 function AdminDashboard() {
 
   const navigate = useNavigate()
   const [lists, setLists] = useState([])
-  const [hotelLists, setHotelLists] = useState([])
   let getLoginToken = localStorage.getItem('adminLoginToken')
+
+  let stayImages = [
+    {
+      image : hotelsImg,
+    },
+    {
+      image : villasImg,
+    },
+    {
+      image : resortsImg,
+    },
+    {
+      image : cottagesImg,
+    },
+    {
+      image : cabinsImg,
+    },
+  ]
 
   const getStayTypes = async() => {
     try {
@@ -48,8 +69,8 @@ function AdminDashboard() {
           <Row xs={1} md={2} className='mx-auto cityRows d-flex justify-content-around align-items-center'>
             {
               lists.map((e,i)=> {
-                return  <Card className='px-0 mb-4' style={{ width: '15rem',minHeight:"10rem"}} key={i} onClick={() =>navigate(`/admin/${e}`)}>
-                  <Card.Img variant="top" src={hotelsImg} alt='a'/>
+                return  <Card className='px-0 mb-4' style={{ width: '15rem'}} key={i} onClick={() =>navigate(`/admin/${e}`)}>
+                  {/* <Card.Img variant="top" src={hotelsImg}/> */}
                   <Card.Body>
                     <h5 style={{textTransform : 'capitalize'}}>{e+`s`}</h5>
                   </Card.Body>
