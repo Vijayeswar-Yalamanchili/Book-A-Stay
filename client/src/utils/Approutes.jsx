@@ -42,7 +42,7 @@ const Approutes = [
         exact : true
     },
     {
-        path : '/hotels/:hotelId',
+        path : '/hotels/:id',
         element : <UserAuthContextComponent><UserLogInStatusContextComponent><SharedDataComponent><HotelPage/></SharedDataComponent></UserLogInStatusContextComponent></UserAuthContextComponent>,
         exact : true
     },

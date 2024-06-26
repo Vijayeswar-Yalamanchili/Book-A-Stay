@@ -607,6 +607,9 @@
 
 .roomViewImg{
     border-radius: 5px;
+    width : 19rem;
+    height: 16rem;
+    border: 1px solid grey;
 }
 
 @media screen and (max-width : 991px) and (min-width : 768px){

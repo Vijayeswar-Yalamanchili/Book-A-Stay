@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Button, Card, Row } from 'react-bootstrap'
+import { Button, Card, Row, Image } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeftLong, faLocationPin }  from '@fortawesome/free-solid-svg-icons'
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import hotelRoomImg from '../assets/hotelroom.jpeg'
 import { SharedDataContext } from '../contextApi/SharedDataComponent'
 import AxiosService from '../utils/AxiosService'
@@ -12,41 +13,16 @@ import ApiRoutes from '../utils/ApiRoutes'
 
 function HotelDetailPage() {
 
-    let { sharedHotelIdData } = useContext(SharedDataContext)
+    let {id} = useParams()
     const [hotelData,setHotelData] = useState('')
+    const [roomImgs,setRoomImgs] = useState([])
     const getLoginToken = localStorage.getItem('loginToken')
-
-    let imagesList = [
-        {
-            image : hotelRoomImg
-        },
-        {
-            image : hotelRoomImg
-        },
-        {
-            image : hotelRoomImg
-        },
-        {
-            image : hotelRoomImg
-        },
-        {
-            image : hotelRoomImg
-        },
-        {
-            image : hotelRoomImg
-        },
-        {
-            image : hotelRoomImg
-        },
-        {
-            image : hotelRoomImg
-        }
-    ]
 
     const getHotelData = async() => {
         try {
-            let res = await AxiosService.get(`${ApiRoutes.HOTELBYID.path}/find/${sharedHotelIdData}`,{ headers : { 'Authorization' : `${getLoginToken}`} })
+            let res = await AxiosService.get(`${ApiRoutes.HOTELBYID.path}/find/${id}`,{ headers : { 'Authorization' : `${getLoginToken}`} })
             let result = res.data.getHotelData
+            setRoomImgs(result.roomImages)
             setHotelData(result)            
         } catch (error) {
             toast.error(error.response.data.message || error.message)
@@ -63,7 +39,7 @@ function HotelDetailPage() {
                 <div className='d-flex flex-column'>
                     <div className='d-flex justify-content-start align-items-center' style={{gap : "2%"}}>
                         <Link to={'/'}><Button variant='none' className='px-0'><FontAwesomeIcon icon={faArrowLeftLong}/></Button></Link>
-                        <h3>{hotelData.hotelName}</h3>
+                        <h3>{hotelData.name}</h3>
                     </div>
                     <span><FontAwesomeIcon icon={faLocationPin} style={{color : "gray"}}/> {hotelData.address}</span>
                     <span style={{color:"green"}}>Book to stay over {'\u20B9'}{hotelData.lowestPrice} at this stay and get free Breakfast</span>
@@ -74,18 +50,21 @@ function HotelDetailPage() {
             <div className="roomImagesList my-4">
                 <ResponsiveMasonry columnsCountBreakPoints={{350: 1, 750: 2, 900: 4}}>
                     <Masonry gutter='0.5rem'>
+                        {/* {console.log(hotelData?.roomImages)} */}
                         {
-                            imagesList.map((e,i) => {
-                                return <img key={i} src={`http://localhost:7000/${e.roomImages}`} alt="Room Image" className='roomViewImg'/>            //onClick={()=> handleViewImage(e.image,i)}
-                            })
+                            roomImgs.length > 0 ?
+                            roomImgs.map((e,i) => {
+                                console.log(e)
+                                return <Image key={i} src={`http://localhost:7000/${e}`} alt="Room Image" className='roomViewImg'/>            //onClick={()=> handleViewImage(e.image,i)}
+                            }) : null
                         }
                     </Masonry>
                 </ResponsiveMasonry>
                 {/* <Row xs={1} className='mx-auto cityRows'>
                 {
-                    imagesList.map((e,i) => {
+                    hotelData.roomImages.map((e,i) => {
                         return <Card key={i} style={{width : "20rem"}} className='p-0'>
-                            <Card.Img src={e.image} className='roomViewImg'/>
+                            <Card.Img src={`http://localhost:7000/${e.roomImages}`} className='roomViewImg'/>
                         </Card>
                     })
                 }
@@ -94,8 +73,8 @@ function HotelDetailPage() {
 
             <div className='desc d-flex justify-content-between align-items-center'>
                 <div className='rightDesc px-2 py-2'>
-                    <h3>Stay In {hotelData.hotelName}</h3>
-                    <p>{hotelData.detailedDesc}</p>
+                    <h3>Stay In {hotelData.name}</h3>
+                    <p>{hotelData.overview}</p>
                 </div>
                 <div className='leftDesc  d-flex flex-column justify-content-between align-items-start'>
                     <div className='leftDescData px-4 py-3 d-flex flex-column justify-content-between align-items-start'>
