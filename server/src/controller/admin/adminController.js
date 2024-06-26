@@ -112,9 +112,12 @@ const addStay = async(req,res) => {
     try {
         if(req.body.city !== ''){
             let city = req.body.city.toLowerCase()
+            let aminity = req.body.aminities
+            let updatedAminity = aminity.split(',')
             const addNewStay = await HotelsModel.create({
                 ...req.body,
                 city : city,
+                aminities : updatedAminity,
                 hotelImage : req.files.hotelImage[0]?.filename,
                 roomImages : req.files.roomImages.map(ele => ele.filename)
             })
@@ -132,8 +135,16 @@ const addStay = async(req,res) => {
 const updateStay = async(req,res) => {
     try {
         if(req.body.city !== ''){
+            let aminity = req.body.aminities
+            let updatedAminity = aminity.split(',')
             let city = req.body.city.toLowerCase()
-            const updatedStay = await HotelsModel.findByIdAndUpdate({_id:req.params.id},{$set : {...req.body,city : city,hotelImage : req.files.hotelImage[0]?.filename,roomImages : req.files.roomImages.map(ele => ele.filename) }})
+            const updatedStay = await HotelsModel.findByIdAndUpdate({_id:req.params.id},{$set : {
+                ...req.body,
+                aminities : updatedAminity,
+                city : city,
+                hotelImage : req.files.hotelImage[0]?.filename,
+                roomImages : req.files.roomImages.map(ele => ele.filename)
+            }})
             res.status(200).send({
                 updatedStay
             })
