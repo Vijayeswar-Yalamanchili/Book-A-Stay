@@ -7,8 +7,7 @@ const order = async(req,res) => {
             key_id: process.env.RP_KEY_ID,
             key_secret : process.env.RP_KEY_SECRET
         })
-        const options = req.body
-        const order = await rp.orders.create(options)
+        const order = await rp.orders.create(req.body)
         if(!order){
             res.status(400).send({
                 message:"Internal Server Error in  payment order"

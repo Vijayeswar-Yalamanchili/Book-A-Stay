@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Button, Image } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeftLong, faLocationPin }  from '@fortawesome/free-solid-svg-icons'
@@ -10,19 +10,35 @@ import hotelRoomImg from '../assets/hotelroom.jpeg'
 import logo from '../assets/book-a-stay.png'
 import AxiosService from '../utils/AxiosService'
 import ApiRoutes from '../utils/ApiRoutes'
+import { SearchContext } from '../contextApi/SearchContextComponent'
 
 function HotelDetailPage() {
 
     let {id} = useParams()
+    let { dates,city,options } = useContext(SearchContext)
+    console.log(city,dates,options)
+
     const [hotelData,setHotelData] = useState('')
     const [roomImgs,setRoomImgs] = useState([])
     const [aminities,setAminities] = useState([])
     const getLoginToken = localStorage.getItem('loginToken')
     const decodedToken = jwtDecode(getLoginToken)
 
+    const MilliSecondsPerDay = 1000 * 60 * 60 * 24
+    const dayDifference = (date1,date2) => {
+      const timeDifference = Math.abs(date2.getTime() - date1.getTime())
+      const differentDays  = Math.ceil(timeDifference / MilliSecondsPerDay)
+      return differentDays
+    }
+  
+    let startDate = dates[0].startDate
+    let endDate = dates[0].endDate
+    const daysCount = dayDifference(startDate, endDate)
+    console.log(daysCount)
+
     const handlePayment = async(e) => {
         const paymentData = {
-            amount : 500,
+            amount : `${hotelData.lowestPrice}`* daysCount * `${options.room}` * 100,
             currency : 'INR',
             receipt : 'receipt_01'
         }
@@ -34,7 +50,7 @@ function HotelDetailPage() {
                 }
             })
             const result = res.data.order
-            // console.log(result)
+            console.log(result)
 
             let options = {
                 "key": "rzp_test_U7MqWkBZipoze4", // Enter the Key ID generated from the Dashboard
@@ -70,7 +86,6 @@ function HotelDetailPage() {
                     "color": "#0D6EFD"
                 }
             }
-            console.log(options.handler)
             let rzp1 = new window.Razorpay(options);
             rzp1.on('payment.failed', function (response){
                     alert(response.error.code);
@@ -113,9 +128,10 @@ function HotelDetailPage() {
                         <h3>{hotelData.name}</h3>
                     </div>
                     <span className='my-2'><FontAwesomeIcon icon={faLocationPin} style={{color : "gray"}}/> {hotelData.address}</span>
-                    <span style={{color:"green"}}>Now Pay {'\u20B9'}500 to Reserve your stay here (Refundable)</span>
+                    {/* <span style={{color:"green"}}>Now Pay {'\u20B9'}500 to Reserve your stay here (Refundable)</span> */}
+                    <span style={{color:"green"}}>Book this Stay for just {'\u20B9'}{hotelData.lowestPrice}/day</span>
                 </div>
-                <Button variant='primary' onClick={handlePayment}> Pay  to Reserve</Button>
+                <Button variant='primary' onClick={handlePayment}>Book Now</Button>
             </div>
 
             <div className="roomImagesList my-4">
@@ -149,8 +165,13 @@ function HotelDetailPage() {
                     <div className='leftDescData px-4 py-3 d-flex flex-column justify-content-between align-items-start'>
                         <h5>Perfect for Stay</h5>
                         <p>Located in center of {hotelData.city} city, It has an awesome Experience rating of about {hotelData.rating}</p>
-                        <h5>{'\u20B9'}{hotelData.lowestPrice}/day <span style={{fontSize : '0.85rem'}}>(min.)</span></h5>
-                        <Button style={{width : "100%"}} onClick={handlePayment}>Pay  to Reserve</Button>
+                        {
+                            daysCount > 1 ? 
+                            <h5>{'\u20B9'}{`${hotelData.lowestPrice}`* daysCount * `${options.room}`} ({daysCount} nights)</h5>
+                            :
+                            <h5>{'\u20B9'}{`${hotelData.lowestPrice}`* 1 * `${options.room}`} (1 night)</h5>
+                        }                        
+                        <Button style={{width : "100%"}} onClick={handlePayment}>Book Now</Button>
                     </div>
                     
                 </div>

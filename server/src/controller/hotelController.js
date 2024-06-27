@@ -28,20 +28,20 @@ const getAllHotels = async(req,res) => {
 
 const getAllHotelsByCity = async(req,res) => {
     try {
-        if(req.body.cityName === "bangalore" || req.body.cityName === "bengaluru"){
+        if(req.body.city === "bangalore" || req.body.city === "bengaluru"){
             const searchResult = await HotelsModel.find({city : "bengaluru"})
             res.status(200).send({
                 searchResult
             })            
         }else{
-            const searchResult = await HotelsModel.find({city : req.body.cityName})
+            const searchResult = await HotelsModel.find({city : req.body.city})
             res.status(200).send({
                 searchResult
             })
         }
     } catch (error) {
         res.status(500).send({
-            message:`Internal Server Error in Getting Hotels at ${req.body.cityName}`
+            message:`Internal Server Error in Getting Hotels at ${req.body.city}`
         })
     }
 }

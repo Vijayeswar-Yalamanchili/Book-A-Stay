@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar }  from '@fortawesome/free-solid-svg-icons'
 import { UserStatusContext } from '../contextApi/UserLogInStatusContextComponent'
 import { SharedDataContext } from '../contextApi/SharedDataComponent'
+import { SearchContext } from '../contextApi/SearchContextComponent'
 import hotelRoom from '../assets/hotelroom.jpeg'
 
 function HotelsPageList({hotelsList,searchInputs}) {
@@ -12,7 +13,9 @@ function HotelsPageList({hotelsList,searchInputs}) {
   const navigate = useNavigate()
   let { isLoggedIn } = useContext(UserStatusContext)
   let { setSharedHotelIdData } = useContext(SharedDataContext)
+  let { dates,city } = useContext(SearchContext)
   // const [daysCount, setDaysCount] = useState()
+  // console.log(city,dates)
 
   const MilliSecondsPerDay = 1000 * 60 * 60 * 24
   const dayDifference = (date1,date2) => {
@@ -21,14 +24,13 @@ function HotelsPageList({hotelsList,searchInputs}) {
     return differentDays
   }
 
-  let startDate = searchInputs?.day[0]?.startDate
-  let endDate = searchInputs?.day[0]?.endDate
+  let startDate = searchInputs?.dates[0].startDate
+  let endDate = searchInputs?.dates[0].endDate
+  const daysCount = dayDifference(startDate, endDate)
 
   const handleAvailability = async(hotelId) => {
     try {
       if(isLoggedIn){
-        // console.log(dayDifference(startDate, endDate))
-        // console.log(hotelId,hotelsList)
         setSharedHotelIdData(hotelId)
         navigate(`/hotels/${hotelId}`)
       }

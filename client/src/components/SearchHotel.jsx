@@ -16,6 +16,7 @@ import FeaturedByLiked from './FeaturedByLiked'
 import HotelsPageList from './HotelsPageList'
 import { UserAuthContext } from '../contextApi/UserAuthContextComponent'
 import { UserStatusContext } from '../contextApi/UserLogInStatusContextComponent'
+import { SearchContext } from '../contextApi/SearchContextComponent'
 
 
 function SearchHotel() {
@@ -25,27 +26,29 @@ function SearchHotel() {
   
   let { userAuth } = useContext(UserAuthContext)
   let { isLoggedIn } = useContext(UserStatusContext)
+  let { dispatch,city,options } = useContext(SearchContext)
 
   const [homePage, setHomePage] = useState(true)
-  const [cityName, setCityName] = useState('')
   const [searchInputs, setSearchInputs] = useState()
-  const [openDate, setOpenDate] = useState(false)
   const [hotelsList, setHotelsList] = useState([])
+
+  const [cityName, setCityName] = useState('')
   const [openOptions, setOpenOptions] = useState(false)
-  const [options, setOptions] = useState({ adult : 1, children : 0, room : 1 })
-  const [date, setDate] = useState([
+  const [option, setOption] = useState({ adult : 1, children : 0, room : 1 })
+  const [openDate, setOpenDate] = useState(false)
+  const [dates, setDates] = useState([
     {
       startDate: new Date(),
       endDate: new Date(),
       key: 'selection'
     }
-  ]);
+  ])
 
   const handleOption = (name, operation) => {
-    setOptions((prev) => {
+    setOption((prev) => {
       return {
         ...prev,
-        [name]: operation === "i" ? options[name] + 1 : options[name] - 1,
+        [name]: operation === "i" ? option[name] + 1 : option[name] - 1,
       }
     })
   }
@@ -54,14 +57,14 @@ function SearchHotel() {
     try {
       if(isLoggedIn){
         e.preventDefault()
-        const inputData = { cityName : cityName.toLowerCase(), day : date, persons : options }
+        const inputData = { city : cityName.toLowerCase(), dates : dates, options : option }
+        dispatch({type : 'NEW_SEARCH',payload : inputData})
         if(inputData.cityName !== ""){
           let res = await AxiosService.put(`${ApiRoutes.HOTELSLIST.path}/${userAuth[0]._id}`,inputData,{headers : { 'Authorization' : `${getLoginToken}`}})
           let result = res.data.searchResult
           setHomePage(false)
           setHotelsList(result) 
           setSearchInputs(inputData)  
-          console.log(result,searchInputs)
         } else { 
           toast.error("City name cant be empty")
         }
@@ -82,37 +85,37 @@ function SearchHotel() {
         </div>
         <div className="searchDate d-flex justify-content-start px-2 align-items-center">
             <FontAwesomeIcon icon={faCalendar} className='calenderIcon me-2'/>
-            <span className='searchDateText'  onClick={()=> setOpenDate(!openDate)}>{`${format(date[0].startDate, "dd/MM/yyyy")} to ${format(date[0].endDate, "dd/MM/yyyy")}`}</span>
+            <span className='searchDateText'  onClick={()=> setOpenDate(!openDate)}>{`${format(dates[0].startDate, "dd/MM/yyyy")} to ${format(dates[0].endDate, "dd/MM/yyyy")}`}</span>
             {
-              openDate && <DateRange className='dateblock' ranges={date} onChange={item => setDate([item.selection])} editableDateInputs={true} moveRangeOnFirstSelection={false}/>
+              openDate && <DateRange className='dateblock' ranges={dates} onChange={item => setDates([item.selection])} editableDateInputs={true} moveRangeOnFirstSelection={false}/>
             }
         </div>
         <div className="persons d-flex justify-content-start px-2 align-items-center">
             <FontAwesomeIcon icon={faPerson} className='personIcon me-2'/>
-            <span className='personsText' onClick={()=> setOpenOptions(!openOptions)}>{`${options.adult} adult - ${options.children} chidren - ${options.room} room `}</span>
+            <span className='personsText' onClick={()=> setOpenOptions(!openOptions)}>{`${option.adult} adult - ${option.children} chidren - ${option.room} room `}</span>
             {
               openOptions && <div className='personsOptions px-2'>
                 <div className='optionItem py-1 d-flex justify-content-between align-items-center'>
                   <span>Adult</span>
                   <div >
-                    <Button variant='none' className='optionCounterBtn' disabled={options.adult<=1} onClick={() => handleOption("adult", "d")}>-</Button>
-                    <span className='optionValue mx-2'>{options.adult}</span>
+                    <Button variant='none' className='optionCounterBtn' disabled={option.adult<=1} onClick={() => handleOption("adult", "d")}>-</Button>
+                    <span className='optionValue mx-2'>{option.adult}</span>
                     <Button variant='none' className='optionCounterBtn' onClick={() => handleOption("adult", "i")}>+</Button>
                   </div>
                 </div>
                 <div className='optionItem py-1 d-flex justify-content-between align-items-center'>
                   <span>Children</span>
                   <div >
-                    <Button variant='none' className='optionCounterBtn' disabled={options.children<=0} onClick={() => handleOption("children", "d")}>-</Button>
-                    <span className='optionValue mx-2'>{options.children}</span>
+                    <Button variant='none' className='optionCounterBtn' disabled={option.children<=0} onClick={() => handleOption("children", "d")}>-</Button>
+                    <span className='optionValue mx-2'>{option.children}</span>
                     <Button variant='none' className='optionCounterBtn' onClick={() => handleOption("children", "i")}>+</Button>
                   </div>
                 </div>
                 <div className='optionItem py-1 d-flex justify-content-between align-items-center'>
                   <span>room</span>
                   <div >
-                    <Button variant='none' className='optionCounterBtn' disabled={options.room <=1} onClick={() => handleOption("room", "d")}>-</Button>
-                    <span className='optionValue mx-2 '>{options.room}</span>
+                    <Button variant='none' className='optionCounterBtn' disabled={option.room <=1} onClick={() => handleOption("room", "d")}>-</Button>
+                    <span className='optionValue mx-2 '>{option.room}</span>
                     <Button variant='none' className='optionCounterBtn' onClick={() => handleOption("room", "i")}>+</Button>
                   </div>
                 </div>
