@@ -1,14 +1,15 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { Button, Card, Row, Image } from 'react-bootstrap'
+import React, { useState, useEffect } from 'react'
+import { Button, Image } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeftLong, faLocationPin }  from '@fortawesome/free-solid-svg-icons'
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
 import { Link, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { jwtDecode } from "jwt-decode"
 import hotelRoomImg from '../assets/hotelroom.jpeg'
+import logo from '../assets/book-a-stay.png'
 import AxiosService from '../utils/AxiosService'
 import ApiRoutes from '../utils/ApiRoutes'
-
 
 function HotelDetailPage() {
 
@@ -17,6 +18,75 @@ function HotelDetailPage() {
     const [roomImgs,setRoomImgs] = useState([])
     const [aminities,setAminities] = useState([])
     const getLoginToken = localStorage.getItem('loginToken')
+    const decodedToken = jwtDecode(getLoginToken)
+
+    const handlePayment = async(e) => {
+        const paymentData = {
+            amount : 500,
+            currency : 'INR',
+            receipt : 'receipt_01'
+        }
+        try {
+            let res = await AxiosService.post(`${ApiRoutes.ORDER.path}`,paymentData, {
+                headers : {
+                    'Authorization' : `${getLoginToken}`,
+                    "Content-Type" : 'application/json'
+                }
+            })
+            const result = res.data.order
+            // console.log(result)
+
+            let options = {
+                "key": "rzp_test_U7MqWkBZipoze4", // Enter the Key ID generated from the Dashboard
+                "amount": paymentData.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": paymentData.currency,
+                "name": "book-A-stay", //your business name
+                "description": "Test Transaction",
+                "image": {logo},
+                "order_id": result.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                "handler": async function (response){
+                    // alert(response.razorpay_payment_id);
+                    // alert(response.razorpay_order_id);
+                    // alert(response.razorpay_signature)
+                    const responseBody = {...response}
+                    let res = await AxiosService.post(`${ApiRoutes.VALIDATEORDER.path}`,responseBody, {
+                        headers : {
+                            'Authorization' : `${getLoginToken}`,
+                            "Content-Type" : 'application/json'
+                        }
+                    })
+                    const result = res.data
+                    // console.log(result)
+                },
+                "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
+                    "name": `${decodedToken.firstName} ${decodedToken.lastName}`, //your customer's name
+                    "email": `${decodedToken.email}`, 
+                    "contact": `${decodedToken.mobile}`  //Provide the customer's phone number for better conversion rates 
+                },
+                "notes": {
+                    "address": "Razorpay Corporate Office"
+                },
+                "theme": {
+                    "color": "#0D6EFD"
+                }
+            }
+            console.log(options.handler)
+            let rzp1 = new window.Razorpay(options);
+            rzp1.on('payment.failed', function (response){
+                    alert(response.error.code);
+                    alert(response.error.description);
+                    alert(response.error.source);
+                    alert(response.error.step);
+                    alert(response.error.reason);
+                    alert(response.error.metadata.order_id);
+                    alert(response.error.metadata.payment_id);
+            })
+            rzp1.open();
+            e.preventDefault();
+        } catch (error) {
+            toast.error(error.response.data.message || error.message)
+        }
+    }
 
     const getHotelData = async() => {
         try {
@@ -45,18 +115,17 @@ function HotelDetailPage() {
                     <span className='my-2'><FontAwesomeIcon icon={faLocationPin} style={{color : "gray"}}/> {hotelData.address}</span>
                     <span style={{color:"green"}}>Now Pay {'\u20B9'}500 to Reserve your stay here (Refundable)</span>
                 </div>
-                <Button variant='primary'> Pay  to Reserve</Button>
+                <Button variant='primary' onClick={handlePayment}> Pay  to Reserve</Button>
             </div>
 
             <div className="roomImagesList my-4">
                 <ResponsiveMasonry columnsCountBreakPoints={{350: 1, 750: 2, 900: 4}}>
                     <Masonry gutter='0.5rem'>
                         {
-                            roomImgs.length > 0 ?
+                            roomImgs.length > 0 &&
                                 roomImgs.map((e,i) => {
-                                    console.log(e)
                                     return <Image key={i} src={`http://localhost:7000/${e}`} alt="Room Image" className='roomViewImg'/>            //onClick={()=> handleViewImage(e.image,i)}
-                                }) : null
+                                }) 
                         }
                     </Masonry>
                 </ResponsiveMasonry>
@@ -81,7 +150,7 @@ function HotelDetailPage() {
                         <h5>Perfect for Stay</h5>
                         <p>Located in center of {hotelData.city} city, It has an awesome Experience rating of about {hotelData.rating}</p>
                         <h5>{'\u20B9'}{hotelData.lowestPrice}/day <span style={{fontSize : '0.85rem'}}>(min.)</span></h5>
-                        <Button style={{width : "100%"}}>Pay  to Reserve</Button>
+                        <Button style={{width : "100%"}} onClick={handlePayment}>Pay  to Reserve</Button>
                     </div>
                     
                 </div>

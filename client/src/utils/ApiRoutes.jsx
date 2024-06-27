@@ -112,6 +112,15 @@ const ApiRoutes = {
     COUNTBYTYPE : {
         path : '/hotels/countbytype',
         authenticate : false
+    },
+    //Razorpay
+    ORDER : {
+        path : '/razorpay/order',
+        authenticate : true
+    },
+    VALIDATEORDER : {
+        path : '/razorpay/order/validate',
+        authenticate : true
     }
 }
 
