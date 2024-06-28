@@ -169,6 +169,32 @@ const deleteStay = async(req,res) => {
     }
 }
 
+const getAllUsers = async(req,res) => {
+    try {
+        const allUsers = await UserAuthModel.find()
+        res.status(200).send({
+            allUsers
+        })
+    } catch (error) {
+        res.status(500).send({
+            message : "Internal server error in getting all users"
+        })
+    }
+}
+
+const deleteUser = async(req,res) => {
+    try {
+        const deletedUser = await UserAuthModel.findByIdAndDelete(req.params.userId)
+        res.status(200).send({
+            deletedUser
+        })
+    } catch (error) {
+        res.status(500).send({
+            message : "Internal server error in deleting user"
+        })
+    }
+}
+
 export default {
     getUserById,
     getTypesList,
@@ -180,5 +206,7 @@ export default {
     getStayById,
     addStay,
     updateStay,
-    deleteStay
+    deleteStay,
+    getAllUsers,
+    deleteUser
 }

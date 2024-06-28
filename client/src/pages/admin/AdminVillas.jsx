@@ -44,7 +44,7 @@ function AdminVillas() {
     <Container className='py-5'>
       <div className='mb-3 d-flex justify-content-start align-items-center'>
         <Button className='me-0' variant='none' onClick={()=> navigate('/admin/dashboard')}><FontAwesomeIcon icon={faArrowLeft}/></Button>
-        <h4>List of Hotels</h4>
+        <h4 className='mb-0'>List of Hotels</h4>
       </div>
       <Table striped bordered hover>
         <thead>

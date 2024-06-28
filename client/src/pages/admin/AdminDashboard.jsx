@@ -59,28 +59,39 @@ function AdminDashboard() {
     <AdminNavbar/>
 
     <Container className='p-5'>
-      <div className="header d-flex justify-content-between align-items-center">
-        <h4>List of Stay types</h4>
-        <Button onClick={()=> navigate('/admin/addStay')}>Add new Stay</Button>
-      </div>
-      {
-        lists.length > 0 ? 
-        <div className='d-flex justify-content-start mt-4' style={{gap : "8px"}}>
-          <Row xs={1} md={2} className='mx-auto cityRows d-flex justify-content-around align-items-center'>
-            {
-              lists.map((e,i)=> {
-                return  <Card className='px-0 mb-4' style={{ width: '15rem'}} key={i} onClick={() =>navigate(`/admin/${e}`)}>
-                  {/* <Card.Img variant="top" src={hotelsImg}/> */}
-                  <Card.Body>
-                    <h5 style={{textTransform : 'capitalize'}}>{e+`s List`}</h5>
-                  </Card.Body>
-                </Card>
-              })
-            }
-          </Row>
+      <div className='mb-4'>
+        <h4>List of Users</h4>
+        <div className='mt-4'>
+          <Card style={{ width: '15rem'}} className='mx-auto' onClick={() =>navigate(`/admin/allusers`)}>
+            <Card.Body><h5>Users List</h5></Card.Body>
+          </Card>
         </div>
-        :null
-       }
+      </div>
+
+      <div>
+        <div className="header d-flex justify-content-between align-items-center">
+          <h4>List of Stay types</h4>
+          <Button onClick={()=> navigate('/admin/addStay')}>Add new Stay</Button>
+        </div>
+        {
+          lists.length > 0 ? 
+          <div className='d-flex justify-content-start mt-4' style={{gap : "8px"}}>
+            <Row xs={1} md={2} className='mx-auto cityRows d-flex justify-content-around align-items-center'>
+              {
+                lists.map((e,i)=> {
+                  return  <Card className='px-0 mb-4' style={{ width: '15rem'}} key={i} onClick={() =>navigate(`/admin/${e}`)}>
+                    {/* <Card.Img variant="top" src={hotelsImg}/> */}
+                    <Card.Body>
+                      <h5 style={{textTransform : 'capitalize'}}>{e+`s List`}</h5>
+                    </Card.Body>
+                  </Card>
+                })
+              }
+            </Row>
+          </div>
+          :null
+        }
+      </div>
     </Container>
 
     <AdminFooter/>

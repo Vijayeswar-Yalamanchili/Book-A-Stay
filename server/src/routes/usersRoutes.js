@@ -12,16 +12,16 @@ router.post('/register', userAuthController.register)
 router.put('/contactemail', userAuthController.contactEmail)
 router.put('/logout/:id',auth.authenticate, userAuthController.logout)
 
-router.get('/getallusers/:id', auth.authenticate, userController.getAllUsers)
+// router.get('/getallusers/:id', auth.authenticate, userController.getAllUsers)
 router.get('/getuserbyid/:id', auth.authenticate, userController.getUserById)
 router.put('/userprofileupdate/:id', auth.authenticate, userController.updateUserById)
 router.delete('/deleteuser/:id', auth.authenticate, userController.deleteUser)
 
 // admin
 
-router.post('/admin', adminAuthController.login)
-router.post('/admin/register', adminAuthController.register)
-router.put('/admin/logout/:id', auth.authenticate, adminAuthController.logout)
-router.get('/admin/hotelslist/:id', auth.authenticate, adminController.getHotelsList)
+// router.post('/admin', adminAuthController.login)
+// router.post('/admin/register', adminAuthController.register)
+// router.put('/admin/logout/:id', auth.authenticate, adminAuthController.logout)
+// router.get('/admin/hotelslist/:id', auth.authenticate, adminController.getHotelsList)
 
 export default router

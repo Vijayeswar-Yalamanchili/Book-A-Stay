@@ -19,6 +19,7 @@ import AdminResorts from '../pages/admin/AdminResorts'
 import AdminCottages from '../pages/admin/AdminCottages'
 import AdminCabins from '../pages/admin/AdminCabins'
 import AdminMyProfile from '../pages/admin/AdminMyProfile'
+import AdminAllUsers from '../pages/admin/AdminAllUsers'
 
 const Approutes = [
     {
@@ -65,6 +66,11 @@ const Approutes = [
     {
         path : '/admin/dashboard',
         element : <AdminLogInStatusContextComponent><AdminDashboard/></AdminLogInStatusContextComponent>,
+        exact : true
+    },
+    {
+        path : '/admin/allusers',
+        element : <AdminLogInStatusContextComponent><AdminAllUsers/></AdminLogInStatusContextComponent>,
         exact : true
     },
     {

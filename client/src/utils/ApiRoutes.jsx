@@ -56,6 +56,14 @@ const ApiRoutes = {
         path : '/admin/deletestay',
         authenticate :true
     },
+    GETALLUSERS : {
+        path : '/admin/getallusers',
+        authenticate :true
+    },
+    DELETEUSER : {
+        path : '/admin/deleteuser',
+        authenticate :true
+    },
     // Users
     HOME : {
         path : '/home',
@@ -80,10 +88,6 @@ const ApiRoutes = {
     LOGOUT : {
         path : '/users/logout',
         authenticate : true
-    },
-    GETALLUSERS : {
-        path : '/users/getallusers',
-        authenticate :true
     },
     GETUSERBYID : {
         path : '/users/getuserbyid',
