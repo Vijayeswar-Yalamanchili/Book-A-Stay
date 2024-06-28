@@ -61,6 +61,9 @@ const hotelsSchema = new mongoose.Schema({
         type : [String],
         // required : true
     },
+    rooms : {
+        type : [String]
+    }
 },
 {   timestamps : true  },
 {   collection : 'stays' })

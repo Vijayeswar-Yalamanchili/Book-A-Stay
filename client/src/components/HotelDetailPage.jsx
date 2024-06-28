@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { Button, Image } from 'react-bootstrap'
+import { Button, Card, Image, Modal } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeftLong, faLocationPin }  from '@fortawesome/free-solid-svg-icons'
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
@@ -15,34 +15,80 @@ import { SearchContext } from '../contextApi/SearchContextComponent'
 function HotelDetailPage() {
 
     let {id} = useParams()
-    let { dates,city,options } = useContext(SearchContext)
-    console.log(city,dates,options)
-
+    let { dates,options } = useContext(SearchContext)
+    // console.log(dates,options)
+    const [rooms,setRooms] = useState([])
+    const [selectedRooms, setSelectedRooms] = useState([]);
     const [hotelData,setHotelData] = useState('')
     const [roomImgs,setRoomImgs] = useState([])
     const [aminities,setAminities] = useState([])
+    const [show, setShow] = useState(false);
     const getLoginToken = localStorage.getItem('loginToken')
     const decodedToken = jwtDecode(getLoginToken)
 
+    const handleClose = () => setShow(false);
+    const handleShow = () => {
+        setShow(true)
+        handleRoomSelection()
+    };
+
     const MilliSecondsPerDay = 1000 * 60 * 60 * 24
     const dayDifference = (date1,date2) => {
-      const timeDifference = Math.abs(date2.getTime() - date1.getTime())
+      const timeDifference = Math.abs(date2?.getTime() - date1?.getTime())
       const differentDays  = Math.ceil(timeDifference / MilliSecondsPerDay)
       return differentDays
     }
   
-    let startDate = dates[0].startDate
-    let endDate = dates[0].endDate
-    const daysCount = dayDifference(startDate, endDate)
-    console.log(daysCount)
+    let stayStartDate = dates[0]?.startDate
+    let stayEndDate = dates[0]?.endDate
+    const daysCount = dayDifference(stayStartDate, stayEndDate)
+    // console.log(daysCount)
 
-    const handlePayment = async(e) => {
+    const getDatesInRange = (startDate, endDate) => {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+    
+        const date = new Date(start.getTime());
+    
+        const dates = [];
+    
+        while (date <= end) {
+          dates.push(new Date(date).getTime());
+          date.setDate(date.getDate() + 1);
+        }
+    
+        return dates;
+    }
+
+    const allDates = getDatesInRange(stayStartDate,stayEndDate)
+
+    const isRoomAvailable = (roomNumber) => {
+        const isFound = roomNumber.unAvailableDates.some((date) =>
+            allDates.includes(new Date(date).getTime()))
+        return !isFound;
+    }
+
+    const handlePayment = async(price) => {
+        console.log(price)
         const paymentData = {
-            amount : `${hotelData.lowestPrice}`* daysCount * `${options.room}` * 100,
+            // amount : `${hotelData.lowestPrice}`* daysCount * `${options.room}` * 100,
+            amount : price * daysCount * `${options.room}` * 100,
             currency : 'INR',
             receipt : 'receipt_01'
         }
         try {
+            await Promise.all(selectedRooms.map((roomId)=> {
+                const roomsResponse = AxiosService.put(`${ApiRoutes.UPDATEROOMAVAILABILITY.path}/${roomId}`,
+                {dates : allDates},
+                {
+                    headers : {
+                        'Authorization' : `${getLoginToken}`,
+                        "Content-Type" : 'application/json'
+                    }
+                }
+            )
+            console.log(roomsResponse)
+            }))
             let res = await AxiosService.post(`${ApiRoutes.ORDER.path}`,paymentData, {
                 headers : {
                     'Authorization' : `${getLoginToken}`,
@@ -97,7 +143,8 @@ function HotelDetailPage() {
                     alert(response.error.metadata.payment_id);
             })
             rzp1.open();
-            e.preventDefault();
+            // e.preventDefault();
+            handleClose()
         } catch (error) {
             toast.error(error.response.data.message || error.message)
         }
@@ -113,6 +160,27 @@ function HotelDetailPage() {
         } catch (error) {
             toast.error(error.response.data.message || error.message)
         }
+    }
+
+    const handleRoomSelection = async() => {
+        try {
+            let res = await AxiosService.get(`${ApiRoutes.GETROOMBYHOTELID.path}/${id}`,{ headers : {
+                'Authorization' : `${getLoginToken}`
+            }})
+            console.log(res.data)
+            setRooms(res.data.list)
+        } catch (error) {
+            console.log(error)
+            toast.error(error.response.data.message || error.message)
+        }
+    }
+
+    const handleSelect = (e) => {
+        const checked = e.target.checked;
+        const value = e.target.value;
+        setSelectedRooms(
+          checked ? [...selectedRooms, value] : selectedRooms.filter((item) => item !== value)
+        )
     }
 
     useEffect(()=> {
@@ -131,7 +199,7 @@ function HotelDetailPage() {
                     {/* <span style={{color:"green"}}>Now Pay {'\u20B9'}500 to Reserve your stay here (Refundable)</span> */}
                     <span style={{color:"green"}}>Book this Stay for just {'\u20B9'}{hotelData.lowestPrice}/day</span>
                 </div>
-                <Button variant='primary' onClick={handlePayment}>Book Now</Button>
+                <Button variant='primary' onClick={handleShow}>Select Room to book</Button>
             </div>
 
             <div className="roomImagesList my-4">
@@ -171,12 +239,46 @@ function HotelDetailPage() {
                             :
                             <h5>{'\u20B9'}{`${hotelData.lowestPrice}`* 1 * `${options.room}`} (1 night)</h5>
                         }                        
-                        <Button style={{width : "100%"}} onClick={handlePayment}>Book Now</Button>
+                        <Button style={{width : "100%"}} onClick={handleShow}>Select Room to book</Button>
                     </div>
                     
                 </div>
             </div>
         </div>
+
+        <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+                <Modal.Title>Modal heading</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+            <h5>Select your Preffered Rooms :</h5>
+                {
+                    rooms.map((ele,i) => {
+                        return <div key={i}>
+                            <Card className='my-3 d-flex flex-row'>
+                                <Card.Body className='d-flex flex-column'>
+                                    <div><b>Room Details : </b><i>{ele.title},{ele.description},{ele.maxPeople} persons</i></div>
+                                    <div><b>Room Price : <i>{'\u20B9'}{ele.price}/day</i></b></div>
+                                    <div className='d-flex'>
+                                        {ele.roomNumbers.map((roomNumber,i) => (
+                                            <div className="me-2" key={i}>                                            
+                                                <input type="checkbox" value={roomNumber._id} onChange={handleSelect} disabled={!isRoomAvailable(roomNumber)}/>
+                                                {/* disabled={!isRoomAvailable(roomNumber)} */}
+                                                <label>{roomNumber.number}</label>
+                                            </div>
+                                        ))}
+                                        </div>
+                                </Card.Body>
+                                <Button variant="primary" onClick={()=>handlePayment(ele.price)}>Pay Now</Button>
+                            </Card>
+                        </div>
+                    })
+                }
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>Close</Button>
+            </Modal.Footer>
+        </Modal>
     </>
 }
 

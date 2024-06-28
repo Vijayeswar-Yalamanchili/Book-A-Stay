@@ -4,7 +4,7 @@ import RoomsModel from "../models/roomsModel.js"
 const createRoom = async(req,res) => {
     try {
         const hotelId = req.params.hotelId
-        const addRoom = await RoomsModel.create({...req.body,hotelId : req.params.hotelId})
+        const addRoom = await RoomsModel.create({...req.body, hotelId : req.params.hotelId})
         if(addRoom){
             const addRoomInHotel = await HotelsModel.findByIdAndUpdate(hotelId,{ $push : {rooms : addRoom._id} })
         }
@@ -46,6 +46,25 @@ const getRoomById = async(req,res) => {
     }
 }
 
+const getRoomByHotelId = async(req,res) => {
+    try {
+        // const hotelId = req.params.id
+        const getRoom = await HotelsModel.findById(req.params.id)
+        const list = await Promise.all(
+            getRoom.rooms.map((room) => {
+                return RoomsModel.findById(room)
+            })
+        )
+        res.status(200).send({
+            list
+        })
+    } catch (error) {
+        res.status(500).send({
+            message:"Internal Server Error in Getting room by HotelId"
+        })
+    }
+}
+
 const updateRoom = async(req,res) => {
     try {
         const updateRoom = await RoomsModel.findByIdAndUpdate({_id:req.params.roomId},{$set : req.body},{new : true})
@@ -55,6 +74,23 @@ const updateRoom = async(req,res) => {
     } catch (error) {
         res.status(500).send({
             message:"Internal Server Error in updating room"
+        })
+    }
+}
+
+const updateRoomAvailability = async(req,res) => {
+    try {
+        const updatedAvailability = await RoomsModel.updateOne(
+            {'roomNumbers._id':req.params.roomId},
+            {$push : {'roomNumbers.$.unAvailableDates' : req.body.dates}}
+        )
+        res.status(200).send({
+            message:"updated availability",
+            updatedAvailability
+        })
+    } catch (error) {
+        res.status(500).send({
+            message:"Internal Server Error in updating room availablity"
         })
     }
 }
@@ -81,6 +117,8 @@ export default {
     createRoom,
     getAllRooms,
     getRoomById,
+    getRoomByHotelId,
     updateRoom,
-    deleteRoom
+    deleteRoom,
+    updateRoomAvailability
 }

@@ -113,6 +113,14 @@ const ApiRoutes = {
         path : '/hotels/countbytype',
         authenticate : false
     },
+    GETROOMBYHOTELID : {
+        path : `/rooms`,
+        authenticate : true
+    },
+    UPDATEROOMAVAILABILITY : {
+        path : `/rooms/availability`,
+        authenticate : true
+    },
     //Razorpay
     ORDER : {
         path : '/razorpay/order',
