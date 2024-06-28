@@ -195,6 +195,20 @@ const deleteUser = async(req,res) => {
     }
 }
 
+const updateUserById = async(req,res) => {
+    try {
+        console.log(req.params.id, req.body)
+        const updatedUserDetails = await UserAuthModel.findByIdAndUpdate({_id:req.params.id},{$set : req.body},{new : true})
+        res.status(200).send({
+            updatedUserDetails 
+        })
+    } catch (error) {
+        res.status(500).send({
+            message : "Internal server error in updating user"
+        })
+    }
+}
+
 export default {
     getUserById,
     getTypesList,
@@ -208,5 +222,6 @@ export default {
     updateStay,
     deleteStay,
     getAllUsers,
-    deleteUser
+    deleteUser,
+    updateUserById
 }

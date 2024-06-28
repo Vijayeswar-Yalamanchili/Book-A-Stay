@@ -23,5 +23,6 @@ router.post('/addstay/:id', auth.adminAuthenticate, auth.adminGuard, imageUpload
 router.put('/updatestay/:id/:tokenId', auth.adminAuthenticate, auth.adminGuard, imageUploader.imageUpload.fields([{ name: 'hotelImage', maxCount: 1 }, { name: 'roomImages', maxCount: 8 }]), adminController.updateStay)
 router.delete('/deletestay/:hotelId',auth.adminAuthenticate,adminController.deleteStay)
 router.delete('/deleteuser/:userId',auth.adminAuthenticate,adminController.deleteUser)
+router.put('/updateuser/:id', auth.adminAuthenticate, adminController.updateUserById)
 
 export default router

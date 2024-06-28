@@ -68,8 +68,10 @@ function AdminAllUsers() {
                 <td>{e.email}</td>
                 <td>{e.mobile}</td>
                 <td>{e.isAdmin === false ? 'No' : <i>Yes</i>}</td>
-                <td>                    
-                    <Button variant='danger' onClick={()=>{handleDelete(e._id)}}>Delete</Button>
+                <td>
+                  <Button variant='primary' onClick={()=>navigate(`/admin/edituser/${e._id}`)}>Edit</Button>
+                  &nbsp;
+                  <Button variant='danger' onClick={()=>{handleDelete(e._id)}}>Delete</Button>
                 </td>
                 </tr> 
                 }) : 

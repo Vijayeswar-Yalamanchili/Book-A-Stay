@@ -59,15 +59,16 @@ function AdminDashboard() {
     <AdminNavbar/>
 
     <Container className='p-5'>
-      <div className='mb-4'>
-        <h4>List of Users</h4>
+    <h3>Dashboard</h3>
+      {/* <div className='mb-4'> */}
+        {/* <h4>List of Users</h4> */}
         <div className='mt-4'>
           <Card style={{ width: '15rem'}} className='mx-auto' onClick={() =>navigate(`/admin/allusers`)}>
             <Card.Body><h5>Users List</h5></Card.Body>
           </Card>
         </div>
-      </div>
-
+      {/* </div> */}
+      <hr/>
       <div>
         <div className="header d-flex justify-content-between align-items-center">
           <h4>List of Stay types</h4>

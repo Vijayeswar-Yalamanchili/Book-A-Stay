@@ -60,6 +60,10 @@ const ApiRoutes = {
         path : '/admin/getallusers',
         authenticate :true
     },
+    UPDATEUSER : {
+        path : '/admin/updateuser',
+        authenticate :true
+    },
     DELETEUSER : {
         path : '/admin/deleteuser',
         authenticate :true
