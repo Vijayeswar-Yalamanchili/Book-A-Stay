@@ -72,7 +72,7 @@ function AdminDashboard() {
                 return  <Card className='px-0 mb-4' style={{ width: '15rem'}} key={i} onClick={() =>navigate(`/admin/${e}`)}>
                   {/* <Card.Img variant="top" src={hotelsImg}/> */}
                   <Card.Body>
-                    <h5 style={{textTransform : 'capitalize'}}>{e+`s`}</h5>
+                    <h5 style={{textTransform : 'capitalize'}}>{e+`s List`}</h5>
                   </Card.Body>
                 </Card>
               })
