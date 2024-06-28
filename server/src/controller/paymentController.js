@@ -7,7 +7,6 @@ const order = async(req,res) => {
             key_id: process.env.RP_KEY_ID,
             key_secret : process.env.RP_KEY_SECRET
         })
-        console.log(req.body)
         const order = await rp.orders.create(req.body)
         if(!order){
             res.status(400).send({
