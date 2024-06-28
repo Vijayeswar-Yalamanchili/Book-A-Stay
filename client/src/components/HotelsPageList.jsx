@@ -47,7 +47,8 @@ function HotelsPageList({hotelsList,searchInputs}) {
           hotelsList.map((e,i) => {
             return <div className='hotelListCard' key={i}>
               <Card className='hotelCard my-3 d-flex flex-row'>
-                {e.hotelImage ? <Card.Img src={`http://localhost:7000/${e.hotelImage}`} className='roomImage'/> : <Card.Img src={hotelRoom} className='roomImage'/>}
+                {/* {e.hotelImage ? <Card.Img src={`http://localhost:7000/${e.hotelImage}`} className='roomImage'/> : <Card.Img src={hotelRoom} className='roomImage'/>} */}
+                {e.hotelImage ? <Card.Img src={`https://book-a-stay.onrender.com/${e.hotelImage}`} className='roomImage'/> : <Card.Img src={hotelRoom} className='roomImage'/>}
                 <Card.Body className='cardrightside d-flex justify-content-between align-items-center'>
 
                   <div className='cardLeftBlock d-flex flex-column justify-content-between align-items-start'>

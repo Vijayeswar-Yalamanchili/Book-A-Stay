@@ -35,7 +35,8 @@ function FeaturedByLiked() {
             {
               featuredList && featuredList.map((e,i) => {
                 return <Card className='px-0' style={{ width: '15rem'}} key={i}>
-                  <Card.Img variant="top" src={`http://localhost:7000/${e.hotelImage}`} className='cardImageType'/>
+                  {/* <Card.Img variant="top" src={`http://localhost:7000/${e.hotelImage}`} className='cardImageType'/> */}
+                  <Card.Img variant="top" src={`https://book-a-stay.onrender.com/${e.hotelImage}`} className='cardImageType'/>
                   <Card.Body>
                     <h5>{e.name}</h5>
                     <p style={{textTransform : 'capitalize'}}>{e.city}</p>

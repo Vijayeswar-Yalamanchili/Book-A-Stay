@@ -208,7 +208,8 @@ function HotelDetailPage() {
                         {
                             roomImgs.length > 0 &&
                                 roomImgs.map((e,i) => {
-                                    return <Image key={i} src={`http://localhost:7000/${e}`} alt="Room Image" className='roomViewImg'/>            //onClick={()=> handleViewImage(e.image,i)}
+                                    return <Image key={i} src={`https://book-a-stay.onrender.com/${e}`} alt="Room Image" className='roomViewImg'/>
+                                    // return <Image key={i} src={`http://localhost:7000/${e}`} alt="Room Image" className='roomViewImg'/>            //onClick={()=> handleViewImage(e.image,i)}
                                 }) 
                         }
                     </Masonry>
