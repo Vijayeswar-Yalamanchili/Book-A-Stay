@@ -76,7 +76,7 @@ function AdminEditUser() {
                     </Col>
                 </Row>
                 <Row className="mb-3">
-                    <Col lg xs={12}>
+                    <Col lg xs={12} className="mb-3">
                         <Form.Label>Email</Form.Label>
                         <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter email" id="adminEmail" name='email'/>
                     </Col>

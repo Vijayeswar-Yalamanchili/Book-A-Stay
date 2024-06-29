@@ -72,6 +72,8 @@ function AdminHotels() {
                 <Button variant='primary' onClick={()=>navigate(`/admin/editStay/${e._id}`)}>Edit</Button>
                 &nbsp;
                 <Button variant='danger' onClick={()=>{handleDelete(e._id)}}>Delete</Button>
+                &nbsp;
+                <Button variant='secondary' onClick={()=>{navigate(`/admin/addRoom/${e._id}`)}}>Add Room</Button>
               </td>
             </tr> 
             }) : 

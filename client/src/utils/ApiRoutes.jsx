@@ -68,6 +68,10 @@ const ApiRoutes = {
         path : '/admin/deleteuser',
         authenticate :true
     },
+    ADDROOM : {
+        path : '/admin/addroom',
+        authenticate :true
+    },
     // Users
     HOME : {
         path : '/home',

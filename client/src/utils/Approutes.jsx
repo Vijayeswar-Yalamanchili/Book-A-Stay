@@ -21,6 +21,7 @@ import AdminCabins from '../pages/admin/AdminCabins'
 import AdminMyProfile from '../pages/admin/AdminMyProfile'
 import AdminAllUsers from '../pages/admin/AdminAllUsers'
 import AdminEditUser from '../pages/admin/AdminEditUser'
+import AdminAddRoom from '../pages/admin/AdminAddRoom'
 
 const Approutes = [
     {
@@ -87,6 +88,11 @@ const Approutes = [
     {
         path : '/admin/editStay/:id',
         element : <AdminLogInStatusContextComponent><AdminEditHotel/></AdminLogInStatusContextComponent>,
+        exact : true
+    },
+    {
+        path : '/admin/addRoom/:id',
+        element : <AdminLogInStatusContextComponent><AdminAddRoom/></AdminLogInStatusContextComponent>,
         exact : true
     },
     {
