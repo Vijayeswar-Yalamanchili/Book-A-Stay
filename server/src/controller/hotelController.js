@@ -93,7 +93,6 @@ const countByCity = async(req,res) => {
 
 export default {
     getAllHotels,
-    // getHotelsList,
     getAllHotelsByCity,
     getHotelById,
     countByCity,

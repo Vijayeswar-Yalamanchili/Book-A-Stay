@@ -72,6 +72,18 @@ const ApiRoutes = {
         path : '/admin/addroom',
         authenticate :true
     },
+    GETROOMSLIST : {
+        path : '/admin/roomslist',
+        authenticate :true
+    },
+    EDITROOM : {
+        path : '/admin/editroom',
+        authenticate :true
+    },
+    DELETEROOM : {
+        path : '/admin/deleteroom',
+        authenticate :true
+    },
     // Users
     HOME : {
         path : '/home',

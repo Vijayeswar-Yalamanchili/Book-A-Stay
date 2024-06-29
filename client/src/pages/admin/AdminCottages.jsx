@@ -47,13 +47,14 @@ function AdminCottages() {
         <h4 className='mb-0'>List of Hotels</h4>
       </div>
       <Table striped bordered hover>
-      <thead>
-          <tr>
+        <thead>
+          <tr className='text-center'>
             <th>S.No</th>
             <th>Name</th>
             <th>Type</th>
             <th>City</th>
             <th>Rating</th>
+            <th>Rooms</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -61,18 +62,21 @@ function AdminCottages() {
           { 
             lists.length >=1 ?
             lists.map((e,i) => {
-              return <tr key={i}>
+              return <tr key={i} className='text-center'>
               <td>{i+1}</td>
               <td>{e.name}</td>
               <td>{e.type}</td>
               <td>{e.city}</td>
               <td>{e.rating}</td>
               <td>
+                <Button variant='primary' onClick={()=>{navigate(`/admin/rooms/${e._id}`)}}>Rooms List</Button>
+                &nbsp;
+                <Button variant='success' onClick={()=>{navigate(`/admin/addRoom/${e._id}`)}}>Add Room</Button>
+              </td>
+              <td>
                 <Button variant='primary' onClick={()=>navigate(`/admin/editStay/${e._id}`)}>Edit</Button>
                 &nbsp;
                 <Button variant='danger' onClick={()=>{handleDelete(e._id)}}>Delete</Button>
-                &nbsp;
-                <Button variant='secondary' onClick={()=>{navigate(`/admin/addRoom/${e._id}`)}}>Add Room</Button>
               </td>
             </tr> 
             }) : 

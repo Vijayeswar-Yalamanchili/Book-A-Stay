@@ -36,5 +36,8 @@ router.delete('/deleteuser/:userId',auth.adminAuthenticate,adminUserController.d
 
 // adminRoomController
 router.post('/addroom/:hotelId', auth.adminAuthenticate, auth.adminGuard, adminRoomController.addRoom)
+router.get('/roomslist/:id', auth.adminAuthenticate, adminRoomController.getRoomsList)
+router.put('/editroom/:id', auth.adminAuthenticate, adminRoomController.updateRoom)
+router.delete('/deleteroom/:roomsId/:roomId', auth.adminAuthenticate, adminRoomController.deleteRoom)
 
 export default router
