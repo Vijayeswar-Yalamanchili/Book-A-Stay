@@ -2,7 +2,7 @@ import auth from "../middleware/auth.js"
 import hashPwd from "../middleware/hashPwd.js"
 import UserAuthModel from "../models/userAuthModel.js"
 import contactEmailId from '../helper/emailService.js'
-import forgotPasswordMail from '../helper/forgotPwdEmailService.js'
+import forgotPasswordMail from '../helper/userForgotPwdEmailService.js'
 
 const register = async(req,res) => {
     try {
