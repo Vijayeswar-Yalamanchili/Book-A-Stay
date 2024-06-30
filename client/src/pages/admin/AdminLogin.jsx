@@ -24,7 +24,9 @@ function AdminLogin() {
         }),
         onSubmit : async(values) => {
             try {
+              console.log(values)
                 let res = await AxiosService.post(`${ApiRoutes.ADMINLOGIN.path}`,values)
+                console.log(res)
                 if(res.status === 200){
                     localStorage.setItem('adminLoginToken',res.data.adminLoginToken)
                     navigate('/admin/dashboard')
@@ -51,7 +53,7 @@ function AdminLogin() {
             {formik.touched.password && formik.errors.password ? (<div className='authErrorText'>{formik.errors.password}</div>) : null}
           </Form.Group>
           <div className='mb-4'>
-            <Link to={'/forgotpassword'} className='adminFrgtPwdText'>Forgot Password ?</Link>
+            <Link to={'/admin/forgotpassword'} className='adminFrgtPwdText'>Forgot Password ?</Link>
           </div>
           <div className="d-grid mb-4">
             <Button className='adminFormBtns' type='submit'>Login</Button>

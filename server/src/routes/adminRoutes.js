@@ -13,6 +13,9 @@ const router = express.Router()
 router.post('/', adminAuthController.login)
 router.post('/register', adminAuthController.register)
 router.put('/logout/:id', auth.adminAuthenticate, adminAuthController.logout)
+router.put('/forgotpassword',adminAuthController.forgotPassword)
+router.get('/forgotPassword/:id/verify/:token',adminAuthController.verifyCode)
+router.put('/resetPassword',adminAuthController.resetPassword)
 
 //adminListController
 router.get('/gettypeslist/lists/:id',auth.adminAuthenticate, adminListController.getTypesList)

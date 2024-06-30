@@ -1,7 +1,6 @@
 import Home from '../pages/home/Home'
 import Login from '../pages/authentications/Login'
 import Register from '../pages/authentications/Register'
-// import Hotels from '../pages/hotelsList/Hotels'
 import HotelPage from '../pages/hotelPage/HotelPage'
 import AdminLogin from '../pages/admin/AdminLogin'
 import AdminRegister from '../pages/admin/AdminRegister'
@@ -26,6 +25,9 @@ import AdminRoomsList from '../pages/admin/AdminRoomsList'
 import ForgotPassword from '../pages/authentications/ForgotPassword'
 import VerifyPassword from '../pages/authentications/VerifyPassword'
 import ResetPassword from '../pages/authentications/ResetPassword'
+import AdminForgotPassword from '../pages/admin/AdminForgotPassword'
+import AdminVerifyPassword from '../pages/admin/AdminVerifyPassword'
+import AdminResetPassword from '../pages/admin/AdminResetPassword'
 
 const Approutes = [
     {
@@ -78,6 +80,21 @@ const Approutes = [
         path : '/admin/register',
         element : <AdminRegister/>,
         exact : true
+    },
+    {
+        path : '/admin/forgotpassword',
+        element : <AdminForgotPassword/>,
+        exact : true
+    },
+    {
+        path:'/admin/forgotpassword/:id/verify/:token',
+        element : <AdminVerifyPassword/>,
+        exact:true
+    },
+    {
+        path : '/admin/resetPassword',
+        element : <AdminResetPassword/>,
+        exact: true
     },
     {
         path : '/admin/myProfile',

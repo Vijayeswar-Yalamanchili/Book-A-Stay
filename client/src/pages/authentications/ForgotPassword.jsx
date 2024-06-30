@@ -29,7 +29,7 @@ function ForgotPassword() {
             if(res.status === 200){
                 toast.success(res.data.message)
                 localStorage.setItem('forgotPassToken',res.data.forgotPassToken)
-                // navigate('/login')
+                navigate('/login')
             }
         } catch (error) {
             toast.error(error.response.data.message || error.message)
