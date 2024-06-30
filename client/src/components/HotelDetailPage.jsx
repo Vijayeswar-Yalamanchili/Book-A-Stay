@@ -42,7 +42,6 @@ function HotelDetailPage() {
     let stayStartDate = dates[0]?.startDate
     let stayEndDate = dates[0]?.endDate
     const daysCount = dayDifference(stayStartDate, stayEndDate)
-    // console.log(daysCount)
 
     const getDatesInRange = (startDate, endDate) => {
         const start = new Date(startDate)
@@ -70,73 +69,74 @@ function HotelDetailPage() {
             receipt : 'receipt_01'
         }
         try {
-            await Promise.all(selectedRooms.map((roomId)=> {
-                const roomsResponse = AxiosService.put(`${ApiRoutes.UPDATEROOMAVAILABILITY.path}/${roomId}`,
-                {dates : allDates},
-                {
-                    headers : {
-                        'Authorization' : `${getLoginToken}`,
-                        "Content-Type" : 'application/json'
-                    }
-                }
-            )
-            console.log(roomsResponse)
-            }))
-            let res = await AxiosService.post(`${ApiRoutes.ORDER.path}`,paymentData, {
-                headers : {
-                    'Authorization' : `${getLoginToken}`,
-                    "Content-Type" : 'application/json'
-                }
-            })
-            const result = res.data.order
-            console.log(result)
-
-            let options = {
-                "key": "rzp_test_U7MqWkBZipoze4", // Enter the Key ID generated from the Dashboard
-                "amount": paymentData.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-                "currency": paymentData.currency,
-                "name": "book-A-stay", //your business name
-                "description": "Test Transaction",
-                "image": {logo},
-                "order_id": result.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-                "handler": async function (response){
-                    // alert(response.razorpay_payment_id);
-                    // alert(response.razorpay_order_id);
-                    // alert(response.razorpay_signature)
-                    const responseBody = {...response}
-                    let res = await AxiosService.post(`${ApiRoutes.VALIDATEORDER.path}`,responseBody, {
+            if(daysCount !== 0){
+                await Promise.all(selectedRooms.map((roomId)=> {
+                    const roomsResponse = AxiosService.put(`${ApiRoutes.UPDATEROOMAVAILABILITY.path}/${roomId}`,
+                    {dates : allDates},
+                    {
                         headers : {
                             'Authorization' : `${getLoginToken}`,
                             "Content-Type" : 'application/json'
                         }
-                    })
-                    const result = res.data
-                    // console.log(result)
-                },
-                "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
-                    "name": `${decodedToken.firstName} ${decodedToken.lastName}`, //your customer's name
-                    "email": `${decodedToken.email}`, 
-                    "contact": `${decodedToken.mobile}`  //Provide the customer's phone number for better conversion rates 
-                },
-                "notes": {
-                    "address": "Razorpay Corporate Office"
-                },
-                "theme": {
-                    "color": "#0D6EFD"
+                    }
+                )
+                }))
+                let res = await AxiosService.post(`${ApiRoutes.ORDER.path}`,paymentData, {
+                    headers : {
+                        'Authorization' : `${getLoginToken}`,
+                        "Content-Type" : 'application/json'
+                    }
+                })
+                const result = res.data.order
+    
+                let options = {
+                    "key": "rzp_test_U7MqWkBZipoze4", // Enter the Key ID generated from the Dashboard
+                    "amount": paymentData.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                    "currency": paymentData.currency,
+                    "name": "book-A-stay", //your business name
+                    "description": "Test Transaction",
+                    "image": {logo},
+                    "order_id": result.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                    "handler": async function (response){
+                        // alert(response.razorpay_payment_id);
+                        // alert(response.razorpay_order_id);
+                        // alert(response.razorpay_signature)
+                        const responseBody = {...response}
+                        let res = await AxiosService.post(`${ApiRoutes.VALIDATEORDER.path}`,responseBody, {
+                            headers : {
+                                'Authorization' : `${getLoginToken}`,
+                                "Content-Type" : 'application/json'
+                            }
+                        })
+                        const result = res.data
+                    },
+                    "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
+                        "name": `${decodedToken.firstName} ${decodedToken.lastName}`, //your customer's name
+                        "email": `${decodedToken.email}`, 
+                        "contact": `${decodedToken.mobile}`  //Provide the customer's phone number for better conversion rates 
+                    },
+                    "notes": {
+                        "address": "Razorpay Corporate Office"
+                    },
+                    "theme": {
+                        "color": "#0D6EFD"
+                    }
                 }
+                let rzp1 = new window.Razorpay(options);
+                rzp1.on('payment.failed', function (response){
+                        alert(response.error.code);
+                        alert(response.error.description);
+                        alert(response.error.source);
+                        alert(response.error.step);
+                        alert(response.error.reason);
+                        alert(response.error.metadata.order_id);
+                        alert(response.error.metadata.payment_id);
+                })
+                rzp1.open();
+                handleClose()
+            }else{
+                alert("Enter the stay dates & Room Count to proceed with booking smoothly")
             }
-            let rzp1 = new window.Razorpay(options);
-            rzp1.on('payment.failed', function (response){
-                    alert(response.error.code);
-                    alert(response.error.description);
-                    alert(response.error.source);
-                    alert(response.error.step);
-                    alert(response.error.reason);
-                    alert(response.error.metadata.order_id);
-                    alert(response.error.metadata.payment_id);
-            })
-            rzp1.open();
-            handleClose()
         } catch (error) {
             toast.error(error.response.data.message || error.message)
         }
@@ -160,7 +160,6 @@ function HotelDetailPage() {
                 'Authorization' : `${getLoginToken}`
             }})
             setRooms(res.data.list)
-            console.log(res.data.list)
         } catch (error) {
             toast.error(error.response.data.message || error.message)
         }
@@ -260,7 +259,7 @@ function HotelDetailPage() {
                                         ))}
                                     </div>
                                 </Card.Body>
-                                <Button variant="primary" onClick={()=>handlePayment(ele.price)}>Pay Now</Button>
+                                <Button variant="primary" onClick={()=>handlePayment(ele[0]?.price)}>Pay Now</Button>
                             </Card>
                         </div>
                     })
