@@ -20,7 +20,7 @@ function AdminAllUsers() {
         try {
           const decodedToken = jwtDecode(getLoginToken)
           const id = decodedToken.id
-          let res = await AxiosService.get(`${ApiRoutes.GETALLUSERS.path}/${id}`,{ headers : { 'Authorization' : `${getLoginToken}`} })
+          let res = await AxiosService.get(`${ApiRoutes.GETADMINALLUSERS.path}/${id}`,{ headers : { 'Authorization' : `${getLoginToken}`} })
         //   console.log(res.data.allUsers)
           setLists(res.data.allUsers)
         } catch (error) {
@@ -30,7 +30,7 @@ function AdminAllUsers() {
 
     const handleDelete = async(userId) => {
         try {
-          let res = await AxiosService.delete(`${ApiRoutes.DELETEUSER.path}/${userId}`,{ headers : { 'Authorization' : `${getLoginToken}`} })
+          let res = await AxiosService.delete(`${ApiRoutes.DELETEADMINUSERS.path}/${userId}`,{ headers : { 'Authorization' : `${getLoginToken}`} })
         } catch (error) {
           toast.error(error.response.data.message || error.message)
         }

@@ -1,5 +1,18 @@
 import UserAuthModel from "../models/userAuthModel.js"
 
+const getAllUsers = async(req,res) => {
+    try {
+        const allUsers = await UserAuthModel.find()
+        res.status(200).send({
+            allUsers
+        })
+    } catch (error) {
+        res.status(500).send({
+            message : "Internal server error in getting all users"
+        })
+    }
+}
+
 const getUserById = async(req,res) => {
     try {
         const userById = await UserAuthModel.findById({_id : req.params.id})
@@ -40,6 +53,7 @@ const deleteUser = async(req,res) => {
 }
 
 export default {
+    getAllUsers,
     getUserById,
     updateUserById,
     deleteUser

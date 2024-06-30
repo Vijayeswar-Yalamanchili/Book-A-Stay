@@ -56,16 +56,16 @@ const ApiRoutes = {
         path : '/admin/deletestay',
         authenticate :true
     },
-    GETALLUSERS : {
-        path : '/admin/getallusers',
+    GETADMINALLUSERS : {
+        path : '/admin/getadminallusers',
         authenticate :true
     },
-    UPDATEUSER : {
-        path : '/admin/updateuser',
+    UPDATEADMINUSERS : {
+        path : '/admin/updateadminuser',
         authenticate :true
     },
-    DELETEUSER : {
-        path : '/admin/deleteuser',
+    DELETEADMINUSERS : {
+        path : '/admin/deleteadminuser',
         authenticate :true
     },
     ADDROOM : {
@@ -108,6 +108,10 @@ const ApiRoutes = {
     LOGOUT : {
         path : '/users/logout',
         authenticate : true
+    },
+    GETALLUSERS : {
+        path : '/users/getallusers',
+        authenticate :true
     },
     GETUSERBYID : {
         path : '/users/getuserbyid',

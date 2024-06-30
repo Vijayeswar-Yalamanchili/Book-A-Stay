@@ -29,10 +29,10 @@ router.get('/getstaybyid/:id', auth.adminAuthenticate,auth.adminGuard, adminStay
 router.delete('/deletestay/:hotelId',auth.adminAuthenticate,adminStayController.deleteStay)
 
 //adminUserController
-router.get('/getallusers/:id', auth.adminAuthenticate, adminUserController.getAllUsers)
+router.get('/getadminallusers/:id', auth.adminAuthenticate, adminUserController.getAllUsers)
 router.get('/getadminuserbyid/user/:id', auth.adminAuthenticate, adminUserController.getUserById)
-router.put('/updateuser/:id', auth.adminAuthenticate, adminUserController.updateUserById)
-router.delete('/deleteuser/:userId',auth.adminAuthenticate,adminUserController.deleteUser)
+router.put('/updateadminuser/:id', auth.adminAuthenticate, adminUserController.updateUserById)
+router.delete('/deleteadminuser/:userId',auth.adminAuthenticate,adminUserController.deleteUser)
 
 // adminRoomController
 router.post('/addroom/:hotelId', auth.adminAuthenticate, auth.adminGuard, adminRoomController.addRoom)

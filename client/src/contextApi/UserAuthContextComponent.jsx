@@ -20,7 +20,7 @@ function UserAuthContextComponent({children}) {
                 let result = res.data.allUsers
                 let currentUser = result.filter((user)=> user._id === id)
                 if(res.status === 200){
-                    setUserAuth(currentUser)
+                    setUserAuth(currentUser)                    
                 }
             }
         } catch (error) {

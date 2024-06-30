@@ -60,6 +60,7 @@ function SearchHotel() {
         const inputData = { city : cityName.toLowerCase(), dates : dates, options : option }
         dispatch({type : 'NEW_SEARCH',payload : inputData})
         if(inputData.cityName !== ""){
+          console.log(`${ApiRoutes.HOTELSLIST.path}/${userAuth[0]._id}`)
           let res = await AxiosService.put(`${ApiRoutes.HOTELSLIST.path}/${userAuth[0]._id}`,inputData,{headers : { 'Authorization' : `${getLoginToken}`}})
           let result = res.data.searchResult
           setHomePage(false)
