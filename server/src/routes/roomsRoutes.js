@@ -12,4 +12,5 @@ router.delete('/deleteroom/:roomId/:hotelId', auth.authenticate, auth.adminGuard
 
 router.get('/:id',  roomController.getRoomByHotelId)
 router.put('/availability/:roomId', auth.authenticate, roomController.updateRoomAvailability)
+
 export default router

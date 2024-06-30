@@ -16,7 +16,7 @@ function HotelDetailPage() {
 
     let {id} = useParams()
     let { dates,options } = useContext(SearchContext)
-    // console.log(dates,options)
+
     const [rooms,setRooms] = useState([])
     const [selectedRooms, setSelectedRooms] = useState([]);
     const [hotelData,setHotelData] = useState('')
@@ -45,33 +45,26 @@ function HotelDetailPage() {
     // console.log(daysCount)
 
     const getDatesInRange = (startDate, endDate) => {
-        const start = new Date(startDate);
-        const end = new Date(endDate);
-    
-        const date = new Date(start.getTime());
-    
-        const dates = [];
-    
+        const start = new Date(startDate)
+        const end = new Date(endDate)
+        const date = new Date(start.getTime())    
+        const dates = []    
         while (date <= end) {
           dates.push(new Date(date).getTime());
           date.setDate(date.getDate() + 1);
-        }
-    
-        return dates;
+        }    
+        return dates
     }
 
     const allDates = getDatesInRange(stayStartDate,stayEndDate)
 
     const isRoomAvailable = (roomNumber) => {
-        const isFound = roomNumber.unAvailableDates.some((date) =>
-            allDates.includes(new Date(date).getTime()))
-        return !isFound;
+        const isFound = roomNumber.unAvailableDates.some((date) => allDates.includes(new Date(date).getTime()))
+        return !isFound
     }
 
     const handlePayment = async(price) => {
-        console.log(price)
         const paymentData = {
-            // amount : `${hotelData.lowestPrice}`* daysCount * `${options.room}` * 100,
             amount : price * daysCount * `${options.room}` * 100,
             currency : 'INR',
             receipt : 'receipt_01'

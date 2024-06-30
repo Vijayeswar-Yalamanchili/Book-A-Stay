@@ -5,7 +5,8 @@ const addRoom = async(req,res) => {
     try {
         const isHotelIdExists = await RoomsModel.find({ "$and" : [ {hotelId : req.params.hotelId}, {price : req.body.price} ]})
         if(isHotelIdExists.length > 0){
-            const newRoom =  await RoomsModel.findOneAndUpdate({price : req.body.price}, {$push : {roomNumbers : req.body.roomNumbers}})
+            const newRoom =  await RoomsModel.findOneAndUpdate({price : req.body.price}, {$push : {roomNumbers : req.body.roomNumbers}}) 
+            const addRoomInHotel = await HotelModel.findByIdAndUpdate({_id : req.params.hotelId},{ $push : {rooms : newRoom.roomNumbers[0]._id} })   
             res.status(200).send({
                 message:"Room number added",
                 newRoom 
@@ -13,6 +14,7 @@ const addRoom = async(req,res) => {
         }else{
             const stayName = await HotelModel.findById(req.params.hotelId)
             const newRoom = await RoomsModel.create({...req.body,hotelId : req.params.hotelId, hotelName : stayName.name})
+            const addRoomInHotel = await HotelModel.findByIdAndUpdate({_id : req.params.hotelId},{ $push : {rooms : newRoom.roomNumbers[0]._id} })
             res.status(200).send({
                 message:"Room number added",
                 newRoom 
