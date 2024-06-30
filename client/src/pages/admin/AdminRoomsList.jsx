@@ -48,7 +48,7 @@ function AdminRoomsList() {
 
     return <>
         <AdminNavbar/>
-        <Container>
+        <Container className='my-4'>
             <div className='mb-3 d-flex justify-content-start align-items-center'>
                 <Button className='me-0' variant='none' onClick={()=> navigate(`/admin/dashboard`)}><FontAwesomeIcon icon={faArrowLeft}/></Button>
                 <h4 className='mb-0'>List of Rooms</h4>

@@ -48,13 +48,10 @@ const getRoomById = async(req,res) => {
 
 const getRoomByHotelId = async(req,res) => {
     try {
-        console.log("first")
-        // const hotelId = req.params.id
         const getRoom = await HotelsModel.findById(req.params.id)
-        console.log(getRoom)
         const list = await Promise.all(
-            getRoom.rooms.map((room) => {
-                return RoomsModel.findById(room)
+            getRoom.rooms.map((roomId) => {
+                return RoomsModel.find({'roomNumbers._id' : { $in : roomId }})
             })
         )
         res.status(200).send({

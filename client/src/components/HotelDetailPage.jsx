@@ -136,7 +136,6 @@ function HotelDetailPage() {
                     alert(response.error.metadata.payment_id);
             })
             rzp1.open();
-            // e.preventDefault();
             handleClose()
         } catch (error) {
             toast.error(error.response.data.message || error.message)
@@ -160,10 +159,9 @@ function HotelDetailPage() {
             let res = await AxiosService.get(`${ApiRoutes.GETROOMBYHOTELID.path}/${id}`,{ headers : {
                 'Authorization' : `${getLoginToken}`
             }})
-            console.log(res.data)
             setRooms(res.data.list)
+            console.log(res.data.list)
         } catch (error) {
-            console.log(error)
             toast.error(error.response.data.message || error.message)
         }
     }
@@ -251,17 +249,16 @@ function HotelDetailPage() {
                         return <div key={i}>
                             <Card className='my-3 d-flex flex-row'>
                                 <Card.Body className='d-flex flex-column'>
-                                    <div><b>Room Details : </b><i>{ele.title},{ele.description},{ele.maxPeople} persons</i></div>
-                                    <div><b>Room Price : <i>{'\u20B9'}{ele.price}/day</i></b></div>
+                                    <div><b>Room Details : </b><i>{ele[0].title},{ele[0].description},{ele[0].maxPeople} persons</i></div>
+                                    <div><b>Room Price : <i>{'\u20B9'}{ele[0].price}/day</i></b></div>
                                     <div className='d-flex'>
-                                        {ele.roomNumbers.map((roomNumber,i) => (
+                                        {ele[0].roomNumbers.map((roomNumber,i) => (
                                             <div className="me-2" key={i}>                                            
                                                 <input type="checkbox" value={roomNumber._id} onChange={handleSelect} disabled={!isRoomAvailable(roomNumber)}/>
-                                                {/* disabled={!isRoomAvailable(roomNumber)} */}
                                                 <label>{roomNumber.number}</label>
                                             </div>
                                         ))}
-                                        </div>
+                                    </div>
                                 </Card.Body>
                                 <Button variant="primary" onClick={()=>handlePayment(ele.price)}>Pay Now</Button>
                             </Card>
