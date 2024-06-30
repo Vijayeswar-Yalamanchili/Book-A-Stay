@@ -8,6 +8,9 @@ const router = express.Router()
 
 router.post('/', userAuthController.login)
 router.post('/register', userAuthController.register)
+router.put('/forgotpassword',userAuthController.forgotPassword)
+router.get('/forgotPassword/:id/verify/:token',userAuthController.verifyCode)
+router.put('/resetPassword',userAuthController.resetPassword)
 router.put('/contactemail', userAuthController.contactEmail)
 router.put('/logout/:id',auth.authenticate, userAuthController.logout)
 

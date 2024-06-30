@@ -23,6 +23,9 @@ import AdminAllUsers from '../pages/admin/AdminAllUsers'
 import AdminEditUser from '../pages/admin/AdminEditUser'
 import AdminAddRoom from '../pages/admin/AdminAddRoom'
 import AdminRoomsList from '../pages/admin/AdminRoomsList'
+import ForgotPassword from '../pages/authentications/ForgotPassword'
+import VerifyPassword from '../pages/authentications/VerifyPassword'
+import ResetPassword from '../pages/authentications/ResetPassword'
 
 const Approutes = [
     {
@@ -39,6 +42,21 @@ const Approutes = [
         path : '/register',
         element : <Register/>,
         exact : true
+    },
+    {
+        path : '/forgotpassword',
+        element : <ForgotPassword/>,
+        exact : true
+    },
+    {
+        path:'/forgotpassword/:id/verify/:token',
+        element : <VerifyPassword/>,
+        exact:true
+    },
+    {
+        path : '/resetPassword',
+        element : <ResetPassword/>,
+        exact: true
     },
     {
         path : '/myProfile',

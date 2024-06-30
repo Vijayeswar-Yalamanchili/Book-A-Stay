@@ -13,6 +13,13 @@ const decodeLoginToken = async(token) => {
     return await jwt.decode(token)
 }
 
+const createForgotPassToken = async(payload) => {
+    let token = await jwt.sign(payload,process.env.JWT_SECRETKEY_FP,{
+        expiresIn : process.env.JWT_EXPIRY_FP
+    })
+    return token
+}
+
 // ---------------------------------------------------------------------------------------------------------------
 
 // Middlewares
@@ -95,6 +102,7 @@ const adminAuthenticate = async(req,res,next) => {
 export default {
     createLoginToken,
     decodeLoginToken,
+    createForgotPassToken,
     authenticate,
     getUserEmail,
     adminGuard,

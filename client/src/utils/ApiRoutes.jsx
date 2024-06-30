@@ -97,6 +97,14 @@ const ApiRoutes = {
         path : '/users/register',
         authenticate : false
     },
+    FORGOTPASSWORD : {
+        path : '/users/forgotpassword',
+        authenticate : false
+    },
+    RESETPASSWORD : {
+        path : '/users/resetPassword',
+        authenticate : false
+    },
     CONTACTEMAIL : {
         path : '/users/contactemail',
         authenticate : false
