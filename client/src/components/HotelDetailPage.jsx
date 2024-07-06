@@ -226,9 +226,9 @@ function HotelDetailPage() {
                         <p>Located in center of {hotelData.city} city, It has an awesome Experience rating of about {hotelData.rating}</p>
                         {
                             daysCount > 1 ? 
-                            <h5>{'\u20B9'}{`${hotelData.lowestPrice}`* daysCount * `${options.room}`} ({daysCount} nights /{daysCount-1} days )</h5>
+                            <h5>{'\u20B9'}{`${hotelData.lowestPrice}`* daysCount * `${options.room}`} ({daysCount} N /{daysCount-1} D )</h5>
                             :
-                            <h5>{'\u20B9'}{`${hotelData.lowestPrice}`* 1 * `${options.room}`} (1 night/ 1 day)</h5>
+                            <h5>{'\u20B9'}{`${hotelData.lowestPrice}`* 1 * `${options.room}`} (1N / 1D)</h5>
                         }                        
                         <Button style={{width : "100%"}} onClick={handleShow}>Select Room to book</Button>
                     </div>
