@@ -58,7 +58,7 @@ function FeaturedByCity() {
                         <Card.Img src={e.image} className='cardImage'/>
                         <Card.ImgOverlay className='cardCityData'>
                             <h3>{e.city}</h3>
-                            <h5>{e.properties} Properties</h5>
+                            <h5>{e.properties ? e.properties : 'Loading properties'} Properties</h5>
                         </Card.ImgOverlay>
                     </Card>
                 })
