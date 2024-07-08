@@ -1,5 +1,6 @@
 import Razorpay from 'razorpay'
 import crypto from 'crypto'
+import OrdersModel from '../models/ordersModel.js'
 
 const order = async(req,res) => {
     try {
@@ -7,14 +8,20 @@ const order = async(req,res) => {
             key_id: process.env.RP_KEY_ID,
             key_secret : process.env.RP_KEY_SECRET
         })
-        const order = await rp.orders.create(req.body)
+        const order = await rp.orders.create({
+            amount: req.body.amount,
+            currency: req.body.currency,
+            receipt: req.body.receipt,
+        })        
         if(!order){
             res.status(400).send({
                 message:"Internal Server Error in  payment order"
             }) 
         }else{
+            const orderData = await OrdersModel.create(req.body)
             res.status(200).send({
-                order
+                order,
+                orderData
             })
         }        
     } catch (error) {
@@ -38,7 +45,7 @@ const validateOrder = async(req,res) => {
             res.status(200).send({
                 message : 'Successful Transaction',
                 orderId : razorpay_order_id,
-                paymentId : razorpay_payment_id
+                paymentId : razorpay_payment_id,
             })
         } 
     } catch (error) {

@@ -165,6 +165,14 @@ const ApiRoutes = {
         path : `/rooms/availability`,
         authenticate : true
     },
+    GETMYORDERS : {
+        path : `/orders/myorders`,
+        authenticate : true
+    },
+    UPDATEORDERDATA : {
+        path : '/orders/updateOrderId',
+        authenticate : true
+    },
     //Razorpay
     ORDER : {
         path : '/razorpay/order',
@@ -173,7 +181,8 @@ const ApiRoutes = {
     VALIDATEORDER : {
         path : '/razorpay/order/validate',
         authenticate : true
-    }
+    },
+    
 }
 
 export default ApiRoutes

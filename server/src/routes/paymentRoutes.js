@@ -5,6 +5,6 @@ import auth from '../middleware/auth.js'
 const router = express.Router()
 
 router.post('/order',auth.authenticate, paymentController.order)
-router.post('/order/validate',auth.authenticate, paymentController.validateOrder)
+router.post('/order/validate/:id',auth.authenticate, paymentController.validateOrder)
 
 export default router

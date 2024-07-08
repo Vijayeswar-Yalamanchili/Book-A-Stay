@@ -42,7 +42,7 @@ function ForgotPassword() {
 
     <Container className='mb-5'>
         <Col md xs={12}>
-            <Link to={'/login'}><Button variant='secondary' className='my-4'><FontAwesomeIcon icon={faArrowLeft} className='me-2' />Back</Button></Link> 
+            <Link to={'/login'}><Button variant='secondary' className='my-4'><FontAwesomeIcon icon={faArrowLeft} className='me-2' />Back</Button></Link>
             <Form onSubmit={formik.handleSubmit} className='loginForm mx-auto mt-4 p-5 rounded-4'>
                 <Form.Group className="mb-5">
                     <Form.Label>Enter Email</Form.Label>

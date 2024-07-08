@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { jwtDecode } from 'jwt-decode'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser}  from '@fortawesome/free-solid-svg-icons'
+import { faListSquares, faUser}  from '@fortawesome/free-solid-svg-icons'
 import logo from '../assets/book-a-stay.png'
 import { useLogout } from '../hooks/UseLogout'
 import ApiRoutes from '../utils/ApiRoutes'
@@ -13,18 +13,17 @@ import { UserAuthContext } from '../contextApi/UserAuthContextComponent'
 
 function AppNavbar() {
   
-  // let {userAuth} = useContext(UserAuthContext)
+  let {userAuth} = useContext(UserAuthContext)
   const navigate = useNavigate()
   let logout = useLogout()
-  let getLoginToken = localStorage.getItem('loginToken')
   const [myProfile, setMyProfile] = useState(false)
-  
+  let getLoginToken = localStorage.getItem('loginToken')
   const handleMyProfile = () => setMyProfile(!myProfile)
 
   const handleLogout = async() => {
-    try {
+    try {     
       const decodedToken = jwtDecode(getLoginToken)
-      const id = decodedToken.id
+      const id = decodedToken.id 
       let res = await AxiosService.put(`${ApiRoutes.LOGOUT.path}/${id}`,{ headers : { 'Authorization' : ` ${getLoginToken}`}})
       if(res.status === 200){
         logout()
@@ -60,7 +59,7 @@ function AppNavbar() {
         }
       </Container>
     </Navbar>
-
+        
     <div>
       {
         myProfile ? 
@@ -72,6 +71,11 @@ function AppNavbar() {
             <Link to={'/myProfile'} className="listMenu list-group-item list-group-item-action">
               <span className='d-flex align-items-center' style={{gap:"15px"}}>
                 <FontAwesomeIcon icon={faUser} size='xl' style={{color: "#0d6efd", width:"18px", height:"16px"}}/>My Profile
+              </span>
+            </Link>
+            <Link to={`/orders/${userAuth[0]?._id}}`} className="listMenu list-group-item list-group-item-action">
+              <span className='d-flex align-items-center' style={{gap:"15px"}}>
+                <FontAwesomeIcon icon={faListSquares} size='xl' style={{color: "#0d6efd", width:"18px", height:"16px"}}/>My Orders
               </span>
             </Link>
           </div> : null

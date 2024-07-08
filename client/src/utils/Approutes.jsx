@@ -28,6 +28,7 @@ import ResetPassword from '../pages/authentications/ResetPassword'
 import AdminForgotPassword from '../pages/admin/AdminForgotPassword'
 import AdminVerifyPassword from '../pages/admin/AdminVerifyPassword'
 import AdminResetPassword from '../pages/admin/AdminResetPassword'
+import OrdersList from '../pages/orders/OrdersList'
 
 const Approutes = [
     {
@@ -59,6 +60,11 @@ const Approutes = [
         path : '/resetPassword',
         element : <ResetPassword/>,
         exact: true
+    },
+    {
+        path : '/orders/:id',
+        element : <OrdersList/>,
+        exact : true
     },
     {
         path : '/myProfile',

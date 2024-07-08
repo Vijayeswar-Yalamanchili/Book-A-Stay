@@ -8,7 +8,7 @@ export const UserAuthContext = React.createContext()
 
 function UserAuthContextComponent({children}) {
 
-    const [userAuth,setUserAuth] = useState([])
+    const [userAuth,setUserAuth] = useState()
     
     const getUsers = async() => {
         try {
@@ -22,6 +22,7 @@ function UserAuthContextComponent({children}) {
                 if(res.status === 200){
                     setUserAuth(currentUser)                    
                 }
+                console.log(userAuth)
             }
         } catch (error) {
             toast.error(error.response.data.message || error.message)

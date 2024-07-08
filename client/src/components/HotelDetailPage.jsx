@@ -3,30 +3,35 @@ import { Button, Card, Image, Modal } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeftLong, faLocationPin }  from '@fortawesome/free-solid-svg-icons'
 import Masonry, {ResponsiveMasonry} from "react-responsive-masonry"
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { jwtDecode } from "jwt-decode"
+import { format } from 'date-fns'
 import hotelRoomImg from '../assets/hotelroom.jpeg'
 import logo from '../assets/book-a-stay.png'
 import AxiosService from '../utils/AxiosService'
 import ApiRoutes from '../utils/ApiRoutes'
+import { UserAuthContext } from '../contextApi/UserAuthContextComponent'
 import { SearchContext } from '../contextApi/SearchContextComponent'
 
 function HotelDetailPage() {
-
+    
     let {id} = useParams()
+    let navigate = useNavigate()
+    let { userAuth } = useContext(UserAuthContext)
     let { dates,options } = useContext(SearchContext)
 
     const [rooms,setRooms] = useState([])
-    const [selectedRooms, setSelectedRooms] = useState([]);
+    const [selectedRooms, setSelectedRooms] = useState([])
     const [hotelData,setHotelData] = useState('')
     const [roomImgs,setRoomImgs] = useState([])
     const [aminities,setAminities] = useState([])
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(false)
+
     const getLoginToken = localStorage.getItem('loginToken')
     const decodedToken = jwtDecode(getLoginToken)
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => setShow(false)
     const handleShow = () => {
         setShow(true)
         handleRoomSelection()
@@ -66,20 +71,24 @@ function HotelDetailPage() {
         const paymentData = {
             amount : price * daysCount * `${options.room}` * 100,
             currency : 'INR',
-            receipt : 'receipt_01'
+            receipt : 'receipt_01',
+            currentUserId : `${userAuth[0]?._id}`,
+            from :`${format(dates[0].startDate, "dd/MM/yyyy")}`,
+            to : `${format(dates[0]?.endDate, "dd/MM/yyyy")}`,
+            hotelId : id
         }
         try {
             if(daysCount !== 0){
                 await Promise.all(selectedRooms.map((roomId)=> {
                     const roomsResponse = AxiosService.put(`${ApiRoutes.UPDATEROOMAVAILABILITY.path}/${roomId}`,
-                    {dates : allDates},
-                    {
-                        headers : {
-                            'Authorization' : `${getLoginToken}`,
-                            "Content-Type" : 'application/json'
+                        {dates : allDates},
+                        {
+                            headers : {
+                                'Authorization' : `${getLoginToken}`,
+                                "Content-Type" : 'application/json'
+                            }
                         }
-                    }
-                )
+                    )
                 }))
                 let res = await AxiosService.post(`${ApiRoutes.ORDER.path}`,paymentData, {
                     headers : {
@@ -87,8 +96,8 @@ function HotelDetailPage() {
                         "Content-Type" : 'application/json'
                     }
                 })
-                const result = res.data.order
-    
+                const createRPOrderResult = res.data.order
+                const currentOrderId = res.data.orderData
                 let options = {
                     "key": "rzp_test_U7MqWkBZipoze4", // Enter the Key ID generated from the Dashboard
                     "amount": paymentData.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
@@ -96,19 +105,30 @@ function HotelDetailPage() {
                     "name": "book-A-stay", //your business name
                     "description": "Test Transaction",
                     "image": {logo},
-                    "order_id": result.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                    "order_id": createRPOrderResult.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
                     "handler": async function (response){
                         // alert(response.razorpay_payment_id);
                         // alert(response.razorpay_order_id);
                         // alert(response.razorpay_signature)
                         const responseBody = {...response}
-                        let res = await AxiosService.post(`${ApiRoutes.VALIDATEORDER.path}`,responseBody, {
+                        let res = await AxiosService.post(`${ApiRoutes.VALIDATEORDER.path}/${createRPOrderResult.id}`,responseBody, {
                             headers : {
                                 'Authorization' : `${getLoginToken}`,
                                 "Content-Type" : 'application/json'
                             }
                         })
-                        const result = res.data
+                        const updateOrderDataResult = res.data
+                        let orderDatas = {
+                            orderId : updateOrderDataResult.orderId,
+                            paymentId : updateOrderDataResult.paymentId,
+                            id : currentOrderId._id
+                        }
+                        let resData = await AxiosService.put(`${ApiRoutes.UPDATEORDERDATA.path}`,orderDatas, {
+                            headers : {
+                                'Authorization' : `${getLoginToken}`,
+                                "Content-Type" : 'application/json'
+                            }
+                        })                    
                     },
                     "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
                         "name": `${decodedToken.firstName} ${decodedToken.lastName}`, //your customer's name
@@ -134,6 +154,7 @@ function HotelDetailPage() {
                 })
                 rzp1.open();
                 handleClose()
+                navigate('/')
             }else{
                 alert("Enter the stay dates & Room Count to proceed with booking smoothly")
             }
@@ -186,7 +207,6 @@ function HotelDetailPage() {
                         <h3>{hotelData.name}</h3>
                     </div>
                     <span className='my-2'><FontAwesomeIcon icon={faLocationPin} style={{color : "gray"}}/> {hotelData.address}</span>
-                    {/* <span style={{color:"green"}}>Now Pay {'\u20B9'}500 to Reserve your stay here (Refundable)</span> */}
                     <span style={{color:"green"}}>Book this Stay for just {'\u20B9'}{hotelData.lowestPrice}/day</span>
                 </div>
                 <Button variant='primary' onClick={handleShow}>Select Room to book</Button>
@@ -199,7 +219,6 @@ function HotelDetailPage() {
                             roomImgs.length > 0 &&
                                 roomImgs.map((e,i) => {
                                     return <Image key={i} src={`https://book-a-stay.onrender.com/${e}`} alt="Room Image" className='roomViewImg'/>
-                                    // return <Image key={i} src={`http://localhost:7000/${e}`} alt="Room Image" className='roomViewImg'/>            //onClick={()=> handleViewImage(e.image,i)}
                                 }) 
                         }
                     </Masonry>
