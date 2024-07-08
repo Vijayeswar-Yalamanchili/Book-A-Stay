@@ -29,28 +29,31 @@ function FeaturedByLiked() {
 
   return <>
     <div className='my-5'>
-        <h5>Most Liked Stays</h5>
-        <div className='d-flex justify-content-start ' style={{gap : "8px"}}>
-          <Row xs={1} className='mx-auto cityRows'>
-            {
-              featuredList && featuredList.map((e,i) => {
-                return <Card className='px-0' style={{ width: '15rem'}} key={i}>
-                  {/* <Card.Img variant="top" src={`http://localhost:7000/${e.hotelImage}`} className='cardImageType'/> */}
-                  <Card.Img variant="top" src={`https://book-a-stay.onrender.com/${e.hotelImage}`} className='cardImageType'/>
-                  <Card.Body>
-                    <h5>{e.name}</h5>
-                    <p style={{textTransform : 'capitalize'}}>{e.city}</p>
-                    <h6 style={{height : "2.5rem"}}>Starting from {e.lowestPrice}/- onwards</h6>
-                    <div className="rating">
-                      <Button variant='none' className='me-1' style={{backgroundColor : "#003580", color : "white"}}>{e.rating}</Button>
-                      <span>{e.experience}</span>
-                    </div>
-                  </Card.Body>
-                </Card>
-              })
-            }
-          </Row>
-        </div>
+        {
+          featuredList && <>
+            <h5>Most Liked Stays</h5>
+            <div className='d-flex justify-content-start ' style={{gap : "8px"}}>
+              <Row xs={1} className='mx-auto cityRows'>
+                {
+                  featuredList.map((e,i) => {
+                    return <Card className='px-0' style={{ width: '15rem'}} key={i}>
+                      {/* <Card.Img variant="top" src={`http://localhost:7000/${e.hotelImage}`} className='cardImageType'/> */}
+                      <Card.Img variant="top" src={`https://book-a-stay.onrender.com/${e.hotelImage}`} className='cardImageType'/>
+                      <Card.Body>
+                        <h5>{e.name}</h5>
+                        <p style={{textTransform : 'capitalize'}}>{e.city}</p>
+                        <h6 style={{height : "2.5rem"}}>Starting from {e.lowestPrice}/- onwards</h6>
+                        <div className="rating">
+                          <Button variant='none' className='me-1' style={{backgroundColor : "#003580", color : "white"}}>{e.rating}</Button>
+                          <span>{e.experience}</span>
+                        </div>
+                      </Card.Body>
+                    </Card>
+                  })
+                }
+              </Row>
+            </div>
+          </>}
     </div>
   </>
 }
