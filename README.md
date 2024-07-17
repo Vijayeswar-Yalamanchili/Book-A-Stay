@@ -4,6 +4,10 @@
 ## Overview
 Welcome to the Booking App repository! This project is a comprehensive booking system designed for various types of accommodations, including hotels, resorts, villas, cottages, and cabins. It features a user-friendly interface for both customers and administrators, ensuring a seamless experience for booking stays and managing properties.
 
+## Admin Link : https://book-a-stay-pearl.vercel.app/admin
+## User Link : https://book-a-stay-pearl.vercel.app/
+
+
 ## Features
 - **UserSide**
   - **User Authentication**
