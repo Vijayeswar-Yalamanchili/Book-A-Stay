@@ -19,7 +19,7 @@ const register = async(req,res) => {
             res.status(400).send({
                 message : `User with ${req.body.email} already exists`
             })
-        }      
+        }
     } catch (error) {
         res.status(500).send({
             message : "Internal server error in user registeration"

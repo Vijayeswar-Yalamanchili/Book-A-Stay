@@ -48,8 +48,8 @@ const userAuthSchema = new mongoose.Schema({
     }
 },
 { timestamps : true },
-{ collection : 'user' })
+{ collection : 'userAuth' })
 
-const UserAuthModel = mongoose.model("usersAuth",userAuthSchema)
+const UserAuthModel = mongoose.model("userAuth",userAuthSchema)
 
 export default UserAuthModel

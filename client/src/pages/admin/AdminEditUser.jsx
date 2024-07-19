@@ -15,11 +15,14 @@ function AdminEditUser() {
     let {id} = useParams()
     const navigate = useNavigate()
     const [userData, setUserData] = useState([])
-    const [fname, setFname] = useState(userData?.firstName)
-    const [lname, setLname] = useState(userData?.lastName)
-    const [mobile, setMobile] = useState(userData?.mobile)
-    const [email, setEmail] = useState(userData?.email)
-    const [isAdmin, setIsAdmin] = useState()
+    const firstName = userData?.firstName
+    const lastName = userData?.lastName
+    const mobileNum = userData?.mobile
+    const emailID = userData?.email
+    const [fname, setFname] = useState()
+    const [lname, setLname] = useState()
+    const [mobile, setMobile] = useState()
+    const [email, setEmail] = useState()
 
     let getLoginToken = localStorage.getItem('adminLoginToken')
     const decodedToken = jwtDecode(getLoginToken)
@@ -38,10 +41,10 @@ function AdminEditUser() {
     const handleSubmit = async(e) => {
         e.preventDefault()
         let updatedDatas = {
-            firstName : fname,
-            lastName : lname,
-            email,
-            mobile,
+            firstName : fname === ''? userData?.firstName : fname,
+            lastName : lname === '' ? userData?.lastname : lname,
+            mobile : mobile === ''? userData?.mobile : mobile,
+            email : email === ''? userData?.email : email,
             isAdmin
         }
         try {
@@ -68,21 +71,21 @@ function AdminEditUser() {
                 <Row className="mb-3">
                     <Col lg xs={12} className='fieldBottom'>
                         <Form.Label>Firstname</Form.Label>
-                        <Form.Control type='text' value={fname} onChange={(e) => setFname(e.target.value)} placeholder="Enter Firstname" id='adminFirstName' name='firstName' />
+                        <Form.Control type='text' defaultValue={firstName} onChange={(e) => setFname(e.target.value)} placeholder="Enter Firstname" id='adminFirstName' name='firstName' />
                     </Col>
                     <Col lg xs={12}>
                         <Form.Label>Lastname</Form.Label>
-                        <Form.Control type='text' value={lname} onChange={(e) => setLname(e.target.value)} placeholder="Enter Lastname" id='adminLastName' name='lastName'/>
+                        <Form.Control type='text' defaultValue={lastName} onChange={(e) => setLname(e.target.value)} placeholder="Enter Lastname" id='adminLastName' name='lastName'/>
                     </Col>
                 </Row>
                 <Row className="mb-3">
                     <Col lg xs={12} className="mb-3">
                         <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter email" id="adminEmail" name='email'/>
+                        <Form.Control type="email" defaultValue={emailID} onChange={(e) => setEmail(e.target.value)} placeholder="Enter email" id="adminEmail" name='email'/>
                     </Col>
                     <Col lg xs={12}>
                         <Form.Label>Mobile</Form.Label>
-                        <Form.Control type="text" value={mobile} onChange={(e) => setMobile(e.target.value)} placeholder="Enter Mobile number" maxLength={10} id="adminMobile" name='mobile' />
+                        <Form.Control type="text" defaultValue={mobileNum} onChange={(e) => setMobile(e.target.value)} placeholder="Enter Mobile number" maxLength={10} id="adminMobile" name='mobile' />
                     </Col>
                 </Row>
 
