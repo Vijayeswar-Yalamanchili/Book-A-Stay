@@ -23,7 +23,7 @@ function AdminEditUser() {
     const [lname, setLname] = useState()
     const [mobile, setMobile] = useState()
     const [email, setEmail] = useState()
-
+    const [isAdmin, setIsAdmin] = useState()
     let getLoginToken = localStorage.getItem('adminLoginToken')
     const decodedToken = jwtDecode(getLoginToken)
 
