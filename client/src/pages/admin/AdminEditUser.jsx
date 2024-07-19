@@ -48,9 +48,10 @@ function AdminEditUser() {
             isAdmin
         }
         try {
-            let res = await AxiosService.put(`${ApiRoutes.UPDATEUSER.path}/${id}`,updatedDatas,{ headers : { 'Authorization' : `${getLoginToken}`} })
+            let res = await AxiosService.put(`${ApiRoutes.UPDATEADMINUSERS.path}/${id}`,updatedDatas,{ headers : { 'Authorization' : `${getLoginToken}`} })
             navigate('/admin/allusers')
         } catch (error) {
+            console.log(error)
             toast.error(error.response.data.message || error.message)
         }
     }
