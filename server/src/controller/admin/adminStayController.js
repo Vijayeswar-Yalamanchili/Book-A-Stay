@@ -16,7 +16,7 @@ const getStayById = async(req,res) => {
 const addStay = async(req,res) => {
     try {
         if(req.body.city !== ''){
-            let city = req.body.city.toLowerCase()
+            let city = req.body.city == 'bengaluru' || req.body.city == 'Bengaluru' || req.body.city == 'bangalore' || req.body.city == 'Bangalore' ? "bengaluru" : req.body.city.toLowerCase()
             let aminity = req.body.aminities
             let updatedAminity = aminity.split(',')
             const addNewStay = await HotelsModel.create({
