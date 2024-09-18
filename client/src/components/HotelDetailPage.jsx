@@ -217,8 +217,8 @@ function HotelDetailPage() {
                     <Masonry gutter='0.5rem'>
                         {
                             roomImgs.length > 0 &&
-                                roomImgs.map((e,i) => {
-                                    return <Image key={i} src={`https://book-a-stay.onrender.com/${e}`} alt="Room Image" className='roomViewImg'/>
+                                roomImgs?.map((e,i) => {
+                                    return <Image key={i} src={`https://book-a-stay.onrender.com/${e}`} alt="Room Image" className='roomViewImg' loading='lazy'/>
                                 }) 
                         }
                     </Masonry>

@@ -42,7 +42,7 @@ const updateStay = async(req,res) => {
         if(req.body.city !== ''){
             let aminity = req.body.aminities
             let updatedAminity = aminity.split(',')
-            let city = req.body.city.toLowerCase()
+            let city = req.body.city == 'bengaluru' || req.body.city == 'Bengaluru' || req.body.city == 'bangalore' || req.body.city == 'Bangalore' ? "bengaluru" : req.body.city.toLowerCase()
             const updatedStay = await HotelsModel.findByIdAndUpdate({_id:req.params.id},{$set : {
                 ...req.body,
                 aminities : updatedAminity,

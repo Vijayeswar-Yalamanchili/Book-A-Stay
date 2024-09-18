@@ -64,9 +64,9 @@ function AdminVillas() {
             lists.map((e,i) => {
               return <tr key={i} className='text-center'>
               <td>{i+1}</td>
-              <td>{e.name}</td>
-              <td>{e.type}</td>
-              <td>{e.city}</td>
+              <td style={{textTransform:'capitalize'}}>{e.name}</td>
+              <td style={{textTransform:'capitalize'}}>{e.type}</td>
+              <td style={{textTransform:'capitalize'}}>{e.city}</td>
               <td>{e.rating}</td>
               <td>
                 <Button variant='primary' onClick={()=>{navigate(`/admin/rooms/${e._id}`)}}>RRooms Listoom</Button>
